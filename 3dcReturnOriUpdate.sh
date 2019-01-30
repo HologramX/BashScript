@@ -60,10 +60,9 @@ AutoUpdate(){
 			sudo /etc/init.d/cron stop
 			echo ""
 			echo  -e "${GREEN} Install packages.....                     ${STD}"
-			yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
-			yes | apt-get update
-			yes | sudo apt-get update 
 			export LC_ALL=en_US.UTF-8
+			apt-get update
+			yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
 			yes | sudo apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
 			yes | sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 			yes | sudo apt-get install software-properties-common 
@@ -72,6 +71,19 @@ AutoUpdate(){
 			yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev 
 			yes | sudo apt-get install libminiupnpc-dev 
 			yes | sudo apt-get install libzmq3-dev
+			apt-get remove apache2 -y
+			apt-get remove apache2  -y
+			apt-get remove apache2-bin  -y
+			apt-get remove apache2-data  -y
+			apt-get remove apache2-doc  -y
+			apt-get remove apache2-utils  -y
+			apt-get remove postfix  -y 
+			apt-get upgrade -y
+			#apt-get dist-upgrade -y
+			apt-get update
+			apt-get autoremove -y
+			apt-get autoclean -y
+			yes | apt-get update			
 			sleep 2
 			echo  -e "${GREEN} Stop 3Dcoin core                  ${STD}"
 			3dcoin-cli stop
