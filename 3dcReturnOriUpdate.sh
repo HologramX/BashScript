@@ -59,6 +59,20 @@ AutoUpdate(){
 			echo  -e "${GREEN} Stop Cron                         ${STD}" 
 			sudo /etc/init.d/cron stop
 			echo ""
+			echo  -e "${GREEN} Install packages.....                     ${STD}"
+			yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
+			yes | apt-get update
+			yes | sudo apt-get update 
+			export LC_ALL=en_US.UTF-8
+			yes | sudo apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+			yes | sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+			yes | sudo apt-get install software-properties-common 
+			yes | sudo add-apt-repository ppa:bitcoin/bitcoin 
+			yes | sudo apt-get update 
+			yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev 
+			yes | sudo apt-get install libminiupnpc-dev 
+			yes | sudo apt-get install libzmq3-dev
+			sleep 2
 			echo  -e "${GREEN} Stop 3Dcoin core                  ${STD}"
 			3dcoin-cli stop
 			sleep 10
