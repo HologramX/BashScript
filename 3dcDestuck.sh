@@ -22,7 +22,7 @@ MAG='\e[1;35m'
  
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}                     $COIN DESTUC by RESYNK  $COIN_NAME                               ${NC}\n"
+printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
 $COIN_CLI stop
@@ -31,3 +31,4 @@ rm -r $CONFIG_FOLDER/chainstate/
 rm -r $CONFIG_FOLDER/blocks/
 $COIN_DAEMON -daemon
 exit
+
