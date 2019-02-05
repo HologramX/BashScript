@@ -26,7 +26,7 @@ printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME        
 printf "${YELLOW}#########################################################################${NC}\n"
 
 $COIN_CLI stop
-sleep 1
+sleep 10
 rm -r $CONFIG_FOLDER/chainstate/
 rm -r $CONFIG_FOLDER/database/
 rm -r $CONFIG_FOLDER/blocks/
