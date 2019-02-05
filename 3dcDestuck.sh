@@ -28,7 +28,16 @@ printf "${YELLOW}###############################################################
 $COIN_CLI stop
 sleep 1
 rm -r $CONFIG_FOLDER/chainstate/
+rm -r $CONFIG_FOLDER/database/
 rm -r $CONFIG_FOLDER/blocks/
+rm -f /root/.3dcoin/banlist.dat
+rm -f /root/.3dcoin/mncache.dat
+rm -f /root/.3dcoin/mnpayments.dat
+rm -f /root/.3dcoin/fee_estimates.dat
+rm -f /root/.3dcoin/netfulfilled.dat
+rm -f /root/.3dcoin/governance.dat
+rm -f /root/.3dcoin/debug.log
+rm -f /root/.3dcoin/3dcoind.pid
 $COIN_DAEMON -daemon
 exit
 
