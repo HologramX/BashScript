@@ -26,6 +26,7 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     Systemd Service REMOVE  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 sleep 2
+crontab -l > cron
 systemctl stop 3dcoin
 systemctl stop fire
 systemctl stop mydaemon
