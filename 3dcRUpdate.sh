@@ -28,15 +28,7 @@ printf "${YELLOW}###############################################################
 sleep 2
 crontab -l > cron
 systemctl stop 3dcoin
-systemctl stop fire
-systemctl stop mydaemon
-systemctl stop tame
-systemctl stop max
 systemctl disable 3dcoin
-systemctl disable fire
-systemctl disable mydaemon
-systemctl disable tame
-systemctl disable max
 systemctl daemon-reload
 }
 
