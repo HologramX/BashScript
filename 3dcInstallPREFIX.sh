@@ -34,6 +34,7 @@ printf "${YELLOW}###############################################################
 sleep 2
 
 #### 3Dcoin Masternode installation
+2) type="Masternode"
 
 echo  -e "${GREEN} Get RPC Data                      ${STD}"
 sleep 1
@@ -182,5 +183,17 @@ echo "3DCOIN Configured successfully"
 echo ""
 cd ~
 rm $latestrelease.zip
-reboot
 
+crontab -l | grep "/run/sshd" >/dev/null 2>&1
+if [[ $? -eq 0 ]]
+ then printf "\n        Crontab already SET"
+  else crontab -l > /tmp/cron2fix 
+  echo "@reboot mkdir /run/sshd" >> /tmp/cron2fix 
+  echo "@reboot mkdir /run/fail2ban" >> /tmp/cron2fix 
+  echo "@reboot service sshd start" >> /tmp/cron2fix
+  echo "@reboot service fail2ban start" >> /tmp/cron2fix
+  crontab /tmp/cron2fix 
+  printf "\n        Crontab SET SUCCESFULL"
+ fi
+ 
+reboot
