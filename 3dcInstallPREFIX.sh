@@ -111,6 +111,19 @@ yes | sudo apt-get update
 yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev 
 yes | sudo apt-get install libminiupnpc-dev 
 yes | sudo apt-get install libzmq3-dev
+apt-get update
+apt-get remove apache2 -y
+apt-get remove apache2  -y
+apt-get remove apache2-bin  -y
+apt-get remove apache2-data  -y
+apt-get remove apache2-doc  -y
+apt-get remove apache2-utils  -y
+apt-get remove postfix  -y 
+apt-get upgrade -y
+#apt-get dist-upgrade -y
+apt-get update
+apt-get autoremove -y
+apt-get autoclean -y
 sleep 2
 echo ""
 echo  -e "${GREEN} Compile 3dcoin core .....                 ${STD}"
@@ -195,5 +208,16 @@ if [[ $? -eq 0 ]]
   crontab /tmp/cron2fix 
   printf "\n        Crontab SET SUCCESFULL"
  fi
+ 
+mkdir /var/run/fail2ban
+apt-get install fail2ban -y
+apt-get install nano -y
+apt-get install unzip -y
+apt-get install zip -y
+apt-get install curl -y 
+wget https://github.com/HologramX/BashScript/raw/master/jail.local > /dev/null 2>&1
+cp -rf ./jail.local /etc/fail2ban/ > /dev/null 2>&1
+systemctl restart fail2ban.service > /dev/null 2>&1
+ 
  
 reboot
