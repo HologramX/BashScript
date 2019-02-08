@@ -29,7 +29,7 @@ MAG='\e[1;35m'
 
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}               3DC ORIGINAAL MASTERNODE INSTALL (Precompiled)        ${NC}\n"
+printf "${GREEN}               3DC ORIGINAL MASTERNODE INSTALL (Precompiled)        ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 sleep 2
 
