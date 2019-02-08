@@ -34,7 +34,6 @@ printf "${YELLOW}###############################################################
 sleep 2
 
 #### 3Dcoin Masternode installation
-2) type="Masternode"
 
 echo  -e "${GREEN} Get RPC Data                      ${STD}"
 sleep 1
@@ -211,8 +210,6 @@ if [[ $? -eq 0 ]]
  
 mkdir /var/run/fail2ban
 apt-get install fail2ban -y
-apt-get install nano -y
-apt-get install unzip -y
 apt-get install zip -y
 apt-get install curl -y 
 wget https://github.com/HologramX/BashScript/raw/master/jail.local > /dev/null 2>&1
