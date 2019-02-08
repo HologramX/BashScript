@@ -34,8 +34,6 @@ printf "${YELLOW}###############################################################
 sleep 2
 
 #### 3Dcoin Masternode installation
-2) type="Masternode"
-
 echo  -e "${GREEN} Get RPC Data                      ${STD}"
 sleep 1
 
