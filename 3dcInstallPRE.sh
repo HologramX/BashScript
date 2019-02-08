@@ -32,7 +32,6 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}               3DC ORIGINAAL MASTERNODE INSTALL (Precompiled)        ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 sleep 2
-
 #### 3Dcoin Masternode installation
 echo  -e "${GREEN} Get RPC Data                      ${STD}"
 sleep 1
