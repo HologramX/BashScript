@@ -30,14 +30,27 @@ sleep 10
 rm -r $CONFIG_FOLDER/chainstate/
 rm -r $CONFIG_FOLDER/database/
 rm -r $CONFIG_FOLDER/blocks/
-rm -f /root/.3dcoin/banlist.dat
-rm -f /root/.3dcoin/mncache.dat
-rm -f /root/.3dcoin/mnpayments.dat
-rm -f /root/.3dcoin/fee_estimates.dat
-rm -f /root/.3dcoin/netfulfilled.dat
-rm -f /root/.3dcoin/governance.dat
-rm -f /root/.3dcoin/debug.log
-rm -f /root/.3dcoin/3dcoind.pid
+rm -f $HOME/.$FOLDER/banlist.dat
+rm -f $HOME/.$FOLDER/mncache.dat
+rm -f $HOME/.$FOLDER/mnpayments.dat
+rm -f $HOME/.$FOLDER/fee_estimates.dat
+rm -f $HOME/.$FOLDER/netfulfilled.dat
+rm -f $HOME/.$FOLDER/governance.dat
+rm -f $HOME/.$FOLDER/debug.log
+rm -f $HOME/.$FOLDER/3dcoind.pid
+echo "addnode=206.189.72.203
+addnode=206.189.41.191
+addnode=165.227.197.115
+addnode=167.99.87.86
+addnode=159.65.201.222
+addnode=159.65.148.226
+addnode=165.227.38.214
+addnode=159.65.167.79
+addnode=159.65.90.101
+addnode=128.199.218.139
+addnode=174.138.3.33
+addnode=159.203.167.75
+addnode=138.68.102.67" >> $HOME/.$FOLDER/$COIN_NAME.conf
 $COIN_DAEMON -daemon
 exit
 
