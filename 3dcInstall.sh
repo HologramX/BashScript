@@ -12,6 +12,7 @@ COIN_PATH="/usr/local/bin/"
 COIN_PORT=6695
 RPC_PORT=6694
 COIN_KEY=""
+choice=""
 NODE_IP=""
 COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 COIN_ZIP="3dcoin_latest.zip"
@@ -40,9 +41,9 @@ printf "${GREEN}               3DC ORIGINAL MASTERNODE INSTALL         ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}"
 	echo   ""
 	echo   ""
-	echo "1. Install Masternode - COMPILING"
-	echo "2. Install Masternode - PRECOMPILED"
-	echo "3. Install Masternode - PRECOMPILED (OpenVZ FIX)"
+	echo "1. Install Masternode - COMPILING DAEMON"
+	echo "2. Install Masternode - ${RED}PRECOMPILED Daemon${NC}"
+	echo "3. Install Masternode - ${RED}PRECOMPILED Daemon and OpenVZ FIX${NC}"
 	echo "4. Exit"
 	echo ""
    
@@ -60,6 +61,8 @@ rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
 
 rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
 
+echo ""
+echo ""
 unset pv
 while [ -z ${pv} ]; do
 read -p "Please Enter Masternode Private key: " pv
@@ -110,12 +113,6 @@ sudo ufw limit ssh/tcp
 sudo ufw allow 6695/tcp
 sudo ufw logging on 
 yes | sudo ufw enable 
-sudo fallocate -l 4G /swapfile
-sudo chmod 600 /swapfile
-sudo mkswap /swapfile 
-sudo swapon /swapfile
-echo "/swapfile none swap sw 0 0" >> /etc/fstab
-sleep 2 
 echo ""
 echo  -e "${GREEN} Building 3dcoin core from source.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
@@ -235,8 +232,24 @@ if [[ $? -eq 0 ]]
  fi
 }
 
+function check_swap() {
+SWAPSIZE=$(cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
+FREESPACE=$(df / | tail -1 | awk '{print $4}')
+if [ $SWAPSIZE -lt 4000000 ]
+  then if [ $FREESPACE -gt 6000000 ]
+    then sudo fallocate -l 4G /swapfile
+		sudo chmod 600 /swapfile
+		sudo mkswap /swapfile 
+		sudo swapon /swapfile
+		echo "/swapfile none swap sw 0 0" >> /etc/fstab
+    else echo 'Swap seems smaller than recommended. It cannot be increased because of lack of space'
+		pause
+    fi
+fi  
+}
+
 show_menu
-local choice
+
 read -p "Enter choice [ 1 - 4] " choice
 case $choice in
 		
@@ -244,6 +257,7 @@ case $choice in
 	1)	echo ""
 		echo " #### 3Dcoin Masternode installation Original with Compilation ####"
 		Config_Masternode
+		check_swap
 		prep_3dcoin_core
 		install_3dcoin_core_COMP	
 		config_3dcoin_core
