@@ -26,7 +26,6 @@ GREEN="\033[0;32m"
 NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
-MAG='\e[1;35m'
 
 
 pause(){
@@ -42,8 +41,8 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo   ""
 	echo "1. Install Masternode - COMPILING DAEMON"
-	echo "2. Install Masternode - ${RED}PRECOMPILED Daemon${NC}"
-	echo "3. Install Masternode - ${RED}PRECOMPILED Daemon and OpenVZ FIX${NC}"
+	echo "2. Install Masternode - ** PRECOMPILED ** Daemon"
+	echo "3. Install Masternode - ** PRECOMPILED ** Daemon and ** OpenVZ FIX **"
 	echo "4. Exit"
 	echo ""
    
