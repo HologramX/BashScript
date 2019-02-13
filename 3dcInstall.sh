@@ -42,8 +42,9 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo "1. Install Masternode - COMPILING DAEMON"
 	echo "2. Install Masternode - ** PRECOMPILED ** Daemon"
-	echo "3. Install Masternode - ** PRECOMPILED ** Daemon and ** OpenVZ FIX **"
-	echo "4. Exit"
+	echo "3. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP"
+	echo "4. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP - OpenVZ FIX"
+	echo "5. Exit"
 	echo ""
    
 }
@@ -106,7 +107,7 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 yes | apt-get update
 yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
 echo ""
-echo  -e "${GREEN} Firewall/Swapfile setup.....              ${STD}"
+echo  -e "${GREEN} Firewall setup.....              ${STD}"
 sudo ufw allow ssh/tcp
 sudo ufw limit ssh/tcp 
 sudo ufw allow 6695/tcp
@@ -232,6 +233,8 @@ if [[ $? -eq 0 ]]
 }
 
 function check_swap() {
+echo ""
+echo " Check and Setup Swapfile....."
 SWAPSIZE=$(cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
 FREESPACE=$(df / | tail -1 | awk '{print $4}')
 if [ $SWAPSIZE -lt 4000000 ]
@@ -245,6 +248,7 @@ if [ $SWAPSIZE -lt 4000000 ]
 		pause
     fi
 fi  
+echo ""
 }
 
 show_menu
@@ -260,32 +264,46 @@ case $choice in
 		prep_3dcoin_core
 		install_3dcoin_core_COMP	
 		config_3dcoin_core
-		exit 0;;
+		printf "Would you reboot system?"
+		pause
+		reboot;;
 
 	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
 	2)	echo ""
 		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON ####"
 		Config_Masternode
+		check_swap
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
 		config_3dcoin_core
-		exit 0;;
+		printf "Would you reboot system?"
+		pause
+		reboot;;
+
+	3)	echo ""
+		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP####"
+		Config_Masternode
+		prep_3dcoin_core	
+		install_3dcoin_core_PRE
+		config_3dcoin_core
+		printf "Would you reboot system?"
+		pause
+		reboot;;
 
 	#### 3Dcoin Primenode installation
-	3)	echo ""
-		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON and OPENVZ FIX####"
+	4)	echo ""
+		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP - OPENVZ FIX####"
 		Config_Masternode
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		openvz_fix
-		exit 0;;
+		printf "Would you reboot system?"
+		pause
+		reboot;;
 
-	4) 	exit 0;;
+	5) 	exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 
-printf "Would you reboot system?"
-pause
-reboot
