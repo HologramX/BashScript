@@ -286,5 +286,5 @@ case $choice in
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 
-echo  -e "${GREEN} Rebooting .....               ${STD}"
+echo  -e "${GREEN} Rebooting .....              ${STD}"
 reboot
