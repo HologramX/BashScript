@@ -141,7 +141,7 @@ yes | sudo apt-get remove apache2-data  -y
 yes | sudo apt-get remove apache2-doc  -y
 yes | sudo apt-get remove apache2-utils  -y
 yes | sudo apt-get remove postfix  -y 
-yes | sudo apt-get upgrade -y
+apt-get -o DPkg::Options::=--force-confdef upgrade -q -y -u --force-yes
 yes | sudo apt-get update
 yes | sudo apt-get autoremove -y
 yes | sudo apt-get autoclean -y
@@ -265,6 +265,7 @@ case $choice in
 		install_3dcoin_core_COMP	
 		config_3dcoin_core
 		printf "Would you reboot system?"
+		echo ""
 		pause
 		reboot;;
 
@@ -277,6 +278,7 @@ case $choice in
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		printf "Would you reboot system?"
+		echo ""
 		pause
 		reboot;;
 
@@ -287,6 +289,7 @@ case $choice in
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		printf "Would you reboot system?"
+		echo ""
 		pause
 		reboot;;
 
@@ -299,6 +302,7 @@ case $choice in
 		config_3dcoin_core
 		openvz_fix
 		printf "Would you reboot system?"
+		echo ""
 		pause
 		reboot;;
 
