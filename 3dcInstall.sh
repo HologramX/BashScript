@@ -50,6 +50,13 @@ printf "${YELLOW}###############################################################
 }
 
 Config_Masternode(){
+echo ""
+unset pv
+while [ -z ${pv} ]; do
+read -p "Please Enter Masternode Private key: " pv
+done
+echo ""
+yes | apt-get install curl
 nodeIpAddress=`curl ifconfig.me/ip`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="externalip=${nodeIpAddress}"
@@ -60,13 +67,6 @@ fi
 rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
 
 rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
-
-echo ""
-echo ""
-unset pv
-while [ -z ${pv} ]; do
-read -p "Please Enter Masternode Private key: " pv
-done
 
 config="#----
 rpcuser=$rpcUserName
