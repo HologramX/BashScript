@@ -42,9 +42,10 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo "1. Install Masternode - COMPILING DAEMON"
 	echo "2. Install Masternode - ** PRECOMPILED ** Daemon"
-	echo "3. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP"
-	echo "4. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP - OpenVZ FIX"
-	echo "5. Exit"
+	echo "3. Install Masternode - ** PRECOMPILED ** Daemon - OpenVZ FIX"
+	echo "4. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP"
+	echo "5. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP - OpenVZ FIX"
+	echo "6. Exit"
 	echo ""
    
 }
@@ -56,6 +57,7 @@ while [ -z ${pv} ]; do
 read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
+
 yes | apt-get install curl
 nodeIpAddress=`curl ifconfig.me/ip`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
@@ -266,7 +268,6 @@ case $choice in
 		config_3dcoin_core
 		printf "Would you reboot system?"
 		echo ""
-		echo ""
 		pause
 		reboot;;
 
@@ -280,11 +281,23 @@ case $choice in
 		config_3dcoin_core
 		printf "Would you reboot system?"
 		echo ""
-		echo ""
 		pause
 		reboot;;
 
 	3)	echo ""
+		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - OPENVZ FIX ####"
+		Config_Masternode
+		check_swap
+		prep_3dcoin_core	
+		install_3dcoin_core_PRE
+		config_3dcoin_core
+		openvz_fix
+		printf "Would you reboot system?"
+		echo ""
+		pause
+		reboot;;
+
+	4)	echo ""
 		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP####"
 		Config_Masternode
 		prep_3dcoin_core	
@@ -292,13 +305,11 @@ case $choice in
 		config_3dcoin_core
 		printf "Would you reboot system?"
 		echo ""
-		echo ""
 		pause
 		reboot;;
 
-	#### 3Dcoin Primenode installation
-	4)	echo ""
-		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP - OPENVZ FIX####"
+	5)	echo ""
+		echo " #3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP - OPENVZ FIX#"
 		Config_Masternode
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
@@ -306,11 +317,9 @@ case $choice in
 		openvz_fix
 		printf "Would you reboot system?"
 		echo ""
-		echo ""
 		pause
 		reboot;;
-
-	5) 	exit 0;;
+	6) 	exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
