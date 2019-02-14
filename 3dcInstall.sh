@@ -266,6 +266,7 @@ case $choice in
 		config_3dcoin_core
 		printf "Would you reboot system?"
 		echo ""
+		echo ""
 		pause
 		reboot;;
 
@@ -279,6 +280,7 @@ case $choice in
 		config_3dcoin_core
 		printf "Would you reboot system?"
 		echo ""
+		echo ""
 		pause
 		reboot;;
 
@@ -289,6 +291,7 @@ case $choice in
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		printf "Would you reboot system?"
+		echo ""
 		echo ""
 		pause
 		reboot;;
@@ -302,6 +305,7 @@ case $choice in
 		config_3dcoin_core
 		openvz_fix
 		printf "Would you reboot system?"
+		echo ""
 		echo ""
 		pause
 		reboot;;
