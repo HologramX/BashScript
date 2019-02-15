@@ -236,10 +236,10 @@ echo ""
 #		printf "Would you install another IP"
 #		echo ""
 #		pause
-
+COUNT=0
 while true; do
 		echo ""
-		COUNT=COUNT+1
+		let "COUNT += 1" 
 		echo " # 3Dcoin Masternode Install IP NUMBER $COUNT#"
 		Config_Masternode
 		3dcoin-cli stop
