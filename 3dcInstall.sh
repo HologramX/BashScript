@@ -16,6 +16,9 @@ choice=""
 NODE_IP=""
 COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 COIN_ZIP="3dcoin_latest.zip"
+COIN_TGZ18=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
+COIN_ZIP18="3dcoin_latest18.zip"
+
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -45,7 +48,8 @@ printf "${YELLOW}###############################################################
 	echo "3. Install Masternode - ** PRECOMPILED ** Daemon - OpenVZ FIX"
 	echo "4. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP"
 	echo "5. Install Masternode - ** PRECOMPILED ** Daemon - NO SWAP - OpenVZ FIX"
-	echo "6. Exit"
+	echo "6. Install Masternode - ** PRECOMPILED ** Daemon - Ubuntu 18"
+	echo "0. Exit"
 	echo ""
    
 }
@@ -184,6 +188,28 @@ cp $COIN_DAEMON $COIN_PATH
 cp $COIN_CLI $COIN_PATH     
 }
 
+install_3dcoin_core_PRE18(){
+echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
+apt -y install zip unzip curl >/dev/null 2>&1
+printf "\n\n         Installed Utility" 
+cd 
+cd $TMP_FOLDER >/dev/null 2>&1
+wget -q $COIN_TGZ18
+printf "\n        Downloaded Daemon" 
+if [[ $? -ne 0 ]]; then
+echo -e 'Error downloading node. Please contact support'
+exit 1
+fi
+unzip -j $COIN_ZIP18
+$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+service $COIN_NAME stop > /dev/null 2>&1
+$COIN_CLI stop > /dev/null 2>&1
+sleep 2
+cp $COIN_DAEMON $COIN_PATH 
+cp $COIN_CLI $COIN_PATH     
+}
+
+
 config_3dcoin_core(){
 echo  -e "${GREEN} Configure 3dcoin core .....               ${STD}"
 cd ~
@@ -266,10 +292,7 @@ case $choice in
 		prep_3dcoin_core
 		install_3dcoin_core_COMP	
 		config_3dcoin_core
-		printf "Would you reboot system?"
-		echo ""
-		pause
-		reboot;;
+		echo "";;
 
 	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
 	2)	echo ""
@@ -279,10 +302,7 @@ case $choice in
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
 		config_3dcoin_core
-		printf "Would you reboot system?"
-		echo ""
-		pause
-		reboot;;
+		echo "";;
 
 	3)	echo ""
 		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - OPENVZ FIX ####"
@@ -292,10 +312,7 @@ case $choice in
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		openvz_fix
-		printf "Would you reboot system?"
-		echo ""
-		pause
-		reboot;;
+		echo "";;
 
 	4)	echo ""
 		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP####"
@@ -303,10 +320,7 @@ case $choice in
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
 		config_3dcoin_core
-		printf "Would you reboot system?"
-		echo ""
-		pause
-		reboot;;
+		echo "";;
 
 	5)	echo ""
 		echo " #3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP - OPENVZ FIX#"
@@ -315,12 +329,24 @@ case $choice in
 		install_3dcoin_core_PRE
 		config_3dcoin_core
 		openvz_fix
-		printf "Would you reboot system?"
-		echo ""
-		pause
-		reboot;;
-	6) 	exit 0;;
+		echo "";;
+
+	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
+	6)	echo ""
+		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON ####"
+		Config_Masternode
+		check_swap
+		prep_3dcoin_core	
+		install_3dcoin_core_PRE18
+		config_3dcoin_core
+		echo "";;
+		
+	0) 	exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
+printf "Would you reboot system?"
+echo ""
+pause
+reboot
 

@@ -15,10 +15,10 @@ RPC_PORT=6694
 COIN_KEY=""
 choice=""
 NODE_IP=""
-COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
+COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 COIN_ZIP="3dcoin_latest.zip"
 COIN_TGZ18=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
-COIN_ZIP18="3dcoin_latest.zip"
+COIN_ZIP18="3dcoin_latest18.zip"
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -47,7 +47,7 @@ printf "${YELLOW}###############################################################
 	echo "2. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16"
 	echo "3. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16 - OpenVZ FIX"
 	echo "4. Update Masternode - ** PRECOMPILED ** Daemon - **Ubuntu18** "
-	echo "5. Exit"
+	echo "0. Exit"
 	echo ""
    
 }
@@ -278,7 +278,7 @@ if [[ $? -eq 0 ]]
 ##### Main #####
 show_menu
 
-read -p "Enter choice [ 1 - 4] " choice
+read -p "Enter choice [ 1 - 5] " choice
 case $choice in
 		
 	1)	echo ""
@@ -314,10 +314,10 @@ case $choice in
 		UpdateCONF
 		echo "";;
 		
-	5) 	exit 0;;
+	0) 	exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 printf "ALL DONE rebooting system..... "
-sleep 5
+pause
 reboot
