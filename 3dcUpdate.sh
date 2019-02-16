@@ -15,8 +15,10 @@ RPC_PORT=6694
 COIN_KEY=""
 choice=""
 NODE_IP=""
-COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
+COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
 COIN_ZIP="3dcoin_latest.zip"
+COIN_TGZ18=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
+COIN_ZIP18="3dcoin_latest.zip"
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -42,9 +44,10 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo   ""
 	echo "1. Update Masternode - COMPILING DAEMON"
-	echo "2. Update Masternode - ** PRECOMPILED ** Daemon"
-	echo "3. Update Masternode - ** PRECOMPILED ** Daemon - OpenVZ FIX"
-	echo "4. Exit"
+	echo "2. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16"
+	echo "3. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16 - OpenVZ FIX"
+	echo "4. Update Masternode - ** PRECOMPILED ** Daemon - **Ubuntu18** "
+	echo "5. Exit"
 	echo ""
    
 }
@@ -140,7 +143,7 @@ UpdateCOMP(){
 }
 			
 			
-UpdatePRE(){
+UpdatePRE16(){
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 	cd 
@@ -152,6 +155,26 @@ UpdatePRE(){
 	exit 1
 	fi
 	unzip -j $COIN_ZIP
+	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+	service $COIN_NAME stop > /dev/null 2>&1
+	$COIN_CLI stop > /dev/null 2>&1
+	sleep 2
+	cp $COIN_DAEMON $COIN_PATH 
+	cp $COIN_CLI $COIN_PATH 
+}
+
+UpdatePRE18(){
+	echo ""
+	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
+	cd 
+	cd $TMP_FOLDER >/dev/null 2>&1
+	wget -q $COIN_TGZ18
+	printf "\n        Downloaded Daemon" 
+	if [[ $? -ne 0 ]]; then
+	echo -e 'Error downloading node. Please contact support'
+	exit 1
+	fi
+	unzip -j $COIN_ZIP18
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
@@ -270,7 +293,7 @@ case $choice in
 		echo " #### 3Dcoin Masternode FULL UPDATE with PRECOMPILED DAEMON ####"
 		SystemdRemove
 		PrepUpdate
-		UpdatePRE
+		UpdatePRE16
 		UpdateCONF
 		echo "";;
 
@@ -283,7 +306,15 @@ case $choice in
 		OpenvzFix
 		echo "";;
 		
-	4) 	exit 0;;
+	4)	echo ""
+		echo " #### 3Dcoin Masternode FULL UPDATE with PRECOMPILED DAEMON - UBUNTU18 ####"
+		SystemdRemove
+		PrepUpdate
+		UpdatePRE18
+		UpdateCONF
+		echo "";;
+		
+	5) 	exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
