@@ -301,7 +301,7 @@ case $choice in
 		echo " #### 3Dcoin FULL UPDATE with PRECOMPILED DAEMON - OPENVZ FIX ####"
 		SystemdRemove
 		PrepUpdate
-		UpdatePRE
+		UpdatePRE16
 		UpdateCONF
 		OpenvzFix
 		echo "";;
