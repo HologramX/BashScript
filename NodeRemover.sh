@@ -43,9 +43,10 @@ rm -r $CONFIG_FOLDER
 crontab -l | grep "$COIN_NAME" >/dev/null 2>&1
 if [[ $? -eq 0 ]]
  then 
-  crontab -u root -l | grep -v '$COIN_DAEMON'  | crontab -u root -
+  crontab -u root -l | grep -v '@reboot /usr/local/bin/$COIN_DAEMON -daemon'  | crontab -u root -
   printf "\n        Crontab SET SUCCESFULL"
  fi
-}
+
+printf "\n\n"
 
 pause
