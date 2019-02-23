@@ -319,7 +319,6 @@ case $choice in
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 printf "ALL DONE rebooting system..... "
-rm *.sh* > /dev/null 2>&1
-rm *.zip > /dev/null 2>&1
+rm 3dcUpdate.sh* > /dev/null 2>&1
 pause
 reboot
