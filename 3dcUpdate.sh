@@ -314,7 +314,8 @@ case $choice in
 		UpdateCONF
 		echo "";;
 		
-	0) 	exit 0;;
+	0) 	rm 3dc*.sh* > /dev/null 2>&1
+		exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
