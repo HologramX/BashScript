@@ -49,4 +49,3 @@ if [[ $? -eq 0 ]]
 
 printf "\n\n"
 
-pause
