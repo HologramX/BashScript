@@ -87,17 +87,6 @@ PrepUpdate(){
 			rm -f /usr/local/bin/3dcoin-cli.sh
 			rm -rf /usr/local/bin/Masternode
 			echo ""
-			cd ~
-			echo  -e "${GREEN} Get latest release                ${STD}"
-			latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-			link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-			wget $link
-			tar -xvzf $latestrelease.tar.gz
-			file=${latestrelease//[Vv]/3dcoin-} 
-			echo ""
-			echo  -e "${GREEN} Stop Cron                         ${STD}" 
-			sudo /etc/init.d/cron stop
-			echo ""
 			echo  -e "${GREEN} Install packages.....                     ${STD}"
 			export LC_ALL=en_US.UTF-8
 			apt-get update
@@ -124,6 +113,17 @@ PrepUpdate(){
 			apt-get autoremove -y
 			apt-get autoclean -y		
 			sleep 2
+			echo ""
+			cd ~
+			echo  -e "${GREEN} Get latest release                ${STD}"
+			latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+			link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+			wget $link
+			tar -xvzf $latestrelease.tar.gz
+			file=${latestrelease//[Vv]/3dcoin-} 
+			echo ""
+			echo  -e "${GREEN} Stop Cron                         ${STD}" 
+			sudo /etc/init.d/cron stop
 }
 
 UpdateCOMP(){
