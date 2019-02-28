@@ -113,6 +113,10 @@ PrepUpdate(){
 			apt-get autoremove -y
 			apt-get autoclean -y		
 			sleep 2
+			$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+			service $COIN_NAME stop > /dev/null 2>&1
+			$COIN_CLI stop > /dev/null 2>&1
+			sleep 2
 			echo ""
 			cd ~
 			echo  -e "${GREEN} Get latest release                ${STD}"
