@@ -158,7 +158,7 @@ UpdatePRE16(){
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
-	unzip -j $COIN_ZIP
+	unzip -o -j $COIN_ZIP
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
@@ -178,7 +178,7 @@ UpdatePRE18(){
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
-	unzip -j $COIN_ZIP18
+	unzip -o -j $COIN_ZIP18
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
