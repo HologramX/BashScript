@@ -281,7 +281,7 @@ echo ""
 
 show_menu
 
-read -p "Enter choice [ 1 - 4] " choice
+read -p "Enter choice [ 1 - 6] " choice
 case $choice in
 		
 	#### 3Dcoin Masternode installation Original with Compilation
@@ -333,7 +333,7 @@ case $choice in
 
 	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
 	6)	echo ""
-		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON ####"
+		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON UBUNTU 18 ####"
 		Config_Masternode
 		check_swap
 		prep_3dcoin_core	
