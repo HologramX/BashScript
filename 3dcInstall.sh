@@ -345,6 +345,7 @@ case $choice in
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
+rm 3dc*.sh* > /dev/null 2>&1
 printf "Would you reboot system?"
 echo ""
 pause
