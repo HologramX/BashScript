@@ -44,32 +44,10 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo   ""
 	echo "1. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16"
-	echo "2. Update Masternode - ** PRECOMPILED ** Daemon - Ubuntu16 - OpenVZ FIX"
-	echo "3. Update Masternode - ** PRECOMPILED ** Daemon - **Ubuntu18**"
-	echo "4. Update Masternode - ** PRECOMPILED ** Daemon - **Ubuntu18** - OpenVZ FIX"
+	echo "2. Update Masternode - ** PRECOMPILED ** Daemon - **Ubuntu18**"
 	echo "0. Exit"
 	echo ""
    
-}
-
-
-SystemdRemove() {
-printf "\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}                     Systemd Service REMOVE  $COIN_NAME                               ${NC}\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-sleep 2
-systemctl stop 3dcoin
-systemctl stop fire
-systemctl stop mydaemon
-systemctl stop tame
-systemctl stop max
-systemctl disable 3dcoin
-systemctl disable fire
-systemctl disable mydaemon
-systemctl disable tame
-systemctl disable max
-systemctl daemon-reload
 }
 
 PrepUpdate(){
@@ -147,54 +125,23 @@ UpdatePRE18(){
 	cp $COIN_CLI $COIN_PATH 
 }
 
-OpenvzFix(){
-crontab -l | grep "/run/sshd" >/dev/null 2>&1
-if [[ $? -eq 0 ]]
- then printf "\n        Crontab already SET"
-  else crontab -l > /tmp/cron2fix 
-  echo "@reboot mkdir /run/sshd" >> /tmp/cron2fix 
-  echo "@reboot mkdir /run/fail2ban" >> /tmp/cron2fix 
-  echo "@reboot service sshd start" >> /tmp/cron2fix
-  echo "@reboot service fail2ban start" >> /tmp/cron2fix
-  crontab /tmp/cron2fix 
-  printf "\n        Crontab SET SUCCESFULL"
- fi
-}
 
 ##### Main #####
 show_menu
 
-read -p "Enter choice [ 1 - 5] " choice
+read -p "Enter choice [ 1 - 2] " choice
 case $choice in
 		
 	1)	echo ""
-		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - U16 ##"
-		SystemdRemove
+		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - UBUNTU16 ##"
 		PrepUpdate
 		UpdatePRE16
 		echo "";;
 
 	2)	echo ""
-		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - U16 - FIX ##"
-		SystemdRemove
-		PrepUpdate
-		UpdatePRE16
-		OpenvzFix
-		echo "";;
-
-	3)	echo ""
-		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - U18 - FIX ##"
-		SystemdRemove
+		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - UBUNTU18 ##"
 		PrepUpdate
 		UpdatePRE18
-		echo "";;
-		
-	4)	echo ""
-		echo "## 3Dcoin Masternode Daemon UPDATE with PRECOMPILED DAEMON - U18 - FIX ##"
-		SystemdRemove
-		PrepUpdate
-		UpdatePRE18
-		OpenvzFix
 		echo "";;
 		
 	0) 	rm 3dc*.sh* > /dev/null 2>&1
