@@ -147,7 +147,7 @@ yes |  apt-get remove apache2-data  -y
 yes |  apt-get remove apache2-doc  -y
 yes |  apt-get remove apache2-utils  -y
 yes |  apt-get remove postfix  -y 
-yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+yes |  apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes |  apt-get update
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y

@@ -109,7 +109,7 @@ PrepUpdate(){
 			apt-get remove apache2-utils  -y
 			apt-get remove postfix  -y 
 			apt-get update
-			yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+			yes |  apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 			apt-get autoremove -y
 			apt-get autoclean -y		
 			sleep 2
