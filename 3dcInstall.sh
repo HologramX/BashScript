@@ -114,11 +114,11 @@ yes | apt-get update
 yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
-sudo ufw allow ssh/tcp
-sudo ufw limit ssh/tcp 
-sudo ufw allow 6695/tcp
-sudo ufw logging on 
-yes | sudo ufw enable 
+ ufw allow ssh/tcp
+ ufw limit ssh/tcp 
+ ufw allow 6695/tcp
+ ufw logging on 
+yes |  ufw enable 
 echo ""
 echo  -e "${GREEN} Building 3dcoin core from source.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
@@ -128,29 +128,29 @@ link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
 wget $link
 tar -xvzf $latestrelease.tar.gz
 file=${latestrelease//[v]/3dcoin-}
-yes | sudo apt-get update
+yes |  apt-get update
 export LC_ALL=en_US.UTF-8
-yes | sudo apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
-yes | sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-yes | sudo apt-get install software-properties-common
-yes | sudo add-apt-repository ppa:bitcoin/bitcoin
-yes | sudo apt-get update
-yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev
-yes | sudo apt-get install libminiupnpc-dev
-yes | sudo apt-get install libzmq3-dev
+yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+yes |  apt-get install software-properties-common
+yes |  add-apt-repository ppa:bitcoin/bitcoin
+yes |  apt-get update
+yes |  apt-get install libdb4.8-dev libdb4.8++-dev
+yes |  apt-get install libminiupnpc-dev
+yes |  apt-get install libzmq3-dev
 yes | apt-get install sshpass
 sleep 2
-yes | sudo apt-get remove apache2 -y
-yes | sudo apt-get remove apache2  -y
-yes | sudo apt-get remove apache2-bin  -y
-yes | sudo apt-get remove apache2-data  -y
-yes | sudo apt-get remove apache2-doc  -y
-yes | sudo apt-get remove apache2-utils  -y
-yes | sudo apt-get remove postfix  -y 
-yes | sudo apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-yes | sudo apt-get update
-yes | sudo apt-get autoremove -y
-yes | sudo apt-get autoclean -y
+yes |  apt-get remove apache2 -y
+yes |  apt-get remove apache2  -y
+yes |  apt-get remove apache2-bin  -y
+yes |  apt-get remove apache2-data  -y
+yes |  apt-get remove apache2-doc  -y
+yes |  apt-get remove apache2-utils  -y
+yes |  apt-get remove postfix  -y 
+yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+yes |  apt-get update
+yes |  apt-get autoremove -y
+yes |  apt-get autoclean -y
 sleep 2
 }
 
@@ -267,10 +267,10 @@ SWAPSIZE=$(cat /proc/meminfo | grep SwapTotal | awk '{print $2}')
 FREESPACE=$(df / | tail -1 | awk '{print $4}')
 if [ $SWAPSIZE -lt 4000000 ]
   then if [ $FREESPACE -gt 6000000 ]
-    then sudo fallocate -l 4G /swapfile
-		sudo chmod 600 /swapfile
-		sudo mkswap /swapfile 
-		sudo swapon /swapfile
+    then  fallocate -l 4G /swapfile
+		 chmod 600 /swapfile
+		 mkswap /swapfile 
+		 swapon /swapfile
 		echo "/swapfile none swap sw 0 0" >> /etc/fstab
     else echo 'Swap seems smaller than recommended. It cannot be increased because of lack of space'
 		pause

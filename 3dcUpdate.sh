@@ -90,17 +90,17 @@ PrepUpdate(){
 			echo  -e "${GREEN} Install packages.....                     ${STD}"
 			export LC_ALL=en_US.UTF-8
 			apt-get update
-			yes | sudo apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+			yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 			yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
-			yes | sudo apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
-			yes | sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-			yes | sudo apt-get install software-properties-common 
-			yes | sudo add-apt-repository ppa:bitcoin/bitcoin 
-			yes | sudo apt-get update 
-			yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev 
-			yes | sudo apt-get install libminiupnpc-dev 
-			yes | sudo apt-get install libzmq3-dev
-			yes | sudo apt-get install zip unzip curl
+			yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+			yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+			yes |  apt-get install software-properties-common 
+			yes |  add-apt-repository ppa:bitcoin/bitcoin 
+			yes |  apt-get update 
+			yes |  apt-get install libdb4.8-dev libdb4.8++-dev 
+			yes |  apt-get install libminiupnpc-dev 
+			yes |  apt-get install libzmq3-dev
+			yes |  apt-get install zip unzip curl
 			apt-get remove apache2 -y
 			apt-get remove apache2  -y
 			apt-get remove apache2-bin  -y
@@ -109,7 +109,7 @@ PrepUpdate(){
 			apt-get remove apache2-utils  -y
 			apt-get remove postfix  -y 
 			apt-get update
-			yes | sudo apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+			yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 			apt-get autoremove -y
 			apt-get autoclean -y		
 			sleep 2
@@ -127,7 +127,7 @@ PrepUpdate(){
 			file=${latestrelease//[Vv]/3dcoin-} 
 			echo ""
 			echo  -e "${GREEN} Stop Cron                         ${STD}" 
-			sudo /etc/init.d/cron stop
+			 /etc/init.d/cron stop
 }
 
 UpdateCOMP(){
@@ -218,7 +218,7 @@ line="@reboot /usr/local/bin/3dcoind
 			echo "Crontab updated successfully"
 			echo ""
 			echo  -e "${GREEN} Start Cron                        ${STD}"
-			sudo /etc/init.d/cron start
+			 /etc/init.d/cron start
 			echo ""		
 			echo  -e "${GREEN} Update Finished,rebooting server  ${STD}" 
 			cd ~
