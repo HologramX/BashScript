@@ -50,9 +50,29 @@ printf "${YELLOW}###############################################################
    
 }
 
+SystemdRemove() {
+printf "\n"
+printf "${YELLOW}#########################################################################${NC}\n"
+printf "${GREEN}                     Systemd Service REMOVE  $COIN_NAME                               ${NC}\n"
+printf "${YELLOW}#########################################################################${NC}\n"
+sleep 2
+systemctl stop 3dcoin
+systemctl stop fire
+systemctl stop mydaemon
+systemctl stop tame
+systemctl stop max
+systemctl disable 3dcoin
+systemctl disable fire
+systemctl disable mydaemon
+systemctl disable tame
+systemctl disable max
+systemctl daemon-reload
+}
+
 PrepUpdate(){
 
 			echo ""
+			h=$(( RANDOM % 23 + 1 ));
 			echo  -e "${BLUE} Start ${Update}                    ${STD}"
 			rm -f /usr/local/bin/check.sh
 			rm -f /usr/local/bin/update.sh
@@ -64,6 +84,17 @@ PrepUpdate(){
 			echo ""
 			echo  -e "${GREEN} Install packages.....                     ${STD}"
 			apt-get update
+			yes |  apt-get apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+			yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
+			yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+			yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+			yes |  apt-get install software-properties-common 
+			yes |  add-apt-repository ppa:bitcoin/bitcoin 
+			yes |  apt-get update 
+			yes |  apt-get install libdb4.8-dev libdb4.8++-dev 
+			yes |  apt-get install libminiupnpc-dev 
+			yes |  apt-get install libzmq3-dev
+			yes |  apt-get install zip unzip curl
 			DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 			apt-get autoremove -y
 			apt-get autoclean -y		
@@ -151,5 +182,6 @@ case $choice in
 esac
 printf "ALL DONE rebooting system..... "
 rm 3dc*.sh* > /dev/null 2>&1
+/etc/init.d/cron start
 pause
 reboot
