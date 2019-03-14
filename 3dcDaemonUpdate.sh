@@ -184,4 +184,4 @@ printf "ALL DONE rebooting system..... "
 rm 3dc*.sh* > /dev/null 2>&1
 #/etc/init.d/cron start
 #pause
-#reboot
+reboot
