@@ -182,6 +182,6 @@ case $choice in
 esac
 printf "ALL DONE rebooting system..... "
 rm 3dc*.sh* > /dev/null 2>&1
-/etc/init.d/cron start
-pause
-reboot
+#/etc/init.d/cron start
+#pause
+#reboot
