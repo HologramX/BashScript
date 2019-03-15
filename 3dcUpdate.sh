@@ -282,7 +282,7 @@ if [[ $? -eq 0 ]]
 ##### Main #####
 show_menu
 
-read -p "Enter choice [ 1 - 5] " choice
+read -p "Enter choice [ 0 - 6] " choice
 case $choice in
 		
 	1)	echo ""
