@@ -13,7 +13,7 @@ apt-get remove perl -y
 apt-get clean
 apt-get autoremove -y
 apt-get autoclean -y
-cd /var/log/*
+cd /var/log/
 rm *.gz
 rm *.1 > /dev/null 2>&1
 rm *.2 > /dev/null 2>&1
@@ -22,5 +22,6 @@ echo > btmp.log
 echo > auth.log
 echo > ufw.log
 echo > kern.log
+echo > .3dcoin/debug.log
 rm -r journal/*
 reboot
