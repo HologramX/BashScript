@@ -122,12 +122,6 @@ yes |  ufw enable
 echo ""
 echo  -e "${GREEN} Building 3dcoin core from source.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
-cd ~
-latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-wget $link
-tar -xvzf $latestrelease.tar.gz
-file=${latestrelease//[v]/3dcoin-}
 yes |  apt-get update
 export LC_ALL=en_US.UTF-8
 yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
@@ -150,6 +144,12 @@ yes |  apt-get remove postfix  -y
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
+cd ~
+latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+wget $link
+tar -xvzf $latestrelease.tar.gz
+file=${latestrelease//[v]/3dcoin-}
 sleep 2
 }
 

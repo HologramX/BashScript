@@ -112,11 +112,10 @@ PrepUpdate(){
 			apt-get remove postfix  -y 
 			apt-get autoremove -y
 			apt-get autoclean -y		
-			sleep 2
 			$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 			service $COIN_NAME stop > /dev/null 2>&1
 			$COIN_CLI stop > /dev/null 2>&1
-			sleep 2
+			sleep 8
 			echo ""
 			cd ~
 			echo  -e "${GREEN} Get latest release                ${STD}"
@@ -139,7 +138,7 @@ UpdateCOMP(){
 			echo  -e "${GREEN} Stop 3Dcoin core                  ${STD}"
 			echo ""			
 			3dcoin-cli stop
-			sleep 10	
+			sleep 2	
 			echo  -e "${GREEN} Make install                      ${STD}"
 			echo ""			
 			make install-strip
@@ -151,40 +150,39 @@ UpdatePRE16(){
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 	cd 
-	cd $TMP_FOLDER >/dev/null 2>&1
+	cd $COIN_PATH >/dev/null 2>&1
 	wget -q $COIN_TGZ
 	printf "\n        Downloaded Daemon" 
 	if [[ $? -ne 0 ]]; then
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
-	unzip -o -j $COIN_ZIP
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 2
-	cp $COIN_DAEMON $COIN_PATH 
-	cp $COIN_CLI $COIN_PATH 
+	unzip -o -j $COIN_ZIP
+	rm *.zip*
 }
 
 UpdatePRE18(){
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 	cd 
-	cd $TMP_FOLDER >/dev/null 2>&1
+	cd $COIN_PATH >/dev/null 2>&1
 	wget -q $COIN_TGZ18
 	printf "\n        Downloaded Daemon" 
 	if [[ $? -ne 0 ]]; then
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
-	unzip -o -j $COIN_ZIP18
+	
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 2
-	cp $COIN_DAEMON $COIN_PATH 
-	cp $COIN_CLI $COIN_PATH 
+	unzip -o -j $COIN_ZIP18
+	rm *.zip*
 }
 
 UpdateCONF(){
@@ -282,7 +280,7 @@ if [[ $? -eq 0 ]]
 ##### Main #####
 show_menu
 
-read -p "Enter choice [ 0 - 6] " choice
+read -p "Enter choice [ 1 - 5] " choice
 case $choice in
 		
 	1)	echo ""
