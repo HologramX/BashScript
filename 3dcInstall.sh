@@ -111,7 +111,7 @@ h=$(( RANDOM % 23 + 1 ));
 echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 yes | apt-get update
-yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl
+yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl fail2ban
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw allow ssh/tcp
@@ -234,7 +234,7 @@ cd ~
 crontab -r
 line="@reboot /usr/local/bin/3dcoind
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
 0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
 * * */2 * * /usr/local/bin/Masternode/clearlog.sh"
 echo "$line" | crontab -u root -
