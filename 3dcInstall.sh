@@ -103,7 +103,7 @@ addnode=159.203.167.75
 addnode=138.68.102.67"
 }
 
-prep_3dcoin_core(){
+prep_3dcoin_core(){ 
 echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
@@ -111,7 +111,8 @@ h=$(( RANDOM % 23 + 1 ));
 echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 yes | apt-get update
-yes | apt-get install ufw python virtualenv git unzip pv nano htop libwww-perl fail2ban
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+yes | apt-get install fail2ban ufw python virtualenv git unzip pv nano htop libwww-perl
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw allow ssh/tcp
@@ -141,7 +142,6 @@ yes |  apt-get remove apache2-data  -y
 yes |  apt-get remove apache2-doc  -y
 yes |  apt-get remove apache2-utils  -y
 yes |  apt-get remove postfix  -y 
-DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
@@ -234,7 +234,7 @@ cd ~
 crontab -r
 line="@reboot /usr/local/bin/3dcoind
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
 0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
 * * */2 * * /usr/local/bin/Masternode/clearlog.sh"
 echo "$line" | crontab -u root -
