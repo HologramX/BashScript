@@ -130,7 +130,7 @@ yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chro
 yes |  apt-get install software-properties-common
 yes |  add-apt-repository ppa:bitcoin/bitcoin
 yes |  apt-get update
-yes |  apt-get install libdb4.8-dev libdb4.8++-dev
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install libdb4.8-dev libdb4.8++-dev
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
 yes | apt-get install sshpass
