@@ -68,7 +68,7 @@ fi
    crontab /tmp/cron2upd >/dev/null 2>&1
    echo -e "${GREEN}/tmp/cron2upd is a temporary copy of crontab${NC}"
    sleep 2 
-fi
+   ;;
 }
 
 
