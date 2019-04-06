@@ -87,6 +87,7 @@ case $UFWSTATUS in
 		   for PORT in ${SERVICES};do echo -e "${GREEN} $PORT $(lsof -i:$PORT|tail -1 | awk '{print $1}') is listening on $PORT; enabling ...${NC}"; ufw allow $PORT >/dev/null 2>&1; done
 		   echo -e "${GREEN}Enabling $COIN_PORT ...${NC}"; ufw allow $COIN_PORT >/dev/null 2>&1
 		   sleep 5
+		   ;;
 	active*)
 		ufw status | grep $COIN_PORT | grep ALLOW >/dev/null 2>&1
         	if [[ $? -eq 0 ]]; then echo "ufw seems already active and configured"
