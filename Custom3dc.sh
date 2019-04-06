@@ -25,14 +25,13 @@ MAG='\e[1;35m'
 function apt_update() {
 echo
 echo -e "${GREEN}Checking and installing operating system updates. It may take awhile ...${NC}"
-apt-get update 
+apt-get update >/dev/null 2>&1
 DEBIAN_FRONTEND=noninteractive apt-get -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" -y upgrade  
 DEBIAN_FRONTEND=noninteractive apt-get -y install zip unzip curl 
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
+DEBIAN_FRONTEND=noninteractive apt-get -y autoclear
 if [[ -f /var/run/reboot-required ]]
-  then echo -e "${RED}Warning:${NC}${GREEN}some updates require a reboot${NC}"
-    REBOOTSYS=n
-    sleep 3
+  then REBOOTSYS=n
 fi
 }
 
@@ -51,12 +50,14 @@ crontab -l | grep "$COIN_PATH/cust-upd-3dc.sh" >/dev/null 2>&1
 if [[ $? -eq 0 ]]
  then if [[ $RCUPDCHECK -eq 0 ]]
   then echo "Update script already updated"
-  else crontab -l > /tmp/cron2fix
-  sed -i '/cust-upd-3dc.sh/d' /tmp/cron2fix
-  crontab /tmp/cron2fix
+  else crontab -l > /tmp/cron2fix 
+  sed -i '/cust-upd-3dc.sh/d' /tmp/cron2fix 
+  crontab /tmp/cron2fix 
  fi
 fi
 
+if [[ $RCUPDCHECK -ne 0 ]]
+ then 
    ORA=$(echo $((1 + $RANDOM % 23)))
    MIN=$(echo $((1 + $RANDOM % 59)))
    base64 -d <<<"H4sICGyETFwAA2N1c3QtdXBkLTNkYy5zaADNVW1v2zYQ/q5fcdWEKE5BsV7RLw3cInWcNkDsBLaHIc2ygKZom4tEqiIVZ13233fUm1/SGNg+zV8sHo93zz3P8fjTKzqTis6YWXrT4dXd2eXF6WDcCw7TeyvSDEjc8fqX56O76eevvaW1mXlP6ULaZTGLuE7phLMhy+nbmGupSMqMFbnSsSCF0vO55JIlNGcrWu00folUxWP0XWZV7NOTwfBy1Aur3TisrP2L88ZEeCJr69XJ9EsvpIXJaaI5Rnfw673RyXDQq05Uhq/nV1iK4EsNQVMFPAFb3QM5C2kI4V9ZLpWFYHT2d9jxPI8zIyDoAkaAT+ejo44HwGMI1tzABxqLB6qKJIGfPxx00WG1EBbIt3UOtMk53NxA8BGIEvAGbm+PwS4FRgUo8RAB4SDPdQ6xXqlEs1iqBTjqorB0epQWXPC5bKOReZ3CkRBsULcZvlDIK5A/alekAI62fJ/jH56+m/wyxOqc7vE7U6Qv5am4a1nrOtKa86PBr7vn957KZKznW45oHPd7wce2YD9oofnwqteuMZUPBwe4Hvd9pPLbDsNrjv2J1RnkhVKOXqmMZYoL41dec6TfiPxBcoF7EByaP7FNU24TxLzIRVbDc43VVgFNGVDV4X6xhvVR41IGTdzndJf+SlRfJhGY5m21GA8m05PxdHI9Oe1dO1Mp/kYH7CXEMbDTBXpfI9QrvGd4zTcU/wFkvkx1DK8fX+qLXTPG3MC8UZYPPUR97cB6Fdi1VGOB6uTWCVVd4kabUq49WhH2b+Ta0Qoz7hOrVmotxPGxB5Nxv5wMCbOIOReJwLGBzc+LHNEQIxOBKZtxyTIZbYxMxKkN/YTT654vmVRTJODiol/PRlpHM7QK3lQW+pYt7hRLhf8+RKMRMZABhIZGR/7hze/+7euOHx3R37q0LLMcjmtk6zkK5EHkRmq1HoSwMwhxhxfWNYVP8HrNu51aTCDfUc6tqlFJeHqCm+d2J3SwCQNdtzTfOQFFYmXKoFnGJtNKzpDLCLbitB7ldU4wCItch7iR6f4S55ICyXG6fLkcDmpm60leWvAbFQGeoLrwg2ftJXWcjlWcNmZEWWH1QqgIn1C35FrN5aLIBXZCLA2bJYK4Ms3GelHI1rbCtLqwzra/zf97j++fR3WLV5Oo+wY/U3bfsktQIHyo/xcXEO+eMIx73j/hy3kotwgAAA==" | gunzip > $COIN_PATH/cust-upd-3dc.sh
@@ -65,14 +66,30 @@ fi
    echo "$MIN $ORA * * * $COIN_PATH/cust-upd-3dc.sh $SOURCEBIN" >> /tmp/cron2upd
    crontab /tmp/cron2upd >/dev/null 2>&1
    echo -e "${GREEN}/tmp/cron2upd is a temporary copy of crontab${NC}"
-   sleep 2 
+   sleep 2
+  
+fi
 }
 
+function check_user() {
+if [[ $EUID -ne 0 ]]; then
+   echo -e "${RED}$0 must be run as root.${NC}"
+   exit 1
+fi
+}
 
 function welcome() {
 clear
+base64 -d <<<"H4sICCgmslsAAzNkY29pbi50eHQAjVC5DQAxDOo9BTLzef/2gOSe5qS4CJhgYgU4rQJGdZ8IwVcMWCm0oAkaBpM20DZYBk1ZK6G3tuB2vISzrE/qv9U3WkChVGqykVaoln6P3jMzO/XsB+oCwu9KXC4BAAA=" | gunzip
 echo -e "${GREEN}Masternode installation script $COIN_NAME ${NC}"
 sleep 3
+}
+
+function check_distro() {
+if [[ $(lsb_release -i) != *Ubuntu* ]]; then
+  echo -e "${RED}You are not running Ubuntu. This script is meant for Ubuntu.${NC}"
+  exit 1
+fi
 }
 
 function check_firewall() {
@@ -87,7 +104,7 @@ case $UFWSTATUS in
 		   for PORT in ${SERVICES};do echo -e "${GREEN} $PORT $(lsof -i:$PORT|tail -1 | awk '{print $1}') is listening on $PORT; enabling ...${NC}"; ufw allow $PORT >/dev/null 2>&1; done
 		   echo -e "${GREEN}Enabling $COIN_PORT ...${NC}"; ufw allow $COIN_PORT >/dev/null 2>&1
 		   sleep 5
-		   ;;
+		   ;;	
 	active*)
 		ufw status | grep $COIN_PORT | grep ALLOW >/dev/null 2>&1
         	if [[ $? -eq 0 ]]; then echo "ufw seems already active and configured"
@@ -138,6 +155,37 @@ clear
    download_node
    SOURCEBIN="BIN"
 }
+
+function compile_node() {
+  pidof $COIN_DAEMON >/dev/null 2>&1
+  RC=$?
+  if [[ -f "$COIN_PATH$COIN_DAEMON" && "$RC" -eq "0" ]]
+  then echo -e "${GREEN}It seems $COIN_DAEMON is already installed and running, install the update script during next steps to check for updates${NC}"
+  sleep 3
+  else if [[ -d 3dcoin ]]; then rm -rf 3dcoin >/dev/null 2>&1; fi
+  sudo git clone https://github.com/BlockchainTechLLC/3dcoin.git
+  yes | sudo apt-get update 
+  export LC_ALL=en_US.UTF-8
+  yes | sudo apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+  yes | sudo apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+  yes | sudo apt-get install software-properties-common 
+  yes | sudo add-apt-repository ppa:bitcoin/bitcoin 
+  yes | sudo apt-get update 
+  yes | sudo apt-get install libdb4.8-dev libdb4.8++-dev 
+  yes | sudo apt-get install libminiupnpc-dev 
+  yes | sudo apt-get install libzmq3-dev
+  sleep 2
+  cd 3dcoin
+  ./autogen.sh
+  ./configure --disable-tests --disable-gui-tests --without-gui
+  make install-strip
+  if [[ "$?" -eq "0" ]]
+   then echo "Binaries compiled successfully"
+   else echo "Something went wrong...."
+   exit 4
+  fi
+  fi
+} 
 
 function download_node() {
   echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
@@ -247,9 +295,9 @@ if [ $SWAPSIZE -lt 4000000 ]
   then if [ $FREESPACE -gt 6000000 ]
     then dd if=/dev/zero of=/bigfile.swap bs=250MB count=16 
     chmod 600 /bigfile.swap
-    mkswap /swapfile
-    swapon /swapfile
-    echo '/swapsile none swap sw 0 0' >> /etc/fstab
+    mkswap /bigfile.swap
+    swapon /bigfile.swap
+    echo '/bigfile.swap none swap sw 0 0' >> /etc/fstab
     else echo 'Swap seems smaller than recommended. It cannot be increased because of lack of space'
     fi
 fi  
@@ -277,7 +325,7 @@ EOF
 function create_key() {
   echo -e "${YELLOW}Enter your ${RED}$COIN_NAME Masternode GEN Key${NC}"
   echo -e "${YELLOW}Press enter to let the script generate one${NC}"
-  #read -e COINKEY
+  read -e COINKEY
   if [[ -z "$COINKEY" ]]; then
   $COIN_PATH$COIN_DAEMON$IP_SELECT.sh -daemon >/dev/null 2>&1
   sleep 60
@@ -323,7 +371,7 @@ function get_ip() {
   declare -a NODE_IPS
   for ips in $(ip a | grep inet | awk '{print $2}' | cut -f1 -d "/")
   do
-    NODE_IPS+=($(curl --interface $ips --connect-timeout 30 -sk https://v4.ident.me/))
+    NODE_IPS+=($(curl --interface $ips --connect-timeout 4 -sk https://v4.ident.me/))
   done
 
   if [ ${#NODE_IPS[@]} -gt 1 ]
@@ -381,8 +429,8 @@ function important_information() {
  echo -e "${BLUE}================================================================================================================================${NC}"
  echo -e "${GREEN}$COIN_NAME Masternode is up and running listening on port: ${NC}${RED}$COIN_PORT${NC}."
  echo -e "${GREEN}Configuration file is: ${NC}${RED}$CONFIGFOLDER$IP_SELECT/$CONFIG_FILE${NC}"
- echo -e "${GREEN}VPS_IP: ${NC}${RED}$NODEIP:$COIN_PORT${NC}" >> /root/info
- echo -e "${GREEN}MASTERNODE GENKEY is: ${NC}${RED}$COINKEY${NC}" >> /root/info
+ echo -e "${GREEN}VPS_IP: ${NC}${RED}$NODEIP:$COIN_PORT${NC}"
+ echo -e "${GREEN}MASTERNODE GENKEY is: ${NC}${RED}$COINKEY${NC}"
  echo -e "${BLUE}================================================================================================================================"
  echo -e "${CYAN}Stop, start and check your $COIN_NAME instance${NC}"
  echo -e "${BLUE}================================================================================================================================${NC}"
@@ -420,7 +468,9 @@ function important_information() {
 
 function setup_node() {
   unset NODE_IPS
+  check_distro
   welcome
+  check_user
   apt_update
   check_swap
   check_firewall
