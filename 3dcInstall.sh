@@ -61,6 +61,8 @@ while [ -z ${pv} ]; do
 read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
+yes | apt-get update
+yes | apt-get install curl
 nodeIpAddress=`curl ifconfig.me/ip`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="externalip=${nodeIpAddress}"
@@ -284,47 +286,50 @@ case $choice in
 	#### 3Dcoin Masternode installation Original with Compilation
 	1)	echo ""
 		echo " #### 3Dcoin Masternode installation Original with Compilation ####"
+		Config_Masternode
 		check_swap
 		prep_3dcoin_core
 		install_3dcoin_core_COMP
-		Config_Masternode
-		
+
 		config_3dcoin_core
 		echo "";;
 
 	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
 	2)	echo ""
 		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON ####"
+		Config_Masternode
 		check_swap
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
-		Config_Masternode
 		config_3dcoin_core
 		echo "";;
 
 	3)	echo ""
 		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - OPENVZ FIX ####"
+		Config_Masternode
 		check_swap
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
-		Config_Masternode
+		
 		config_3dcoin_core
 		openvz_fix
 		echo "";;
 
 	4)	echo ""
 		echo " #### 3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP####"
+		Config_Masternode
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
-		Config_Masternode
+		
 		config_3dcoin_core
 		echo "";;
 
 	5)	echo ""
 		echo " #3Dcoin Masternode installation with PRECOMPILED DAEMON - NO SWAP - OPENVZ FIX#"
+		Config_Masternode
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE
-		Config_Masternode
+		
 		config_3dcoin_core
 		openvz_fix
 		echo "";;
@@ -332,10 +337,11 @@ case $choice in
 	#### 3Dcoin Masternode installation Original with PRECOMPILED Daemon
 	6)	echo ""
 		echo " #### 3Dcoin Masternode installation Original with PRECOMPILED DAEMON UBUNTU 18 ####"
+		Config_Masternode
 		check_swap
 		prep_3dcoin_core	
 		install_3dcoin_core_PRE18
-		Config_Masternode
+		
 		config_3dcoin_core
 		echo "";;
 		
