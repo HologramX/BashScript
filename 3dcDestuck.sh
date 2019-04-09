@@ -25,7 +25,7 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
-$COIN_CLI stop
+$COIN_PATH$COIN_CLI stop
 sleep 10
 rm -r $CONFIG_FOLDER/chainstate/
 rm -r $CONFIG_FOLDER/database/
@@ -38,6 +38,6 @@ rm -f $HOME/.$FOLDER/netfulfilled.dat
 rm -f $HOME/.$FOLDER/governance.dat
 rm -f $HOME/.$FOLDER/debug.log
 rm -f $HOME/.$FOLDER/3dcoind.pid
-$COIN_DAEMON -daemon
+$COIN_PATH$COIN_DAEMON -daemon
 exit
 
