@@ -2,7 +2,7 @@
 # Copyright (c) 2018 The Crown developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-dir="/tmp"
+
 # Usage: ./crown-server-install.sh [OPTION]...
 #
 # Setup crown server or update existing one
@@ -15,6 +15,7 @@ help=false
 install=false
 unknown=()
 appname=$(basename "$0")
+
 
 handle_arguments()
 {
@@ -69,6 +70,7 @@ update_repos() {
 
 download_package() {
     # Create temporary directory
+    dir=\tmp\
     if [ -z "$dir" ]; then
         # Create directory under $HOME if above operation failed
         dir=$HOME/crown-temp
@@ -85,8 +87,8 @@ download_package() {
 
 install_package() {
     sudo unzip -d $dir/crown $dir/crown.zip
-    sudo cp -f $dir/crown/*/bin/* /usr/local/bin/
-    sudo cp -f $dir/crown/*/lib/* /usr/local/lib/
+    cp -f $dir/crown/bin/* /usr/local/bin/
+    cp -f $dir/crown/lib/* /usr/local/lib/
 }
 
 configure_conf() {
@@ -159,8 +161,8 @@ main() {
     # Ensure there is a cron job to restart crownd on reboot
     add_cron_job
     # Start Crownd to begin sync
-    /usr/local/bin/crownd
+    #/usr/local/bin/crownd
 }
 
-handle_arguments
+handle_arguments 
 main
