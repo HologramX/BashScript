@@ -70,11 +70,7 @@ update_repos() {
 
 download_package() {
     # Create temporary directory
-    if [ -z "$dir" ]; then
-        # Create directory under $HOME if above operation failed
-        dir=$HOME/crown-temp
-        mkdir -p $dir
-    fi
+    
     # 32 or 64 bit? If getconf fails we'll assume 64
     BITS=$(getconf LONG_BIT 2>/dev/null)
     if [ $? -ne 0 ]; then
