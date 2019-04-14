@@ -8,7 +8,7 @@
 # Setup crown server or update existing one
 
 LATEST_RELEASE="0.13.2.0"
-
+dir=/tmp
 systemnode=false
 masternode=false
 help=false
@@ -70,7 +70,6 @@ update_repos() {
 
 download_package() {
     # Create temporary directory
-    dir=\tmp\
     if [ -z "$dir" ]; then
         # Create directory under $HOME if above operation failed
         dir=$HOME/crown-temp
