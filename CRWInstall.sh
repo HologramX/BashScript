@@ -2,7 +2,7 @@
 # Copyright (c) 2018 The Crown developers
 # Distributed under the MIT/X11 software license, see the accompanying
 # file COPYING or http://www.opensource.org/licenses/mit-license.php.
-
+dir="/tmp"
 # Usage: ./crown-server-install.sh [OPTION]...
 #
 # Setup crown server or update existing one
@@ -15,20 +15,6 @@ help=false
 install=false
 unknown=()
 appname=$(basename "$0")
-
-print_help()
-{
-echo "Usage: $(basename "$0") [OPTION]...
-Setup crown server or update existing one
-
-  -m, --masternode                  create a masternode
-  -s, --systemnode                  create a systemnode
-  -p, --privkey=privkey             set private key
-  -v, --version=version             set version, default will be the latest release
-  -h, --help                        display this help and exit
-
-"
-}
 
 handle_arguments()
 {
@@ -83,7 +69,6 @@ update_repos() {
 
 download_package() {
     # Create temporary directory
-    dir="\tmp\"
     if [ -z "$dir" ]; then
         # Create directory under $HOME if above operation failed
         dir=$HOME/crown-temp
@@ -177,5 +162,5 @@ main() {
     /usr/local/bin/crownd
 }
 
-handle_arguments "$@"
+handle_arguments
 main
