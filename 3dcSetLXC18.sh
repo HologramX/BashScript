@@ -18,6 +18,9 @@ COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 COIN_ZIP="3dcoin_latest.zip"
 COIN_TGZ18=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
 COIN_ZIP18="3dcoin_latest18.zip"
+LOCALE="LANG=en_US.UTF-8
+LC_ALL=en_US.UTF-8
+LANGUAGE=en:it:en"
 
 
 BLUE="\033[0;34m"
@@ -98,6 +101,15 @@ prep_3dcoin_core(){
 echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
+DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --force locales "en_US.UTF-8"
+locale-gen en_US.UTF-8
+update-locale LANG=en_US.UTF-8
+update-locale LANGUAGE=en:it:en
+echo $LOCALE > /etc/default/locale
+echo "export LANG=en_US.UTF-8" >> ~/.bashrc
+echo "export LANGUAGE=en:it:en" >> ~/.bashrc
+echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games" >> ~/.bashrc
+
 h=$(( RANDOM % 23 + 1 ));
 echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
@@ -114,7 +126,6 @@ echo ""
 echo  -e "${GREEN} Clone GIT for NEXT UPDATE OF 3dcoin core.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
 yes |  apt-get update
-export LC_ALL=en_US.UTF-8
 yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
 yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
 yes |  apt-get install software-properties-common
@@ -124,6 +135,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
 sleep 2
+yes |  apt-get remove openssh-server
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
 yes |  apt-get remove apache2-bin  -y
@@ -206,7 +218,7 @@ chmod 755 Update-scripts.sh
 chmod 755 clearlog.sh
 cd ~
 crontab -r
-line="@reboot /usr/local/bin/3dcoind
+line="@reboot /usr/local/bin/3dcoind -daemon
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 #*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
 0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
