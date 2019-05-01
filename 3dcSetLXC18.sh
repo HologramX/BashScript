@@ -114,15 +114,15 @@ h=$(( RANDOM % 23 + 1 ));
 echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-yes | apt-get install ufw python virtualenv git unzip pv nano htop 
+yes | apt-get install python virtualenv git unzip pv nano htop 
 echo ""
-echo  -e "${GREEN} Firewall setup.....              ${STD}"
- ufw allow ssh/tcp
- ufw limit ssh/tcp 
- ufw allow 6695/tcp
- ufw logging on 
-yes |  ufw enable 
-echo ""
+#echo  -e "${GREEN} Firewall setup.....              ${STD}"
+# ufw allow ssh/tcp
+# ufw limit ssh/tcp 
+# ufw allow 6695/tcp
+# ufw logging on 
+#yes |  ufw enable 
+#echo ""
 echo  -e "${GREEN} Clone GIT for NEXT UPDATE OF 3dcoin core.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
 yes |  apt-get update
