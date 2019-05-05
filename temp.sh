@@ -22,7 +22,7 @@ MAG='\e[1;35m'
  
 /usr/local/bin/3dcoin-cli stop 
 /usr/local/bin/mydaemonc - stop
-
+sleep 20
 cp /usr/local/bin/3dcoind /usr/local/bin/mydaemond
 cp /usr/local/bin/3dcoin-cli /usr/local/bin/mydaemonc
 
