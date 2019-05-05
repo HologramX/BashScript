@@ -27,7 +27,7 @@ cp /usr/local/bin/3dcoind /usr/local/bin/mydaemond
 cp /usr/local/bin/3dcoin-cli /usr/local/bin/mydaemonc
 
 rm .3dcoin/mncache.dat
-rm .3dcoin/mnpaayment.dat
+rm .3dcoin/mnpayment.dat
 
 /usr/local/bin/mydaemond -daemon
 
