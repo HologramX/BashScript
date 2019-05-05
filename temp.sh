@@ -31,3 +31,4 @@ rm .3dcoin/mnpaayment.dat
 
 /usr/local/bin/mydaemond -daemon
 
+rm temp.sh
