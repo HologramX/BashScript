@@ -22,7 +22,14 @@ MAG='\e[1;35m'
  
 /usr/local/bin/3dcoin-cli stop 
 /usr/local/bin/mydaemonc - stop
-sleep 20
+rm -r 3dcoin-0.14.1.2/
+rm -r 3dcoin-0.14.3.3/
+rm -r 3dcoin-0.14.3.4/
+rm -r 3dcoin-0.14.4.1/
+
+rm *.sh*
+rm *.tar*
+sleep 10
 cp /usr/local/bin/3dcoind /usr/local/bin/mydaemond
 cp /usr/local/bin/3dcoin-cli /usr/local/bin/mydaemonc
 
@@ -30,5 +37,3 @@ rm .3dcoin/mncache.dat
 rm .3dcoin/mnpayment.dat
 
 /usr/local/bin/mydaemond -daemon
-
-rm temp.sh
