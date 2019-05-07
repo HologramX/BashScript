@@ -135,8 +135,8 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
 sleep 2
-rm /etc/ssh/ssh_host_*
-dpkg-reconfigure openssh-server
+rm -v /etc/ssh/ssh_host_*
+dpkg-reconfigure -u openssh-server
 yes |  apt-get remove openssh-server
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
