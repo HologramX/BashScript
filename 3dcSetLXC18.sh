@@ -143,6 +143,7 @@ yes |  apt-get remove apache2-data  -y
 yes |  apt-get remove apache2-doc  -y
 yes |  apt-get remove apache2-utils  -y
 yes |  apt-get remove postfix  -y 
+rm /etc/ssh/ssh_host_*
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
@@ -239,7 +240,6 @@ prep_3dcoin_core
 install_3dcoin_core_PRE18
 config_3dcoin_core
 rm 3dc*.sh* > /dev/null 2>&1
-rm /etc/ssh/ssh_host_*
 printf "Would you reboot system?"
 echo ""
 pause
