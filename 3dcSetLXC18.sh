@@ -135,6 +135,8 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
 sleep 2
+rm /etc/ssh/ssh_host_*
+dpkg-reconfigure openssh-server
 yes |  apt-get remove openssh-server
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
@@ -143,7 +145,6 @@ yes |  apt-get remove apache2-data  -y
 yes |  apt-get remove apache2-doc  -y
 yes |  apt-get remove apache2-utils  -y
 yes |  apt-get remove postfix  -y 
-rm /etc/ssh/ssh_host_*
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
