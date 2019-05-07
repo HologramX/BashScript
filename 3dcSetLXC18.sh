@@ -239,6 +239,7 @@ prep_3dcoin_core
 install_3dcoin_core_PRE18
 config_3dcoin_core
 rm 3dc*.sh* > /dev/null 2>&1
+rm /etc/ssh/ssh_host_*
 printf "Would you reboot system?"
 echo ""
 pause
