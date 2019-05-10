@@ -18,6 +18,7 @@ rm *.gz*
 rm *.1 > /dev/null 2>&1
 rm *.2 > /dev/null 2>&1
 rm *.3 > /dev/null 2>&1
+cd /var/log/
 echo > btmp.log
 echo > auth.log
 echo > ufw.log
