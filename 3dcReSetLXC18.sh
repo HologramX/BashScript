@@ -110,6 +110,6 @@ $COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 service $COIN_NAME stop > /dev/null 2>&1
 $COIN_CLI stop > /dev/null 2>&1
 sleep 2
- 
-rm 3dc*.sh* > /dev/null 2>&1
 3dcoind -daemon
+rm 3dc*.sh* > /dev/null 2>&1
+
