@@ -50,7 +50,6 @@ update-locale LANGUAGE=en:it:en
 echo $LOCALE > /etc/default/locale
 echo "export LANG=en_US.UTF-8" >> ~/.bashrc
 echo "export LANGUAGE=en:it:en" >> ~/.bashrc
-echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games" >> ~/.bashrc
 
 h=$(( RANDOM % 23 + 1 ));
 echo ""
