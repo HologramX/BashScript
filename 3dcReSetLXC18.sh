@@ -65,7 +65,6 @@ echo ""
 #yes |  ufw enable 
 #echo ""
 echo  -e "${GREEN} Clone GIT for NEXT UPDATE OF 3dcoin core.....     ${STD}"
-rm -rf /usr/local/bin/Masternode
 DEBIAN_FRONTEND=noninteractive apt-get -y update 
 DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
 DEBIAN_FRONTEND=noninteractive apt-get -y install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
