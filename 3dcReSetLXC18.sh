@@ -41,30 +41,13 @@ printf "${YELLOW}###############################################################
  sleep 2   
 
 echo ""
-echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
-sleep 1
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --force locales "en_US.UTF-8"
-locale-gen en_US.UTF-8
-update-locale LANG=en_US.UTF-8
-update-locale LANGUAGE=en:it:en
-echo $LOCALE > /etc/default/locale
-echo "export LANG=en_US.UTF-8" >> ~/.bashrc
-echo "export LANGUAGE=en:it:en" >> ~/.bashrc
 
-h=$(( RANDOM % 23 + 1 ));
 echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes | apt-get install python virtualenv git unzip pv nano htop 
 echo ""
-#echo  -e "${GREEN} Firewall setup.....              ${STD}"
-# ufw allow ssh/tcp
-# ufw limit ssh/tcp 
-# ufw allow 6695/tcp
-# ufw logging on 
-#yes |  ufw enable 
-#echo ""
-echo  -e "${GREEN} Clone GIT for NEXT UPDATE OF 3dcoin core.....     ${STD}"
 DEBIAN_FRONTEND=noninteractive apt-get -y update 
 DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
 DEBIAN_FRONTEND=noninteractive apt-get -y install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
@@ -75,23 +58,15 @@ DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -
 DEBIAN_FRONTEND=noninteractive apt-get -y install libminiupnpc-dev
 DEBIAN_FRONTEND=noninteractive apt-get -y install libzmq3-dev
 sleep 2
-DEBIAN_FRONTEND=noninteractive apt-get -y remove openssh-server
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2 
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2  
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2-bin  
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2-data  
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2-doc  
-DEBIAN_FRONTEND=noninteractive apt-get -y remove apache2-utils  
-DEBIAN_FRONTEND=noninteractive apt-get -y remove postfix   
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
 DEBIAN_FRONTEND=noninteractive apt-get -y autoclean 
 cd ~
-#latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-#link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-#wget $link
-#tar -xvzf $latestrelease.tar.gz
-#file=${latestrelease//[v]/3dcoin-}
-#sleep 2
+latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+wget $link
+tar -xvzf $latestrelease.tar.gz
+file=${latestrelease//[v]/3dcoin-}
+sleep 2
 
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 apt -y install zip unzip >/dev/null 2>&1
@@ -109,6 +84,41 @@ $COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 service $COIN_NAME stop > /dev/null 2>&1
 $COIN_CLI stop > /dev/null 2>&1
 sleep 2
-3dcoind -daemon
-rm 3dc*.sh* > /dev/null 2>&1
 
+cd ~
+cd $COIN_PATH
+mkdir Masternode
+cd Masternode
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
+chmod 755 daemon_check.sh
+chmod 755 UpdateNode.sh
+chmod 755 Check-scripts.sh
+chmod 755 Update-scripts.sh
+chmod 755 clearlog.sh
+cd ~
+crontab -l >> cron
+crontab -r
+line="@reboot /usr/local/bin/3dcoind -daemon
+0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+* * */2 * * /usr/local/bin/Masternode/clearlog.sh"
+echo "$line" | crontab -u root -
+echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
+echo ""
+cd ~
+rm $latestrelease.tar.gz
+rm -rf $file 
+
+3dcoind -daemon 
+rm 3dc*.sh* > /dev/null 2>&1
+printf "Would you reboot system?"
+echo ""
+  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+reboot
