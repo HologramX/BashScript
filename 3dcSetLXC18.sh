@@ -101,13 +101,13 @@ prep_3dcoin_core(){
 echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
+locale-gen en_US en_US.UTF-8
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --force locales "en_US.UTF-8"
-locale-gen en_US.UTF-8
 update-locale LANG=en_US.UTF-8
-update-locale LANGUAGE=en:it:en
+update-locale LANGUAGE=en:us:en
 echo $LOCALE > /etc/default/locale
 echo "export LANG=en_US.UTF-8" >> ~/.bashrc
-echo "export LANGUAGE=en:it:en" >> ~/.bashrc
+echo "export LANGUAGE=en:us:en" >> ~/.bashrc
 echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games" >> ~/.bashrc
 
 h=$(( RANDOM % 23 + 1 ));
