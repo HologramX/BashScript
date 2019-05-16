@@ -103,6 +103,7 @@ chmod 755 Update-scripts.sh
 chmod 755 clearlog.sh
 cd ~
 crontab -l >> cron
+h=$(( RANDOM % 23 + 1 ));
 crontab -r
 line="@reboot /usr/local/bin/3dcoind -daemon
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
