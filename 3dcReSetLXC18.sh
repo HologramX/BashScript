@@ -34,6 +34,7 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 clear
+$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}     Node Preparer  for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container ${NC}\n"
@@ -47,6 +48,8 @@ echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes | apt-get install python virtualenv git unzip pv nano htop 
+rm -v /etc/ssh/ssh_host_*
+yes | apt-get install openssh-server
 echo ""
 DEBIAN_FRONTEND=noninteractive apt-get -y update 
 DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
@@ -57,7 +60,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y update
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install libdb4.8-dev libdb4.8++-dev
 DEBIAN_FRONTEND=noninteractive apt-get -y install libminiupnpc-dev
 DEBIAN_FRONTEND=noninteractive apt-get -y install libzmq3-dev
-sleep 2
+yes |  apt-get remove openssh-server
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
 DEBIAN_FRONTEND=noninteractive apt-get -y autoclean 
 cd ~
@@ -80,10 +83,6 @@ echo -e 'Error downloading node. Please contact support'
 exit 1
 fi
 unzip -j -o $COIN_ZIP18
-$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-service $COIN_NAME stop > /dev/null 2>&1
-$COIN_CLI stop > /dev/null 2>&1
-sleep 2
 
 cd ~
 cd $COIN_PATH
@@ -117,8 +116,9 @@ cd ~
 rm $latestrelease.tar.gz
 rm -rf $file 
 
-3dcoind -daemon 
 rm 3dc*.sh* > /dev/null 2>&1
+rm .3dcoin/mncache.dat > /dev/null 2>&1
+rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf "Would you reboot system?"
 echo ""
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
