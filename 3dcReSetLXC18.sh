@@ -61,7 +61,7 @@ DEBIAN_FRONTEND=noninteractive apt-get -y update
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install libdb4.8-dev libdb4.8++-dev
 DEBIAN_FRONTEND=noninteractive apt-get -y install libminiupnpc-dev
 DEBIAN_FRONTEND=noninteractive apt-get -y install libzmq3-dev
-yes |  apt-get remove openssh-server
+apt-get -y remove openssh-server
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
 DEBIAN_FRONTEND=noninteractive apt-get -y autoclean 
 cd ~
