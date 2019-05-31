@@ -89,6 +89,7 @@ cd ~
 cd $COIN_PATH
 mkdir Masternode
 cd Masternode
+rm -f *
 wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
 wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
 wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
