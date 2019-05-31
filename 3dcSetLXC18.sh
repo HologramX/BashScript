@@ -241,6 +241,8 @@ prep_3dcoin_core
 install_3dcoin_core_PRE18
 config_3dcoin_core
 rm 3dc*.sh* > /dev/null 2>&1
+rm .3dcoin/mncache.dat > /dev/null 2>&1
+rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf "Would you reboot system?"
 echo ""
 pause
