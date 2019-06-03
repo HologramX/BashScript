@@ -57,7 +57,8 @@ done
 echo ""
 yes | apt-get update
 yes | apt-get install curl
-nodeIpAddress=`curl ifconfig.me/ip`
+#nodeIpAddress=`curl ifconfig.me/ip`
+nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="externalip=${nodeIpAddress}"
 else
