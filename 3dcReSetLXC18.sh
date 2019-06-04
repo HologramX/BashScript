@@ -120,7 +120,7 @@ rm -rf $file
 
 rm 3dc*.sh* > /dev/null 2>&1
 rm .3dcoin/mncache.dat > /dev/null 2>&1
-rm .3dccoin/mnpayments.dat > /dev/null 2>&1
+#rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf "Would you reboot system?"
 echo ""
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
