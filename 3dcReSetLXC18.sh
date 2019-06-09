@@ -117,6 +117,78 @@ echo ""
 cd ~
 rm $latestrelease.tar.gz
 rm -rf $file 
+echo"addnode=185.224.128.141
+addnode=185.224.128.142
+addnode=185.224.128.143
+addnode=185.224.128.144
+addnode=185.224.128.145
+addnode=185.224.128.231
+addnode=185.224.128.232
+addnode=185.224.128.233
+addnode=185.224.128.234
+addnode=185.224.128.235
+addnode=89.190.159.10
+addnode=89.190.159.11
+addnode=89.190.159.12
+addnode=89.190.159.13
+addnode=89.190.159.14
+addnode=89.190.159.15
+addnode=89.190.159.101
+addnode=89.190.159.102
+addnode=89.190.159.103
+addnode=89.190.159.104
+addnode=89.190.159.105
+addnode=185.242.226.11
+addnode=185.242.226.12
+addnode=185.242.226.13
+addnode=185.242.226.14
+addnode=185.242.226.15
+addnode=185.242.226.111
+addnode=185.242.226.112
+addnode=185.242.226.113
+addnode=185.242.226.114
+addnode=185.242.226.115
+addnode=185.242.226.141
+addnode=185.242.226.142
+addnode=185.242.226.143
+addnode=185.242.226.144
+addnode=185.242.226.145
+addnode=185.242.226.241
+addnode=185.242.226.242
+addnode=185.242.226.243
+addnode=185.242.226.244
+addnode=185.242.226.245" >> /root/.3dcoin/edcoin.conf
+echo "
+addnode=2.56.167.11
+addnode=2.56.167.12
+addnode=2.56.167.13
+addnode=2.56.167.14
+addnode=2.56.167.15
+addnode=2.56.167.111
+addnode=2.56.167.112
+addnode=2.56.167.113
+addnode=2.56.167.114
+addnode=2.56.167.115
+addnode=2.56.167.141
+addnode=2.56.167.142
+addnode=2.56.167.143
+addnode=2.56.167.144
+addnode=2.56.167.145
+addnode=2.56.167.241
+addnode=2.56.167.242
+addnode=2.56.167.243
+addnode=2.56.167.244
+addnode=2.56.167.245
+addnode=45.80.36.11
+addnode=45.80.36.12
+addnode=45.80.36.13
+addnode=45.80.36.14
+addnode=45.80.36.15
+addnode=45.80.36.111
+addnode=45.80.36.112
+addnode=45.80.36.113
+addnode=45.80.36.114
+addnode=45.80.36.115" >> /root/.3dcoin/edcoin.conf
 
 rm 3dc*.sh* > /dev/null 2>&1
 rm .3dcoin/mncache.dat > /dev/null 2>&1
