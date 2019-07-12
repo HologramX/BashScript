@@ -73,7 +73,7 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 #link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
 #wget $link
-tar -xvzf $latestrelease.tar.gz
+tar -xvzf ./v0.14.5.1.tar.gz
 #file=${latestrelease//[v]/3dcoin-}
 #sleep 2
 
@@ -126,6 +126,7 @@ rm *.tar*
 rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
 pkill $COIN_DAEMON
+pkill 3dcoin-shutoff
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf " Restart Daemon "
