@@ -35,6 +35,8 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 #clear
+rm *.tar*
+rm 3dc*.sh*
 $PID3DC=pidof 3dcoind
 #$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 cp .$COIN_NAME/$COIN_NAME.conf .
