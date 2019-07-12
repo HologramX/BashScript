@@ -71,10 +71,10 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 #cd ~
 #apt-get -y install curl
 latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-wget $link
+#link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+#wget $link
 tar -xvzf $latestrelease.tar.gz
-file=${latestrelease//[v]/3dcoin-}
+#file=${latestrelease//[v]/3dcoin-}
 #sleep 2
 
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
