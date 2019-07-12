@@ -75,7 +75,7 @@ file=${latestrelease//[v]/3dcoin-}
 sleep 2
 
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-apt -y install zip unzip >/dev/null 2>&1
+#apt -y install zip unzip >/dev/null 2>&1
 printf "\n\n         Installed Utility" 
 cd 
 cd $COIN_PATH >/dev/null 2>&1
