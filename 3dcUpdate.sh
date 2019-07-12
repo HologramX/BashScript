@@ -320,6 +320,19 @@ case $choice in
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR UBUNTU16 ####"
 		SystemdRemove
 		#PrepUpdate
+		$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+		service $COIN_NAME stop > /dev/null 2>&1
+		$COIN_CLI stop > /dev/null 2>&1
+		sleep 8
+		echo ""
+		cd ~
+		echo  -e "${GREEN} Get latest release                ${STD}"
+		latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+		link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+		wget $link
+		tar -xvzf $latestrelease.tar.gz
+		file=${latestrelease//[Vv]/3dcoin-} 
+		echo ""
 		UpdatePRE16
 		echo "";;
 		
@@ -327,6 +340,19 @@ case $choice in
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR **UBUNTU18** ####"
 		SystemdRemove
 		#PrepUpdate
+		$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+		service $COIN_NAME stop > /dev/null 2>&1
+		$COIN_CLI stop > /dev/null 2>&1
+		sleep 8
+		echo ""
+		cd ~
+		echo  -e "${GREEN} Get latest release                ${STD}"
+		latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+		link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+		wget $link
+		tar -xvzf $latestrelease.tar.gz
+		file=${latestrelease//[Vv]/3dcoin-} 
+		echo ""
 		UpdatePRE18
 		echo "";;
 		
