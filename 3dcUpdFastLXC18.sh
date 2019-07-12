@@ -125,4 +125,5 @@ rm .3dcoin/mncache.dat > /dev/null 2>&1
 printf "Rebooting"
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+hostname -f
 reboot
