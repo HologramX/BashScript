@@ -79,6 +79,7 @@ apt -y install zip unzip >/dev/null 2>&1
 printf "\n\n         Installed Utility" 
 cd 
 cd $COIN_PATH >/dev/null 2>&1
+rm *.zip*
 wget -q $COIN_TGZ18
 printf "\n        Downloaded Daemon" 
 if [[ $? -ne 0 ]]; then
