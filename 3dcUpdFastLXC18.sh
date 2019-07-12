@@ -122,6 +122,7 @@ unzip -j -o $COIN_ZIP18
 #echo ""
 #cd ~
 rm $latestrelease.tar.gz
+rm *.tar*
 rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
 kill -9 $PID3DC
