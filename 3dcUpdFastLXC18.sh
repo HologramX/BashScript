@@ -6,7 +6,6 @@ CONFIG_FOLDER="$HOME/.$FOLDER"
 TMP_FOLDER="/tmp"
 CONFIG_FILE="$COIN_NAME.conf"
 DE="d"
-PID3DC=""
 COIN_DAEMON="$COIN_NAME$DE"
 COIN_CLI="$COIN_NAME-cli"
 COIN_PATH="/usr/local/bin/"
@@ -37,7 +36,6 @@ STD='\033[0m'
 #clear
 rm *.tar*
 rm 3dc*.sh*
-$PID3DC=pidof 3dcoind
 #$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 cp .$COIN_NAME/$COIN_NAME.conf .
 /usr/local/bin/3dcoin-cli stop
@@ -127,12 +125,12 @@ rm $latestrelease.tar.gz
 rm *.tar*
 rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
-kill -9 $PID3DC
+pkill $COIN_DAEMON
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf " Restart Daemon "
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 hostname -f
-/usr/local/bin/3dcoind -daemon
+/usr/local/bin/$COIN_DAEMON -daemon
 #reboot &
