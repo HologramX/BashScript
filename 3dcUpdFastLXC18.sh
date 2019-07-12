@@ -131,5 +131,5 @@ printf " Restart Daemon "
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 hostname -f
-/usr/local/bin/$COIN_DAEMON -daemon
+/usr/local/bin/$COIN_DAEMON -daemon &
 #reboot &
