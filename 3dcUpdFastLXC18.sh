@@ -127,4 +127,4 @@ printf "Rebooting"
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 hostname -f
-reboot
+reboot &
