@@ -6,6 +6,7 @@ CONFIG_FOLDER="$HOME/.$FOLDER"
 TMP_FOLDER="/tmp"
 CONFIG_FILE="$COIN_NAME.conf"
 DE="d"
+PID3DC=""
 COIN_DAEMON="$COIN_NAME$DE"
 COIN_CLI="$COIN_NAME-cli"
 COIN_PATH="/usr/local/bin/"
@@ -34,9 +35,11 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 #clear
-$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+PID3DC=pidof 3dcoind
+#$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 cp .$COIN_NAME/$COIN_NAME.conf .
 /usr/local/bin/3dcoin-cli stop
+sleep 4
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}     Node Preparer  for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container ${NC}\n"
@@ -121,10 +124,12 @@ unzip -j -o $COIN_ZIP18
 rm $latestrelease.tar.gz
 rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
+kill -9 $PID3DC
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
-printf "Rebooting"
+printf " Restart Daemon "
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 hostname -f
-reboot &
+/usr/local/bin/3dcoind -daemon
+#reboot &
