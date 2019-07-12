@@ -35,7 +35,7 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 #clear
-PID3DC=pidof 3dcoind
+$PID3DC=pidof 3dcoind
 #$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 cp .$COIN_NAME/$COIN_NAME.conf .
 /usr/local/bin/3dcoin-cli stop
