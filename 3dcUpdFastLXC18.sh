@@ -72,7 +72,7 @@ link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
 wget $link
 tar -xvzf $latestrelease.tar.gz
 file=${latestrelease//[v]/3dcoin-}
-sleep 2
+#sleep 2
 
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 #apt -y install zip unzip >/dev/null 2>&1
@@ -88,24 +88,24 @@ exit 1
 fi
 unzip -j -o $COIN_ZIP18
 
-cd ~
-cd $COIN_PATH
-mkdir Masternode
-cd Masternode
-rm -f *
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
-chmod 755 daemon_check.sh
-chmod 755 UpdateNode.sh
-chmod 755 Check-scripts.sh
-chmod 755 Update-scripts.sh
-chmod 755 clearlog.sh
-cd ~
+#cd ~
+#cd $COIN_PATH
+#mkdir Masternode
+#cd Masternode
+#rm -f *
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
+#chmod 755 daemon_check.sh
+#chmod 755 UpdateNode.sh
+#chmod 755 Check-scripts.sh
+#chmod 755 Update-scripts.sh
+#chmod 755 clearlog.sh
+#cd ~
 #crontab -l >> cron
 #h=$(( RANDOM % 23 + 1 ));
 #crontab -r
