@@ -36,6 +36,7 @@ STD='\033[0m'
 clear
 $COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 cp .$COIN_NAME/$COIN_NAME.conf .
+/usr/local/bin/3dcoin-cli stop
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}     Node Preparer  for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container ${NC}\n"
@@ -121,7 +122,7 @@ rm -rf $file
 rm 3dc*.sh* > /dev/null 2>&1
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
-printf "Would you reboot system?"
+printf "Rebooting"
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 reboot
