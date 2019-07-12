@@ -119,13 +119,13 @@ unzip -j -o $COIN_ZIP18
 #echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 #echo ""
 #cd ~
-rm $latestrelease.tar.gz
+#rm $latestrelease.tar.gz
 rm *.tar*
-rm $file 
+#rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
 pkill 3dcoind
 pkill 3dcoin-shutoff
-rm .3dcoin/mncache.dat > /dev/null 2>&1
+rm .3dcoin/mncache.dat
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
 printf " Restart Daemon "
 #echo ""
