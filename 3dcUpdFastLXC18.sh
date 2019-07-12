@@ -66,7 +66,7 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 #DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
 #DEBIAN_FRONTEND=noninteractive apt-get -y autoclean 
 #cd ~
-apt-get -y install curl
+#apt-get -y install curl
 latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
 wget $link
