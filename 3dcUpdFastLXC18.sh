@@ -123,7 +123,7 @@ rm $latestrelease.tar.gz
 rm *.tar*
 rm $file 
 rm 3dc*.sh* > /dev/null 2>&1
-pkill $COIN_DAEMON
+pkill 3dcoind
 pkill 3dcoin-shutoff
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 #rm .3dccoin/mnpayments.dat > /dev/null 2>&1
