@@ -280,7 +280,7 @@ if [[ $? -eq 0 ]]
 ##### Main #####
 show_menu
 
-read -p "Enter choice [ 1 - 5] " choice
+read -p "Enter choice [ 1 - 6] " choice
 case $choice in
 		
 	1)	echo ""
@@ -319,14 +319,14 @@ case $choice in
 	5)	echo ""
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR UBUNTU16 ####"
 		SystemdRemove
-		PrepUpdate
+		#PrepUpdate
 		UpdatePRE16
 		echo "";;
 		
 	6)	echo ""
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR **UBUNTU18** ####"
 		SystemdRemove
-		PrepUpdate
+		#PrepUpdate
 		UpdatePRE18
 		echo "";;
 		
