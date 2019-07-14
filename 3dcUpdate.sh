@@ -327,13 +327,13 @@ case $choice in
 		sleep 8
 		echo ""
 		cd ~
-		echo  -e "${GREEN} Get latest release                ${STD}"
-		latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-		link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-		wget $link
-		tar -xvzf $latestrelease.tar.gz
-		file=${latestrelease//[Vv]/3dcoin-} 
-		echo ""
+		#echo  -e "${GREEN} Get latest release                ${STD}"
+		#latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+		#link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+		#wget $link
+		#tar -xvzf $latestrelease.tar.gz
+		#file=${latestrelease//[Vv]/3dcoin-} 
+		#echo ""
 		UpdatePRE16
 		rm *.tar*
 		#rm $file 
@@ -361,13 +361,13 @@ case $choice in
 		sleep 8
 		echo ""
 		cd ~
-		echo  -e "${GREEN} Get latest release                ${STD}"
-		latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-		link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-		wget $link
-		tar -xvzf $latestrelease.tar.gz
-		file=${latestrelease//[Vv]/3dcoin-} 
-		echo ""
+		#echo  -e "${GREEN} Get latest release                ${STD}"
+		#latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+		#link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+		#wget $link
+		#tar -xvzf $latestrelease.tar.gz
+		#file=${latestrelease//[Vv]/3dcoin-} 
+		#echo ""
 		UpdatePRE18
 		rm *.tar*
 		#rm $file 
