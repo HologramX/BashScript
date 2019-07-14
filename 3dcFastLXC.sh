@@ -90,9 +90,9 @@ pkill 3dcoind-shutoff
  
 echo "$config" >> "$CONFIG_FOLDER/$CONFIG_FILE"
 
-rm 3dc*.sh* > /dev/null 2>&1
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 rm .3dcoin/netfulfilled.dat
 date > .3dcoin/debug.log
 /usr/local/bin/3dcoind -daemon
-
+cp .3dcoin/3dcoin.conf .
+rm 3dc*.sh* > /dev/null 2>&1
