@@ -81,106 +81,21 @@ maxconnections=32
 #----
 masternode=1
 masternodeprivkey=$pv
-$external_ip_line
-#----
-addnode=206.189.72.203
-addnode=206.189.41.191
-addnode=165.227.197.115
-addnode=167.99.87.86
-addnode=159.65.201.222
-addnode=159.65.148.226
-addnode=165.227.38.214
-addnode=159.65.167.79
-addnode=159.65.90.101
-addnode=128.199.218.139
-addnode=174.138.3.33
-addnode=159.203.167.75
-addnode=138.68.102.67
-addnode=185.224.128.141
-addnode=185.224.128.142
-addnode=185.224.128.143
-addnode=185.224.128.144
-addnode=185.224.128.145
-addnode=185.224.128.231
-addnode=185.224.128.232
-addnode=185.224.128.233
-addnode=185.224.128.234
-addnode=185.224.128.235
-addnode=89.190.159.10
-addnode=89.190.159.11
-addnode=89.190.159.12
-addnode=89.190.159.13
-addnode=89.190.159.14
-addnode=89.190.159.15
-addnode=89.190.159.101
-addnode=89.190.159.102
-addnode=89.190.159.103
-addnode=89.190.159.104
-addnode=89.190.159.105
-addnode=185.242.226.11
-addnode=185.242.226.12
-addnode=185.242.226.13
-addnode=185.242.226.14
-addnode=185.242.226.15
-addnode=185.242.226.111
-addnode=185.242.226.112
-addnode=185.242.226.113
-addnode=185.242.226.114
-addnode=185.242.226.115
-addnode=185.242.226.141
-addnode=185.242.226.142
-addnode=185.242.226.143
-addnode=185.242.226.144
-addnode=185.242.226.145
-addnode=185.242.226.241
-addnode=185.242.226.242
-addnode=185.242.226.243
-addnode=185.242.226.244
-addnode=185.242.226.245
-addnode=2.56.167.11
-addnode=2.56.167.12
-addnode=2.56.167.13
-addnode=2.56.167.14
-addnode=2.56.167.15
-addnode=2.56.167.111
-addnode=2.56.167.112
-addnode=2.56.167.113
-addnode=2.56.167.114
-addnode=2.56.167.115
-addnode=2.56.167.141
-addnode=2.56.167.142
-addnode=2.56.167.143
-addnode=2.56.167.144
-addnode=2.56.167.145
-addnode=2.56.167.241
-addnode=2.56.167.242
-addnode=2.56.167.243
-addnode=2.56.167.244
-addnode=2.56.167.245
-addnode=45.80.36.11
-addnode=45.80.36.12
-addnode=45.80.36.13
-addnode=45.80.36.14
-addnode=45.80.36.15
-addnode=45.80.36.111
-addnode=45.80.36.112
-addnode=45.80.36.113
-addnode=45.80.36.114
-addnode=45.80.36.115"
+#$external_ip_line
+#----"
 }
 
 prep_3dcoin_core(){ 
 echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
-locale-gen en_US en_US.UTF-8
 DEBIAN_FRONTEND=noninteractive dpkg-reconfigure --force locales "en_US.UTF-8"
-update-locale LANG=en_US.UTF-8
-update-locale LANGUAGE=en:us:en
-echo $LOCALE > /etc/default/locale
-echo "export LANG=en_US.UTF-8" >> ~/.bashrc
-echo "export LANGUAGE=en:us:en" >> ~/.bashrc
-echo "export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games" >> ~/.bashrc
+localectl set-locale LANG=en_US.UTF-8
+set LC_ALL=en_US.UTF-8
+#echo $LOCALE > /etc/default/locale
+echo "#export LANG=en_US.UTF-8" >> ~/.bashrc
+echo "#export LANGUAGE=en:us:en" >> ~/.bashrc
+echo "#export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games" >> ~/.bashrc
 
 h=$(( RANDOM % 23 + 1 ));
 echo ""
