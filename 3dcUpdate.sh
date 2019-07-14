@@ -47,8 +47,8 @@ printf "${YELLOW}###############################################################
 	echo "2. Update&Repair Masternode - PRECOMPILED Daemon for Ubuntu16"
 	echo "3. Update&Repair Masternode - PRECOMPILED Daemon for Ubuntu16 - OpenVZ FIX"
 	echo "4. Update&Repair Masternode - PRECOMPILED Daemon for **Ubuntu18** "
-	echo "5. Update ONLY DAEMON WITH PRECOMPILED Daemon for Ubuntu16"
-	echo "6. Update ONLY DAEMON WITH PRECOMPILED Daemon for **Ubuntu18** "	
+	echo "5. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for Ubuntu16"
+	echo "6. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for **Ubuntu18** "	
 	echo "0. Exit"
 	echo ""
    
@@ -320,6 +320,7 @@ case $choice in
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR UBUNTU16 ####"
 		SystemdRemove
 		#PrepUpdate
+		cp .$COIN_NAME/$COIN_NAME.conf .
 		$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 		service $COIN_NAME stop > /dev/null 2>&1
 		$COIN_CLI stop > /dev/null 2>&1
@@ -334,6 +335,20 @@ case $choice in
 		file=${latestrelease//[Vv]/3dcoin-} 
 		echo ""
 		UpdatePRE16
+		rm *.tar*
+		#rm $file 
+		pkill 3dcoind
+		pkill 3dcoin-shutoff
+		rm -f /root/.3dcoin/banlist.dat
+		rm -f /root/.3dcoin/mncache.dat
+		rm -f /root/.3dcoin/fee_estimates.dat
+		rm -f /root/.3dcoin/netfulfilled.dat
+		rm -f /root/.3dcoin/governance.dat
+		rm -f /root/.3dcoin/debug.log
+		crontab -l > cront
+		printf " Restart Daemon "
+		hostname -f
+		$COIN_PATH$COIN_DAEMON -daemon
 		echo "";;
 		
 	6)	echo ""
@@ -354,6 +369,20 @@ case $choice in
 		file=${latestrelease//[Vv]/3dcoin-} 
 		echo ""
 		UpdatePRE18
+		rm *.tar*
+		#rm $file 
+		pkill 3dcoind
+		pkill 3dcoin-shutoff
+		rm -f /root/.3dcoin/banlist.dat
+		rm -f /root/.3dcoin/mncache.dat
+		rm -f /root/.3dcoin/fee_estimates.dat
+		rm -f /root/.3dcoin/netfulfilled.dat
+		rm -f /root/.3dcoin/governance.dat
+		rm -f /root/.3dcoin/debug.log
+		crontab -l > cront
+		printf " Restart Daemon "
+		hostname -f
+		$COIN_PATH$COIN_DAEMON -daemon
 		echo "";;
 		
 	0) 	rm 3dc*.sh* > /dev/null 2>&1
