@@ -66,8 +66,8 @@ $external_ip_line
 #----"
 
 rm -v /etc/ssh/ssh_host_*
-dpkg-reconfigure -u openssh-server
-yes |  apt-get remove openssh-server
+#dpkg-reconfigure -u openssh-server
+#yes |  apt-get remove openssh-server
 cd ~
 
 #echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
