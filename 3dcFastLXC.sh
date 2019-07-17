@@ -41,7 +41,6 @@ pause(){
 $COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 service $COIN_NAME stop > /dev/null 2>&1
 $COIN_CLI stop > /dev/null 2>&1
-cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
@@ -50,12 +49,13 @@ printf "${YELLOW}###############################################################
 
 echo ""
 hostname -f
+cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 echo ""
-unset pv
-while [ -z ${pv} ]; do
-read -p "Please Enter Masternode Private key: " pv
-done
-echo ""
+#unset pv
+#while [ -z ${pv} ]; do
+#read -p "Please Enter Masternode Private key: " pv
+#done
+#echo ""
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="#externalip=${nodeIpAddress}"
@@ -79,10 +79,10 @@ daemon=1
 maxconnections=32
 #----
 masternode=1
-masternodeprivkey=$pv
-#$external_ip_line
-#----"
 
+$external_ip_line
+#----"
+#masternodeprivkey=$pv
 rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 #dpkg-reconfigure -u openssh-server
 #yes |  apt-get remove openssh-server
@@ -101,9 +101,9 @@ cd ~
 #unzip -j -o
 #rm  $COIN_ZIP18
 killall -9 3dcoind >/dev/null 2>&1
+cp "$CONFIG_FOLDER/$CONFIG_FILE" .
 echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
-echo "$config" > TempConf
-cat pk >> TempConf
+cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
 
 rm -f /root/.3dcoin/banlist.dat
 rm -f /root/.3dcoin/mncache.dat
@@ -112,7 +112,8 @@ rm -f /root/.3dcoin/netfulfilled.dat
 rm -f /root/.3dcoin/debug.log
 rm -f /root/.3dcoin/3dcoind.pid
 date > .3dcoin/debug.log
-rm -r 3dcoin-0*
+rm -r 3dcoin-0* > /dev/null 2>&1
+rm *.tar* > /dev/null 2>&1
+rm pk > /dev/null 2>&1
 # /usr/local/bin/3dcoind -daemon &
-cp .3dcoin/3dcoin.conf .
 rm 3dc*.sh* > /dev/null 2>&1
