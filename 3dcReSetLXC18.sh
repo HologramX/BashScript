@@ -50,7 +50,7 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes | apt-get install python virtualenv git unzip pv nano htop 
 rm -v /etc/ssh/ssh_host_*
-yes | apt-get install openssh-server
+#yes | apt-get install openssh-server
 echo ""
 DEBIAN_FRONTEND=noninteractive apt-get -y update 
 DEBIAN_FRONTEND=noninteractive apt-get -y install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
@@ -65,18 +65,19 @@ apt-get -y remove openssh-server
 DEBIAN_FRONTEND=noninteractive apt-get -y autoremove 
 DEBIAN_FRONTEND=noninteractive apt-get -y autoclean 
 cd ~
-latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-wget $link
-tar -xvzf $latestrelease.tar.gz
-file=${latestrelease//[v]/3dcoin-}
-sleep 2
+#latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+#link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+#wget $link
+#tar -xvzf $latestrelease.tar.gz
+#file=${latestrelease//[v]/3dcoin-}
+#sleep 2
 
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 apt -y install zip unzip >/dev/null 2>&1
 printf "\n\n         Installed Utility" 
 cd 
 cd $COIN_PATH >/dev/null 2>&1
+rm *.zip*
 wget -q $COIN_TGZ18
 printf "\n        Downloaded Daemon" 
 if [[ $? -ne 0 ]]; then
@@ -84,7 +85,7 @@ echo -e 'Error downloading node. Please contact support'
 exit 1
 fi
 unzip -j -o $COIN_ZIP18
-
+rm *.zip
 cd ~
 cd $COIN_PATH
 mkdir Masternode
@@ -116,11 +117,15 @@ echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD
 echo ""
 cd ~
 rm $latestrelease.tar.gz
-rm -rf $file 
-rm 3dc*.sh* > /dev/null 2>&1
-rm .3dcoin/mncache.dat > /dev/null 2>&1
-rm .3dccoin/mnpayments.dat > /dev/null 2>&1
+rm -rf $file  
+rm -f /root/.3dcoin/banlist.dat
+rm -f /root/.3dcoin/mncache.dat
+rm -f /root/.3dcoin/mnpayments.dat
+rm -f /root/.3dcoin/netfulfilled.dat
+rm -f /root/.3dcoin/debug.log
+rm -f /root/.3dcoin/3dcoind.pid
 printf "Would you reboot system?"
 echo ""
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+rm 3dc*.sh* > /dev/null 2>&1
 reboot
