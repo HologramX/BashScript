@@ -124,8 +124,10 @@ rm -f /root/.3dcoin/mnpayments.dat
 rm -f /root/.3dcoin/netfulfilled.dat
 rm -f /root/.3dcoin/debug.log
 rm -f /root/.3dcoin/3dcoind.pid
-printf "Would you reboot system?"
-echo ""
-  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+#printf "Would you reboot system?"
+#echo ""
+#  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+
 rm 3dc*.sh* > /dev/null 2>&1
-reboot
+#reboot
+$COIN_PATH$COIN_DAEMON
