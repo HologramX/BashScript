@@ -38,6 +38,10 @@ pause(){
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 }
 
+$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+service $COIN_NAME stop > /dev/null 2>&1
+$COIN_CLI stop > /dev/null 2>&1
+cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
@@ -60,10 +64,25 @@ else
 fi
 masternode_priv_line="masternodeprivkey=${pv}"
 
+rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
+
+rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
+
 config="#----
-$masternode_priv_line
-$external_ip_line
+rpcuser=$rpcUserName
+rpcpassword=$rpcPassword
+rpcallowip=127.0.0.1
+#----
+listen=1
+server=1
+daemon=1
+maxconnections=32
+#----
+masternode=1
+masternodeprivkey=$pv
+#$external_ip_line
 #----"
+}
 
 rm -v /etc/ssh/ssh_host_*
 #dpkg-reconfigure -u openssh-server
@@ -82,17 +101,21 @@ cd ~
 #fi
 #unzip -j -o
 #rm  $COIN_ZIP18
-$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-service $COIN_NAME stop > /dev/null 2>&1
-$COIN_CLI stop > /dev/null 2>&1
-pkill 3dcoind
-pkill 3dcoind-shutoff
- 
-echo "$config" >> "$CONFIG_FOLDER/$CONFIG_FILE"
+killall -9 3dcoind
+echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
+echo "$config" > TempConf
+cat pk >> TempConf
 
+rm -f /root/.3dcoin/banlist.dat
+rm -f /root/.3dcoin/mncache.dat
+rm -f /root/.3dcoin/mnpayments.dat
+rm -f /root/.3dcoin/netfulfilled.dat
+rm -f /root/.3dcoin/debug.log
+rm -f /root/.3dcoin/3dcoind.pid
 rm .3dcoin/mncache.dat > /dev/null 2>&1
 rm .3dcoin/netfulfilled.dat
 date > .3dcoin/debug.log
+rm -r 3dcoin-0*
 # /usr/local/bin/3dcoind -daemon &
 cp .3dcoin/3dcoin.conf .
 rm 3dc*.sh* > /dev/null 2>&1
