@@ -127,7 +127,7 @@ rm -f /root/.3dcoin/3dcoind.pid
 #printf "Would you reboot system?"
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
-
+$COIN_PATH$COIN_DAEMON
+hostname -f
 rm 3dc*.sh* > /dev/null 2>&1
 #reboot
-$COIN_PATH$COIN_DAEMON
