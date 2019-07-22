@@ -83,6 +83,7 @@ masternode=1
 $external_ip_line
 #----"
 #masternodeprivkey=$pv
+
 rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 #dpkg-reconfigure -u openssh-server
 #yes |  apt-get remove openssh-server
@@ -104,7 +105,23 @@ killall -9 3dcoind >/dev/null 2>&1
 cp "$CONFIG_FOLDER/$CONFIG_FILE" .
 echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
 cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
-
+echo "txindex=1
+addressindex=1
+timestampindex=1
+spentindex=1
+addnode=206.189.72.203
+addnode=206.189.41.191
+addnode=165.227.197.115
+addnode=167.99.87.86
+addnode=159.65.201.222
+addnode=159.65.148.226
+addnode=165.227.38.214
+addnode=159.65.167.79
+addnode=159.65.90.101
+addnode=128.199.218.139
+addnode=174.138.3.33
+addnode=159.203.167.75
+addnode=138.68.102.67"" >>  "$CONFIG_FOLDER/$CONFIG_FILE"
 rm -f /root/.3dcoin/banlist.dat
 rm -f /root/.3dcoin/mncache.dat
 rm -f /root/.3dcoin/mnpayments.dat
@@ -114,6 +131,5 @@ rm -f /root/.3dcoin/3dcoind.pid
 date > .3dcoin/debug.log
 rm -r 3dcoin-0* > /dev/null 2>&1
 rm *.tar* > /dev/null 2>&1
-rm pk > /dev/null 2>&1
-# /usr/local/bin/3dcoind -daemon &
+reboot
 rm 3dc*.sh* > /dev/null 2>&1
