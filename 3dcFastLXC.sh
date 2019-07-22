@@ -38,9 +38,9 @@ pause(){
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 }
 
-$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-service $COIN_NAME stop > /dev/null 2>&1
-$COIN_CLI stop > /dev/null 2>&1
+#$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+#service $COIN_NAME stop > /dev/null 2>&1
+#$COIN_CLI stop > /dev/null 2>&1
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
@@ -86,7 +86,7 @@ $external_ip_line
 
 rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 #dpkg-reconfigure -u openssh-server
-#yes |  apt-get remove openssh-server
+yes |  apt-get remove openssh-server
 cd ~
 
 #echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
@@ -101,7 +101,7 @@ cd ~
 #fi
 #unzip -j -o
 #rm  $COIN_ZIP18
-killall -9 3dcoind >/dev/null 2>&1
+#killall -9 3dcoind >/dev/null 2>&1
 cp "$CONFIG_FOLDER/$CONFIG_FILE" .
 echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
 cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
@@ -122,14 +122,14 @@ addnode=128.199.218.139
 addnode=174.138.3.33
 addnode=159.203.167.75
 addnode=138.68.102.67"" >>  "$CONFIG_FOLDER/$CONFIG_FILE"
-rm -f /root/.3dcoin/banlist.dat
-rm -f /root/.3dcoin/mncache.dat
-rm -f /root/.3dcoin/mnpayments.dat
-rm -f /root/.3dcoin/netfulfilled.dat
-rm -f /root/.3dcoin/debug.log
-rm -f /root/.3dcoin/3dcoind.pid
-date > .3dcoin/debug.log
-rm -r 3dcoin-0* > /dev/null 2>&1
-rm *.tar* > /dev/null 2>&1
-reboot
+#rm -f /root/.3dcoin/banlist.dat
+#rm -f /root/.3dcoin/mncache.dat
+#rm -f /root/.3dcoin/mnpayments.dat
+#rm -f /root/.3dcoin/netfulfilled.dat
+#rm -f /root/.3dcoin/debug.log
+#rm -f /root/.3dcoin/3dcoind.pid
+#date > .3dcoin/debug.log
+#rm -r 3dcoin-0* > /dev/null 2>&1
+#rm *.tar* > /dev/null 2>&1
+#reboot
 rm 3dc*.sh* > /dev/null 2>&1
