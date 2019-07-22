@@ -105,7 +105,8 @@ cd ~
 cp "$CONFIG_FOLDER/$CONFIG_FILE" .
 echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
 cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
-echo "txindex=1
+echo "#---
+txindex=1
 addressindex=1
 timestampindex=1
 spentindex=1
@@ -121,7 +122,7 @@ addnode=159.65.90.101
 addnode=128.199.218.139
 addnode=174.138.3.33
 addnode=159.203.167.75
-addnode=138.68.102.67"" >>  "$CONFIG_FOLDER/$CONFIG_FILE"
+addnode=138.68.102.67" >>  "$CONFIG_FOLDER/$CONFIG_FILE"
 #rm -f /root/.3dcoin/banlist.dat
 #rm -f /root/.3dcoin/mncache.dat
 #rm -f /root/.3dcoin/mnpayments.dat
