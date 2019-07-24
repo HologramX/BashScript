@@ -45,43 +45,48 @@ hostname -f
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
-printf "${GREEN}          Precompiled for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container          ${NC}\n"
+printf "${GREEN}          Precompiled for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container       ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}"
 echo ""
-cat ~/.3dcoin/3dcoin.conf | grep rpcuser > rpcup
-cat ~/.3dcoin/3dcoin.conf | grep rpcpassword >> rpcup
-cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
+#cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
+#cp "$CONFIG_FOLDER/$CONFIG_FILE" .
+
+
 echo ""
-#unset pv
-#while [ -z ${pv} ]; do
-#read -p "Please Enter Masternode Private key: " pv
-#done
-#echo ""
+unset pv
+while [ -z ${pv} ]; do
+read -p "Please Enter Masternode Private key: " pv
+done
+echo ""
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="#externalip=${nodeIpAddress}"
 else
   external_ip_line="#externalip=external_IP_goes_here"
 fi
-masternode_priv_line="masternodeprivkey=${pv}"
 
-rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
-
-rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
+#rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
+#rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
 
 config="#----
+rpcuser=APrKMTuvTQVw
+rpcpassword=dAIRc9EkYB9MUG11V2FNamZRLyxXyVHV
 rpcallowip=127.0.0.1
 #----
 listen=1
 server=1
 daemon=1
 maxconnections=32
+txindex=1
+addressindex=1
+timestampindex=1
+spentindex=1
 #----
 masternode=1
-
 $external_ip_line
+#----
+masternodeprivkey=$pv
 #----"
-#masternodeprivkey=$pv
 
 rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 #dpkg-reconfigure -u openssh-server
@@ -89,8 +94,6 @@ rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 cd ~
 
 #echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-#printf "\n\n         Installed Utility" 
-#cd 
 #cd $COIN_PATH >/dev/null 2>&1
 #wget -q $COIN_TGZ18
 #printf "\n        Downloaded Daemon" 
@@ -101,15 +104,10 @@ cd ~
 #unzip -j -o
 #rm  $COIN_ZIP18
 #killall -9 3dcoind >/dev/null 2>&1
-cp "$CONFIG_FOLDER/$CONFIG_FILE" .
-cat rpcup > "$CONFIG_FOLDER/$CONFIG_FILE"
-echo "$config" >> "$CONFIG_FOLDER/$CONFIG_FILE"
-cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
+
+echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
+#cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
 echo "#---
-txindex=1
-addressindex=1
-timestampindex=1
-spentindex=1
 addnode=206.189.72.203
 addnode=206.189.41.191
 addnode=165.227.197.115
@@ -123,14 +121,45 @@ addnode=128.199.218.139
 addnode=174.138.3.33
 addnode=159.203.167.75
 addnode=138.68.102.67" >>  "$CONFIG_FOLDER/$CONFIG_FILE"
-#rm -f /root/.3dcoin/banlist.dat
-#rm -f /root/.3dcoin/mncache.dat
-#rm -f /root/.3dcoin/mnpayments.dat
-#rm -f /root/.3dcoin/netfulfilled.dat
-#rm -f /root/.3dcoin/debug.log
-#rm -f /root/.3dcoin/3dcoind.pid
-#date > .3dcoin/debug.log
-#rm -r 3dcoin-0* > /dev/null 2>&1
-#rm *.tar* > /dev/null 2>&1
-#reboot
-rm 3dc*.sh* > /dev/null 2>&1
+
+#cd ~
+#cd $COIN_PATH
+#mkdir Masternode
+#cd Masternode
+#rm -f *
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
+#wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
+#chmod 755 daemon_check.sh
+#chmod 755 UpdateNode.sh
+#chmod 755 Check-scripts.sh
+#chmod 755 Update-scripts.sh
+#chmod 755 clearlog.sh
+
+cd ~
+crontab -l > cron
+h=$(( RANDOM % 23 + 1 ));
+crontab -r
+line="@reboot /usr/local/bin/3dcoind -daemon
+1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+* * */7 * * /usr/local/bin/Masternode/clearlog.sh"
+echo "$line" | crontab -u root -
+echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
+echo ""
+
+rm -f /root/.3dcoin/banlist.dat
+rm -f /root/.3dcoin/mncache.dat
+rm -f /root/.3dcoin/mnpayments.dat
+rm -f /root/.3dcoin/netfulfilled.dat
+date > /root/.3dcoin/debug.log
+rm -f /root/.3dcoin/3dcoind.pid
+#printf "Would you reboot system?"
+#echo ""
+#  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+rm 3dc*.sh* > /dev/null 2>&1 && reboot
