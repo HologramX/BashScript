@@ -37,7 +37,7 @@ STD='\033[0m'
 pause(){
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 }
-HSTN='hostname -f'
+
 #$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 #service $COIN_NAME stop > /dev/null 2>&1
 #$COIN_CLI stop > /dev/null 2>&1
@@ -45,9 +45,8 @@ printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
 printf "${GREEN}          Precompiled for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container          ${NC}\n"
-printf "${GREEN}                            ${HSTN}                                         ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}"
-
+hostname -f
 echo ""
 cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 echo ""
