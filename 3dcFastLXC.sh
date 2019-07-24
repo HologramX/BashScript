@@ -48,6 +48,8 @@ printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
 printf "${GREEN}          Precompiled for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container          ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}"
 echo ""
+cat ~/.3dcoin/3dcoin.conf | grep rpcuser > rpcup
+cat ~/.3dcoin/3dcoin.conf | grep rpcpassword >> rpcup
 cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 echo ""
 #unset pv
@@ -68,8 +70,6 @@ rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
 rpcPassword=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 32 ; echo '')
 
 config="#----
-rpcuser=$rpcUserName
-rpcpassword=$rpcPassword
 rpcallowip=127.0.0.1
 #----
 listen=1
@@ -102,7 +102,8 @@ cd ~
 #rm  $COIN_ZIP18
 #killall -9 3dcoind >/dev/null 2>&1
 cp "$CONFIG_FOLDER/$CONFIG_FILE" .
-echo "$config" > "$CONFIG_FOLDER/$CONFIG_FILE"
+cat rpcup > "$CONFIG_FOLDER/$CONFIG_FILE"
+echo "$config" >> "$CONFIG_FOLDER/$CONFIG_FILE"
 cat pk >> "$CONFIG_FOLDER/$CONFIG_FILE"
 echo "#---
 txindex=1
