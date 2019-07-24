@@ -41,12 +41,12 @@ pause(){
 #$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 #service $COIN_NAME stop > /dev/null 2>&1
 #$COIN_CLI stop > /dev/null 2>&1
+hostname -f
 printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}               3DC FAST MASTERNODE CONFIG         ${NC}\n"
 printf "${GREEN}          Precompiled for ${RED}UBUNTU 18.0.4 ${GREEN}LXC Container          ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}"
-hostname -f
 echo ""
 cat ~/.3dcoin/3dcoin.conf | grep privkey > pk
 echo ""
