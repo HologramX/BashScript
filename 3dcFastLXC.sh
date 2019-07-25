@@ -77,10 +77,6 @@ listen=1
 server=1
 daemon=1
 maxconnections=32
-txindex=1
-addressindex=1
-timestampindex=1
-spentindex=1
 #----
 masternode=1
 $external_ip_line
