@@ -117,14 +117,6 @@ PrepUpdate(){
 			$COIN_CLI stop > /dev/null 2>&1
 			sleep 8
 			echo ""
-			cd ~
-			echo  -e "${GREEN} Get latest release                ${STD}"
-			latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-			link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-			wget $link
-			tar -xvzf $latestrelease.tar.gz
-			file=${latestrelease//[Vv]/3dcoin-} 
-			echo ""
 			echo  -e "${GREEN} Stop Cron                         ${STD}" 
 			 /etc/init.d/cron stop
 }
@@ -209,7 +201,7 @@ UpdateCONF(){
 			crontab -r
 line="@reboot /usr/local/bin/3dcoind
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
 0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
 * * */2 * * /usr/local/bin/Masternode/clearlog.sh"
 			echo "$line" | crontab -u root -
@@ -287,6 +279,14 @@ case $choice in
 		echo " #### 3Dcoin Masternode FULL UPDATE with Compilation ####"
 		SystemdRemove
 		PrepUpdate
+		cd ~
+		echo  -e "${GREEN} Get latest release                ${STD}"
+		latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
+		link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
+		wget $link
+		tar -xvzf $latestrelease.tar.gz
+		file=${latestrelease//[Vv]/3dcoin-} 
+		echo ""
 		UpdateCOMP
 		UpdateCONF
 		echo "";;
