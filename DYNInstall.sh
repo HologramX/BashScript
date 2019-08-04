@@ -48,6 +48,8 @@ yes |  apt-get remove postfix  -y
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
+ufw allow 33300/tcp 
+ufw allow 9999/tcp 
 wget https://github.com/duality-solutions/Dynamic/releases/download/v2.3.5.0/Dynamic-2.3.5.0-Linux-x64.tar.gz
 tar -xvzf Dynamic-2.3.5.0-Linux-x64.tar.gz
 cp /root/dynamic-2.3.5/bin/* /usr/local/bin/
