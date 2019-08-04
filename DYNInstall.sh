@@ -52,8 +52,8 @@ wget https://github.com/duality-solutions/Dynamic/releases/download/v2.3.5.0/Dyn
 tar -xvzf Dynamic-2.3.5.0-Linux-x64.tar.gz
 cp /root/dynamic-2.3.5/bin/* /usr/local/bin/
 cd ~
-mkdir ./.dynamic
-echo "$config" > ./.dynamic/dynamic.conf
+mkdir /root/.dynamic
+echo "$config" > /root/.dynamic/dynamic.conf
 cd ~
 rm Dynamic*.gz*
 /usr/local/bin/dynamicd -daemon
