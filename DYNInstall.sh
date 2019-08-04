@@ -11,10 +11,6 @@ GREEN="\033[0;32m"
 NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
-
-yes | apt-get update
-yes | apt-get upgrade
-
 echo ""
 unset pv
 while [ -z ${pv} ]; do
@@ -38,6 +34,10 @@ maxconnections=32
 dynode=1
 dynodepairingkey=$pv
 #----"
+
+yes | apt-get update
+yes | apt-get upgrade
+
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
 yes |  apt-get remove apache2-bin  -y
