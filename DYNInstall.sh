@@ -56,6 +56,10 @@ cp /root/dynamic-2.3.5/bin/* /usr/local/bin/
 cd ~
 mkdir /root/.dynamic
 echo "$config" > /root/.dynamic/dynamic.conf
+crontab -l > /tmp/cron2fix 
+  sed -i "@reboot /usr/local/bin/$COIN_DAEMON -daemon" /tmp/cron2fix 
+  crontab /tmp/cron2fix 
 cd ~
 rm Dynamic*.gz*
 /usr/local/bin/dynamicd -daemon
+rm *.sh*
