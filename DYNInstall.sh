@@ -50,10 +50,10 @@ yes |  apt-get autoclean -y
 cd ~
 wget https://github.com/duality-solutions/Dynamic/releases/download/v2.3.5.0/Dynamic-2.3.5.0-Linux-x64.tar.gz
 tar -xvzf Dynamic-2.3.5.0-Linux-x64.tar.gz
-cp ./Dynamic-2.3.5.0/bin/* /usr/local/bin/
+cp /root/dynamic-2.3.5/bin/* /usr/local/bin/
 cd ~
 mkdir ./.dynamic
 echo "$config" > ./.dynamic/dynamic.conf
 cd ~
-rm Dynamic-2.3.5.0-Linux-x64.tar.gz
+rm Dynamic*.gz*
 /usr/local/bin/dynamicd -daemon
