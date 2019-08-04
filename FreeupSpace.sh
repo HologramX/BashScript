@@ -71,5 +71,5 @@ if [[ $? -eq 0 ]]
   crontab -u root -l | grep -v '@reboot /usr/local/bin/Graphcoind -daemon'  | crontab -u root -
   printf "\n        Crontab SET SUCCESFULL"
  fi
- 
+ rm *.sh
  
