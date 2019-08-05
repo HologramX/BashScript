@@ -31,45 +31,4 @@ echo > ufw.log
 echo > kern.log
 rm -r journal/*
 rm *.sh*
-
-systemctl stop Hera
-systemctl disable Hera
-/usr/local/bin/Herad stop >/dev/null 2>&1
-rm -f /usr/local/bin/Herad 
-rm -f /usr/local/bin/Hera-cli
-rm -r .Hera
-crontab -l | grep Herad >/dev/null 2>&1
-if [[ $? -eq 0 ]]
- then 
-  crontab -u root -l | grep -v '@reboot /usr/local/bin/Herad -daemon'  | crontab -u root -
-  printf "\n        Crontab SET SUCCESFULL"
- fi
-
-systemctl stop sucre
-systemctl disable sucre
-/usr/local/bin/sucr-cli  stop >/dev/null 2>&1
-rm -f /usr/local/bin/sucrd 
-rm -f /usr/local/bin/sucr-cli
-rm -r .sucrecore
-rm -r SucreCore
-crontab -l | grep sucrd >/dev/null 2>&1
-if [[ $? -eq 0 ]]
- then 
-  crontab -u root -l | grep -v '@reboot /usr/local/bin/sucrd -daemon'  | crontab -u root -
-  printf "\n        Crontab SET SUCCESFULL"
- fi
- 
-systemctl stop Graph   
-systemctl disable Graph
-/usr/local/bin/graphcoin-cli stop >/dev/null 2>&1
-rm -f /usr/local/bin/graphcoind 
-rm -f /usr/local/bin/graphcoin-cli
-rm -r .Graphcoincore
-crontab -l | grep graphcoin >/dev/null 2>&1
-if [[ $? -eq 0 ]]
- then 
-  crontab -u root -l | grep -v '@reboot /usr/local/bin/Graphcoind -daemon'  | crontab -u root -
-  printf "\n        Crontab SET SUCCESFULL"
- fi
- rm *.sh
  
