@@ -105,15 +105,15 @@ echo "/swapfile none swap sw 0 0" >> /etc/fstab
 
 echo -e "${GREEN}Downloading and Installing VPS $3dcoin Daemon${NC}"
 cd /usr/local/bin/ >/dev/null 2>&1
-wget -q $COIN_TGZ
+wget -q https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 printf "\n        Downloaded Daemon" 
 if [[ $? -ne 0 ]]; then
 echo -e 'Error downloading node. Please contact support'
 exit 1
 fi
-unzip -j -o
-rm  $COIN_ZIP
-
+unzip -j -o /usr/local/bin/3dcoin_latest.zip
+rm   /usr/local/bin/3dcoin_latest.zip
+mkdir /root/.3dcoin
 echo "$config" > /root/.3dcoin/3dcoin.conf
 echo "#---
 addnode=206.189.72.203
