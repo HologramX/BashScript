@@ -34,7 +34,7 @@ maxconnections=32
 dynode=1
 dynodepairingkey=$pv
 #----"
-
+/usr/local/bin/dynamic-cli stop 
 yes | apt-get update
 yes | apt-get upgrade
 
