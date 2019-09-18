@@ -57,7 +57,7 @@ cd ~
 mkdir /root/.dynamic
 echo "$config" > /root/.dynamic/dynamic.conf
 crontab -l > /tmp/cron2fix 
-  sed -i "@reboot /usr/local/bin/$COIN_DAEMON -daemon" /tmp/cron2fix 
+  echo "@reboot /usr/local/bin/dynamicd -daemon" >> /tmp/cron2fix 
   crontab /tmp/cron2fix 
 cd ~
 rm Dynamic*.gz*
