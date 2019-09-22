@@ -38,7 +38,7 @@ pause(){
   read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
 }
 
-#$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 #service $COIN_NAME stop > /dev/null 2>&1
 #$COIN_CLI stop > /dev/null 2>&1
 hostname -f
