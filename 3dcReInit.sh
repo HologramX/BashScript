@@ -58,12 +58,12 @@ cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
 crontab -r
-line="@reboot /usr/local/bin/3dcoind -daemon
+echo "@reboot /usr/local/bin/3dcoind -daemon
 1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/daemon_check.sh
 0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh"
-echo "$line" | crontab -u root -
+* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > cront
+crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
 rm *.sh*
