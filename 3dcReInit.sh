@@ -66,7 +66,7 @@ line="@reboot /usr/local/bin/3dcoind -daemon
 echo "$line" | crontab -u root -
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
-
+rm *.sh*
 
 reboot
 #$COIN_PATH$COIN_DAEMON -reindex
