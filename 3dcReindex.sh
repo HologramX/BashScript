@@ -37,5 +37,3 @@ rm -f $HOME/.$FOLDER/governance.dat
 rm -f $HOME/.$FOLDER/debug.log
 rm -f $HOME/.$FOLDER/3dcoind.pid
 $COIN_PATH$COIN_DAEMON -reindex
-rm 3dcReindex.sh
-exit
