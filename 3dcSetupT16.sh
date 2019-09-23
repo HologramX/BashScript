@@ -40,7 +40,7 @@ done
 echo ""
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  external_ip_line="#externalip=${nodeIpAddress}"
+  external_ip_line="externalip=${nodeIpAddress}"
 else
   external_ip_line="#externalip=external_IP_goes_here"
 fi
@@ -79,7 +79,6 @@ echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw logging on 
 yes |  ufw enable 
 echo ""
-echo  -e "${GREEN} Clone GIT for NEXT UPDATE OF 3dcoin core.....     ${STD}"
 rm -rf /usr/local/bin/Masternode
 yes |  apt-get update
 yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
@@ -148,6 +147,19 @@ chmod 755 Check-scripts.sh
 chmod 755 Update-scripts.sh
 chmod 755 clearlog.sh
 
+cd ~
+crontab -l > cron
+h=$(( RANDOM % 23 + 1 ));
+crontab -r
+echo "@reboot /usr/local/bin/3dcoind -daemon
+1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
+crontab /root/cront
+echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
+echo ""
+
 #crontab -l | grep "/run/sshd" >/dev/null 2>&1
 #if [[ $? -eq 0 ]]
 # then printf "\n        Crontab already SET"
@@ -160,18 +172,7 @@ chmod 755 clearlog.sh
 #  printf "\n        Crontab SET SUCCESFULL"
 # fi
 
-cd ~
-crontab -l > cron
-h=$(( RANDOM % 23 + 1 ));
-crontab -r
-line="@reboot /usr/local/bin/3dcoind -daemon
-1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh"
-echo "$line" | crontab -u root -
-echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
-echo ""
+
 
 #printf "Would you reboot system?"
 #echo ""
