@@ -38,6 +38,8 @@ while [ -z ${pv} ]; do
 read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+yes | apt-get install dnsutils
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="externalip=${nodeIpAddress}"
@@ -68,7 +70,6 @@ echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
 echo  -e "${GREEN} Install packages.....                     ${STD}"
-DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 yes | apt-get install python virtualenv git unzip pv nano htop ufw
 echo ""
