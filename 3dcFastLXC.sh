@@ -86,7 +86,7 @@ masternodeprivkey=$pv
 
 rm -v /etc/ssh/ssh_host_* >/dev/null 2>&1
 #dpkg-reconfigure -u openssh-server
-#yes |  apt-get remove openssh-server
+yes |  apt-get remove openssh-server
 cd ~
 
 #echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
