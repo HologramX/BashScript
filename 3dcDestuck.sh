@@ -25,20 +25,12 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
-$COIN_PATH$COIN_CLI stop
-sleep 10
-rm -r $CONFIG_FOLDER/chainstate/
-rm -r $CONFIG_FOLDER/database/
-rm -r $CONFIG_FOLDER/blocks/
-rm -f $HOME/.$FOLDER/banlist.dat
-rm -f $HOME/.$FOLDER/mncache.dat
-rm -f $HOME/.$FOLDER/mnpayments.dat
-rm -f $HOME/.$FOLDER/fee_estimates.dat
-rm -f $HOME/.$FOLDER/netfulfilled.dat
-rm -f $HOME/.$FOLDER/governance.dat
-rm -f $HOME/.$FOLDER/debug.log
-rm -f $HOME/.$FOLDER/3dcoind.pid
+kill -9 $(pgrep $COIN_DAEMON)
+cp $CONFIG_FOLDER/$CONFIG_FILE .
+rm -r $CONFIG_FOLDER
+mkdir $CONFIG_FOLDER
+cp $CONFIG_FILE $CONFIG_FOLDER
+
 $COIN_PATH$COIN_DAEMON -daemon
 rm 3dcDestuck.sh
-exit
 
