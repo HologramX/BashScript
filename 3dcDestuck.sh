@@ -25,7 +25,6 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
-echo "kill -9 $(pgrep $COIN_DAEMON)"
 kill -9 $(pgrep $COIN_DAEMON)
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
