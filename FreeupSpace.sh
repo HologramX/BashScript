@@ -16,6 +16,11 @@ rm /boot/initrd.img-4.4.0-142-generic
 rm /boot/initrd.img-4.4.0-143-generic
 rm /boot/initrd.img-4.4.0-144-generic
 rm /boot/initrd.img-4.4.0-145-generic
+rm /boot/initrd.img-4.4.0-146-generic
+rm /boot/initrd.img-4.4.0-147-generic
+rm /boot/initrd.img-4.4.0-148-generic
+rm /boot/initrd.img-4.4.0-149-generic
+rm /boot/initrd.img-4.4.0-150-generic
 apt-get -f -y install
 apt-get install perl -y
 apt-get purge linux-image-4.4.0-139-generic
