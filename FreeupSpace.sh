@@ -33,6 +33,7 @@ apt-get -f -y install
 apt-get install perl -y
 apt-get clean
 apt-get autoremove -y
+sudo apt --purge autoremove -y
 apt-get autoclean -y
 rm -r 3dcoin
 rm -r 3dcoin-0.14.1.2
