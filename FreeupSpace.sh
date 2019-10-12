@@ -22,8 +22,8 @@ apt-get purge linux-image-4.4.0-147-generic
 apt-get purge linux-image-4.4.0-148-generic
 apt-get purge linux-image-4.4.0-149-generic
 apt-get purge linux-image-4.4.0-150-generic
-apt-get -f install
-apt-get remove perl -y
+apt-get -f -y install
+apt-get install perl -y
 apt-get clean
 apt-get autoremove -y
 apt-get autoclean -y
