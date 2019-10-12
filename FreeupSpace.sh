@@ -8,7 +8,8 @@ GREEN="\033[0;32m"
 NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
-
+apt-get install perl -y
+apt-get -f -y install
 dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
 rm /boot/initrd.img-4.4.0-139-generic
 rm /boot/initrd.img-4.4.0-140-generic
@@ -17,6 +18,8 @@ rm /boot/initrd.img-4.4.0-142-generic
 rm /boot/initrd.img-4.4.0-143-generic
 rm /boot/initrd.img-4.4.0-144-generic
 rm /boot/initrd.img-4.4.0-145-generic
+apt-get install perl -y
+apt-get -f -y install
 apt-get purge linux-image-4.4.0-139-generic
 apt-get purge linux-image-4.4.0-140-generic
 apt-get purge linux-image-4.4.0-141-generic
@@ -29,12 +32,13 @@ apt-get purge linux-image-4.4.0-147-generic
 apt-get purge linux-image-4.4.0-148-generic
 apt-get purge linux-image-4.4.0-149-generic
 apt-get purge linux-image-4.4.0-150-generic
-apt-get -f -y install
 apt-get install perl -y
+apt-get -f -y install
 apt-get clean
 apt-get autoremove -y
 sudo apt --purge autoremove -y
 apt-get autoclean -y
+update-grub
 rm -r 3dcoin
 rm -r 3dcoin-0.14.1.2
 echo > .3dcoin/debug.log
