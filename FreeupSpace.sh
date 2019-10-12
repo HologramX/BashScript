@@ -9,6 +9,19 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 
+dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
+apt-get purge linux-image-4.4.0-139-generic
+apt-get purge linux-image-4.4.0-140-generic
+apt-get purge linux-image-4.4.0-141-generic
+apt-get purge linux-image-4.4.0-142-generic
+apt-get purge linux-image-4.4.0-143-generic
+apt-get purge linux-image-4.4.0-144-generic
+apt-get purge linux-image-4.4.0-145-generic
+apt-get purge linux-image-4.4.0-146-generic
+apt-get purge linux-image-4.4.0-147-generic
+apt-get purge linux-image-4.4.0-148-generic
+apt-get purge linux-image-4.4.0-149-generic
+apt-get purge linux-image-4.4.0-150-generic
 apt-get remove perl -y
 apt-get clean
 apt-get autoremove -y
@@ -32,4 +45,5 @@ echo > kern.log
 rm -r journal/*
 rm -r /usr/tmp/*
 rm *.sh*
+
  
