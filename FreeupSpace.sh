@@ -10,6 +10,13 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
+rm /boot/initrd.img-4.4.0-139-generic
+rm /boot/initrd.img-4.4.0-140-generic
+rm /boot/initrd.img-4.4.0-141-generic
+rm /boot/initrd.img-4.4.0-142-generic
+rm /boot/initrd.img-4.4.0-143-generic
+rm /boot/initrd.img-4.4.0-144-generic
+rm /boot/initrd.img-4.4.0-145-generic
 apt-get purge linux-image-4.4.0-139-generic
 apt-get purge linux-image-4.4.0-140-generic
 apt-get purge linux-image-4.4.0-141-generic
