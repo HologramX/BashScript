@@ -23,23 +23,8 @@ rm /boot/initrd.img-4.4.0-149-generic
 rm /boot/initrd.img-4.4.0-150-generic
 apt-get -f -y install
 apt-get install perl -y
-apt-get purge -y linux-image-4.4.0-139-generic
-apt-get purge -y linux-image-4.4.0-140-generic
-apt-get purge -y linux-image-4.4.0-141-generic
-apt-get purge -y linux-image-4.4.0-142-generic
-apt-get purge -y linux-image-4.4.0-143-generic
-apt-get purge -y linux-image-4.4.0-144-generic
-apt-get purge -y linux-image-4.4.0-145-generic
-apt-get purge -y linux-image-4.4.0-146-generic
-apt-get purge -y linux-image-4.4.0-147-generic
-apt-get purge -y linux-image-4.4.0-148-generic
-apt-get purge -y linux-image-4.4.0-149-generic
-apt-get purge -y linux-image-4.4.0-150-generic
-apt-get -f -y install
-apt-get install perl -y
+apt-get --purge autoremove -y
 apt-get clean
-apt-get autoremove -y
-sudo apt --purge autoremove -y
 apt-get autoclean -y
 rm -r 3dcoin
 rm -r 3dcoin-0.14.1.2
