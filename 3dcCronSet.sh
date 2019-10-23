@@ -119,7 +119,7 @@ printf "${GREEN}            3DC FAST UPDATE with RESYNC   ** UBUNTU 18 **       
 printf "${YELLOW}###################################################################${NC}"
 
 cd $COIN_PATH >/dev/null 2>&1
-unzip 3dcoin_latest.zip
+unzip -o -j  3dcoin_latest.zip
 cd
 #UpdatePRE18
 UpdateCONF
@@ -129,7 +129,7 @@ cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
 mkdir $CONFIG_FOLDER
 cp $CONFIG_FILE $CONFIG_FOLDER
-unzip BC3dcoin.zip
+unzip -o -j  BC3dcoin.zip
 crontab -l > cront
 printf " Restart Daemon "
 hostname -f
