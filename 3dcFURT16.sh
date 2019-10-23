@@ -91,7 +91,8 @@ line="@reboot /usr/local/bin/3dcoind
 			echo  -e "${GREEN} Start Cron                        ${STD}"
 			 /etc/init.d/cron start
 			echo ""		
-			echo  -e "${GREEN} Update Finished,rebooting server  ${STD}" 
+			echo  -e "${GREEN} Update Finished,rebooting server  ${STD}"
+			echo ""
 			cd ~
 			rm $latestrelease.tar.gz >/dev/null 2>&1
 			rm -rf $file >/dev/null 2>&1
@@ -140,7 +141,7 @@ rm -r $CONFIG_FOLDER
 mkdir $CONFIG_FOLDER
 cp $CONFIG_FILE $CONFIG_FOLDER
 crontab -l > cront
-printf " Restart Daemon "
+printf " Restart Daemon of host:     "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
