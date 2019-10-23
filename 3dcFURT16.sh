@@ -134,7 +134,6 @@ line="@reboot /usr/local/bin/3dcoind
 			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=138.68.102.67") -eq 0 ]; then
 			echo "addnode=138.68.102.67" >> /root/.3dcoin/3dcoin.conf
 			fi	
-}
 
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
