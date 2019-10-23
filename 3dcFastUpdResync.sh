@@ -175,7 +175,7 @@ UpdatePRE18(){
 }
 
 UpdateCONF(){
-			
+			h=$(( RANDOM % 23 + 1 ));
 			echo  -e "${GREEN} Update crontab                    ${STD}"
 			cd ~
 			cd /usr/local/bin
