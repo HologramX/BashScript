@@ -29,111 +29,7 @@ GREEN="\033[0;32m"
 NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
-
-pause(){
-  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
-}
-
-
-show_menu(){
-clear
-printf "\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}               3DC FAST UPDATE with RESYNC       ${NC}\n"
-printf "${YELLOW}#########################################################################${NC}"
-	echo   ""
-	echo   ""
-	echo "1. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for Ubuntu16"
-	echo "2. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for **Ubuntu18** "	
-	echo "0. Exit"
-	echo ""
-
-}
-
-
-SystemdRemove() {
-printf "\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}                     Systemd Service REMOVE  $COIN_NAME                               ${NC}\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-sleep 2
-systemctl stop 3dcoin
-systemctl stop fire
-systemctl stop mydaemon
-systemctl stop tame
-systemctl stop max
-systemctl disable 3dcoin
-systemctl disable fire
-systemctl disable mydaemon
-systemctl disable tame
-systemctl disable max
-systemctl daemon-reload
-
-}
-
-PrepUpdate(){
-
-			echo ""
-			h=$(( RANDOM % 23 + 1 ));
-			echo  -e "${BLUE} Start ${Update}                    ${STD}"
-			echo ""
-			echo  -e "${BLUE} Start ${Update}                    ${STD}"
-			rm -f /usr/local/bin/check.sh
-			rm -f /usr/local/bin/update.sh
-			rm -f /usr/local/bin/UpdateNode.sh
-			rm -f /usr/local/bin/cust-upd-3dc.sh
-			rm -f /usr/local/bin/update_clean_reboot_auto_it.sh
-			rm -f /usr/local/bin/3dcoin-cli.sh
-			rm -rf /usr/local/bin/Masternode
-			echo ""
-			echo  -e "${GREEN} Install packages.....                     ${STD}"
-			export LC_ALL=en_US.UTF-8
-			apt-get update
-			DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-			yes | apt-get install fail2ban ufw python virtualenv git unzip pv nano htop libwww-perl
-			yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
-			yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
-			yes |  apt-get install software-properties-common 
-			yes |  add-apt-repository ppa:bitcoin/bitcoin 
-			yes |  apt-get update 
-			yes |  apt-get install libdb4.8-dev libdb4.8++-dev 
-			yes |  apt-get install libminiupnpc-dev 
-			yes |  apt-get install libzmq3-dev
-			yes |  apt-get install zip unzip curl
-			apt-get remove apache2 -y
-			apt-get remove apache2  -y
-			apt-get remove apache2-bin  -y
-			apt-get remove apache2-data  -y
-			apt-get remove apache2-doc  -y
-			apt-get remove apache2-utils  -y
-			apt-get remove postfix  -y 
-			apt-get autoremove -y
-			apt-get autoclean -y		
-			$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-			service $COIN_NAME stop > /dev/null 2>&1
-			$COIN_CLI stop > /dev/null 2>&1
-			sleep 8
-			echo ""
-			echo  -e "${GREEN} Stop Cron                         ${STD}" 
-			 /etc/init.d/cron stop
-}
-
-UpdateCOMP(){
-			
-			echo ""
-			echo  -e "${GREEN} Compiling 3Dcoin core             ${STD}"
-			cd $file
-			./autogen.sh && ./configure --disable-tests --disable-gui-tests --without-gui && make || { echo "Error: When Compiling 3Dcoin core" && exit;  }
-			echo  -e "${GREEN} Stop 3Dcoin core                  ${STD}"
-			echo ""			
-			3dcoin-cli stop
-			sleep 2	
-			echo  -e "${GREEN} Make install                      ${STD}"
-			echo ""			
-			make install-strip
-			echo ""
-}
-			
+	
 			
 UpdatePRE16(){
 	echo ""
@@ -197,6 +93,7 @@ UpdateCONF(){
 			cd ~
 			crontab -l >> cront
 			crontab -r
+			
 line="@reboot /usr/local/bin/3dcoind
 * 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/daemon_check.sh
@@ -254,45 +151,15 @@ line="@reboot /usr/local/bin/3dcoind
 			fi	
 }
 
-OpenvzFix(){
-crontab -l | grep "/run/sshd" >/dev/null 2>&1
-if [[ $? -eq 0 ]]
- then printf "\n        Crontab already SET"
-  else crontab -l > /tmp/cron2fix 
-  echo "@reboot mkdir /run/sshd" >> /tmp/cron2fix 
-  echo "@reboot mkdir /run/fail2ban" >> /tmp/cron2fix 
-  echo "@reboot service sshd start" >> /tmp/cron2fix
-  echo "@reboot service fail2ban start" >> /tmp/cron2fix
-  crontab /tmp/cron2fix 
-  printf "\n        Crontab SET SUCCESFULL"
- fi
-}
-
 ##### Main #####
-show_menu
+clear
+printf "\n"
+printf "${YELLOW}#################################################################${NC}\n"
+printf "${GREEN}            3DC FAST UPDATE with RESYNC   ** UBUNTU 16 **         ${NC}\n"
+printf "${YELLOW}###################################################################${NC}"
 
-read -p "Enter choice [ 1 - 2] " choice
-case $choice in
-		
-	1)	echo ""
-		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR UBUNTU16 ####"
-		#SystemdRemove
-		#PrepUpdate
-		UpdatePRE16	
-		echo "";;
-		
-	2)	echo ""
-		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR **UBUNTU18** ####"
-		#SystemdRemove
-		#PrepUpdate	
-		UpdatePRE18
-		echo "";;
-		
-	0) 	rm 3dc*.sh* > /dev/null 2>&1
-		exit 0;;
 
-	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
-esac
+UpdatePRE16
 UpdateCONF
 kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
