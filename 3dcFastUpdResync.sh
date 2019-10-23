@@ -305,4 +305,5 @@ printf " Restart Daemon "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
+rm ./3dc*.sh*
 echo ""
