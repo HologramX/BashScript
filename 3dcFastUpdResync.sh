@@ -179,6 +179,7 @@ UpdateCONF(){
 			echo  -e "${GREEN} Update crontab                    ${STD}"
 			cd ~
 			cd /usr/local/bin
+			rm -r Masternode > /dev/null 2>&1
 			mkdir Masternode
 			cd Masternode
 			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
