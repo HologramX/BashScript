@@ -292,7 +292,6 @@ case $choice in
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 UpdateCONF
-rm *.tar*
 kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
 cp $CONFIG_FOLDER/$CONFIG_FILE .
@@ -305,5 +304,6 @@ hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
+rm *.tar*
 rm ./3dc*.sh* > /dev/null 2>&1
 
