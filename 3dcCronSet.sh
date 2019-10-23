@@ -9,6 +9,7 @@ DE="d"
 COIN_DAEMON="$COIN_NAME$DE"
 COIN_CLI="$COIN_NAME-cli"
 COIN_PATH="/usr/local/bin/"
+
 COIN_PORT=6695
 RPC_PORT=6694
 COIN_KEY=""
@@ -18,10 +19,6 @@ COIN_TGZ=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest.zip
 COIN_ZIP="3dcoin_latest.zip"
 COIN_TGZ18=https://github.com/HologramX/Daemons/raw/master/3dcoin_latest18.zip
 COIN_ZIP18="3dcoin_latest18.zip"
-LOCALE="LANG=en_US.UTF-8
-LC_ALL=en_US.UTF-8
-LANGUAGE=en:it:en"
-
 
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
@@ -32,49 +29,150 @@ GREEN="\033[0;32m"
 NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
+	
+			
+UpdatePRE16(){
+	echo ""
+	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
+	cd 
+	cd $COIN_PATH >/dev/null 2>&1
+	wget -q $COIN_TGZ
+	printf "\n        Downloaded Daemon" 
+	if [[ $? -ne 0 ]]; then
+	echo -e 'Error downloading node. Please contact support'
+	exit 1
+	fi
+	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+	service $COIN_NAME stop > /dev/null 2>&1
+	$COIN_CLI stop > /dev/null 2>&1
+	sleep 2
+	unzip -o -j $COIN_ZIP
+	rm *.zip*
+}
 
+UpdatePRE18(){
+	echo ""
+	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
+	cd 
+	cd $COIN_PATH >/dev/null 2>&1
+  rm 3dc*
+	wget -q $COIN_TGZ18
+	printf "\n        Downloaded Daemon" 
+	if [[ $? -ne 0 ]]; then
+	echo -e 'Error downloading node. Please contact support'
+	exit 1
+	fi
+	
+	#$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+	#service $COIN_NAME stop > /dev/null 2>&1
+	#$COIN_CLI stop > /dev/null 2>&1
+	#sleep 2
+	#unzip -o -j $COIN_ZIP18
+	#rm *.zip*
+}
+
+UpdateCONF(){
+			h=$(( RANDOM % 23 + 1 ));
+			echo  -e "${GREEN} Update crontab                    ${STD}"
+			cd ~
+			cd /usr/local/bin
+			rm -r Masternode > /dev/null 2>&1
+			mkdir Masternode
+			cd Masternode
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
+			wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
+			chmod 755 daemon_check.sh
+			chmod 755 UpdateNode.sh
+			chmod 755 Check-scripts.sh
+			chmod 755 Update-scripts.sh
+			chmod 755 clearlog.sh
+			cd ~
+			crontab -l >> cront
+			crontab -r
+			
+line="@reboot /usr/local/bin/3dcoind
+* 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
+#*/30 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+* * */7 * * /usr/local/bin/Masternode/clearlog.sh"
+
+			echo "$line" | crontab -u root -
+			echo "Crontab updated successfully"
+			echo ""
+			echo  -e "${GREEN} Start Cron                        ${STD}"
+			 /etc/init.d/cron start
+			echo ""		
+			echo  -e "${GREEN} Update Finished,rebooting server  ${STD}" 
+			cd ~
+			rm $latestrelease.tar.gz
+			rm -rf $file 
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=206.189.72.203") -eq 0 ]; then
+			echo "addnode=206.189.72.203" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=206.189.41.191") -eq 0 ]; then
+			echo "addnode=206.189.41.191" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=165.227.197.115") -eq 0 ]; then
+			echo "addnode=165.227.197.115" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=167.99.87.86") -eq 0 ]; then
+			echo "addnode=167.99.87.86" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=159.65.201.222") -eq 0 ]; then
+			echo "addnode=159.65.201.222" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=159.65.148.226") -eq 0 ]; then
+			echo "addnode=159.65.148.226" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=165.227.38.214") -eq 0 ]; then
+			echo "addnode=165.227.38.214" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=159.65.167.79") -eq 0 ]; then
+			echo "addnode=159.65.167.79" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=159.65.90.101") -eq 0 ]; then
+			echo "addnode=159.65.90.101" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=128.199.218.139") -eq 0 ]; then
+			echo "addnode=128.199.218.139" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=174.138.3.33") -eq 0 ]; then
+			echo "addnode=174.138.3.33" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=159.203.167.75") -eq 0 ]; then
+			echo "addnode=159.203.167.75" >> /root/.3dcoin/3dcoin.conf
+			fi
+			if [ $(cat /root/.3dcoin/3dcoin.conf | grep -c "addnode=138.68.102.67") -eq 0 ]; then
+			echo "addnode=138.68.102.67" >> /root/.3dcoin/3dcoin.conf
+			fi	
+}
+
+##### Main #####
+clear
 printf "\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}     3dc Crontab FIX ${NC}\n"
-printf "${YELLOW}#########################################################################${NC}"
-cat /etc/hostname  
-cd ~
-latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
-link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
-wget $link
-tar -xvzf $latestrelease.tar.gz
-file=${latestrelease//[v]/3dcoin-}
+printf "${YELLOW}#################################################################${NC}\n"
+printf "${GREEN}            3DC FAST UPDATE with RESYNC   ** UBUNTU 18 **         ${NC}\n"
+printf "${YELLOW}###################################################################${NC}"
 
-cd ~
-cd $COIN_PATH
-mkdir Masternode
-cd Masternode
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
-chmod 755 daemon_check.sh
-chmod 755 UpdateNode.sh
-chmod 755 Check-scripts.sh
-chmod 755 Update-scripts.sh
-chmod 755 clearlog.sh
-cd ~
-crontab -l >> cron
-h=$(( RANDOM % 23 + 1 ));
-crontab -r
-line="@reboot /usr/local/bin/3dcoind -daemon
-0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
-* * */2 * * /usr/local/bin/Masternode/clearlog.sh"
-echo "$line" | crontab -u root -
-echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
+
+UpdatePRE18
+UpdateCONF
+kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
+sleep 2
+cp $CONFIG_FOLDER/$CONFIG_FILE .
+rm -r $CONFIG_FOLDER
+mkdir $CONFIG_FOLDER
+cp $CONFIG_FILE $CONFIG_FOLDER
+crontab -l > cront
+printf " Restart Daemon "
+hostname -f
+#$COIN_PATH$COIN_DAEMON -daemon
+printf "ALL DONE..... "
 echo ""
-cd ~
-rm $latestrelease.tar.gz
-rm -rf $file 
-rm 3dc*.sh* > /dev/null 2>&1
-cat /etc/hostname  
+rm *.tar*
+rm ./3dc*.sh* > /dev/null 2>&1
