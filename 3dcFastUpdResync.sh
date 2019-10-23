@@ -295,6 +295,7 @@ UpdateCONF
 rm *.tar*
 rm 3dc*.sh* > /dev/null 2>&1
 kill -9 $(pgrep $COIN_DAEMON)
+sleep 2
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
 mkdir $CONFIG_FOLDER
