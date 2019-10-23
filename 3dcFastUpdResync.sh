@@ -304,3 +304,4 @@ printf " Restart Daemon "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
+echo ""
