@@ -306,5 +306,5 @@ hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
-rm *.tar*
+rm *.tar* > /dev/null 2>&1
 rm ./3dc*.sh* > /dev/null 2>&1
