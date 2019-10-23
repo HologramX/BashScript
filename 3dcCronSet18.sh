@@ -30,47 +30,6 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 	
-			
-UpdatePRE16(){
-	echo ""
-	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-	cd 
-	cd $COIN_PATH >/dev/null 2>&1
-	wget -q $COIN_TGZ
-	printf "\n        Downloaded Daemon" 
-	if [[ $? -ne 0 ]]; then
-	echo -e 'Error downloading node. Please contact support'
-	exit 1
-	fi
-	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-	service $COIN_NAME stop > /dev/null 2>&1
-	$COIN_CLI stop > /dev/null 2>&1
-	sleep 2
-	unzip -o -j $COIN_ZIP
-	rm *.zip*
-}
-
-UpdatePRE18(){
-	echo ""
-	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-	cd 
-	cd $COIN_PATH >/dev/null 2>&1
-  rm 3dc*
-	wget -q $COIN_TGZ18
-	printf "\n        Downloaded Daemon" 
-	if [[ $? -ne 0 ]]; then
-	echo -e 'Error downloading node. Please contact support'
-	exit 1
-	fi
-	
-	#$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-	#service $COIN_NAME stop > /dev/null 2>&1
-	#$COIN_CLI stop > /dev/null 2>&1
-	#sleep 2
-	#unzip -o -j $COIN_ZIP18
-	#rm *.zip*
-}
-
 UpdateCONF(){
 			h=$(( RANDOM % 23 + 1 ));
 			echo  -e "${GREEN} Update crontab                    ${STD}"
@@ -159,8 +118,11 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}            3DC FAST UPDATE with RESYNC   ** UBUNTU 18 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 
-
-UpdatePRE18
+cd $COIN_PATH >/dev/null 2>&1
+rm *3dcoin*
+rm *.zip*
+cd
+#UpdatePRE18
 UpdateCONF
 kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
@@ -174,5 +136,9 @@ hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
+cd
 rm *.tar*
 rm ./3dc*.sh* > /dev/null 2>&1
+rm -r 3dcoin-0.14.6.1 > /dev/null 2>&1
+rm -r 3dcoin-0.14.6.2 > /dev/null 2>&1
+	
