@@ -199,7 +199,7 @@ UpdateCONF(){
 line="@reboot /usr/local/bin/3dcoind
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 #*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
 * * */2 * * /usr/local/bin/Masternode/clearlog.sh"
 			echo "$line" | crontab -u root -
 			echo "Crontab updated successfully"
@@ -274,14 +274,14 @@ case $choice in
 		
 	1)	echo ""
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR UBUNTU16 ####"
-		SystemdRemove
+		#SystemdRemove
 		#PrepUpdate
 		UpdatePRE16	
 		echo "";;
 		
 	2)	echo ""
 		echo " #### Update 3dcoin Daemon with PRECOMPILED DAEMON FOR **UBUNTU18** ####"
-		SystemdRemove
+		#SystemdRemove
 		#PrepUpdate	
 		UpdatePRE18
 		echo "";;
