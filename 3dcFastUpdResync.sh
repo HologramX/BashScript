@@ -293,8 +293,7 @@ case $choice in
 esac
 UpdateCONF
 rm *.tar*
-rm 3dc*.sh* > /dev/null 2>&1
-kill -9 $(pgrep $COIN_DAEMON)
+kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
@@ -305,5 +304,6 @@ printf " Restart Daemon "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
-rm ./3dc*.sh*
 echo ""
+rm ./3dc*.sh* > /dev/null 2>&1
+
