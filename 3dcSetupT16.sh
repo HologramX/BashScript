@@ -178,4 +178,5 @@ echo ""
 #printf "Would you reboot system?"
 #echo ""
 #  read -p "Press [Enter] key to continue - Press [CRTL+C] key to Exit..." fackEnterKey
+echo $external_ip_line
 rm 3dc*.sh* > /dev/null 2>&1 && reboot
