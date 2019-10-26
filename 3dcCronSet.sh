@@ -30,6 +30,7 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 
+kill -9 $(pgrep 3dcoind)
 kill -9 $(pgrep make)
 kill -9 $(pgrep g++)
 kill -9 $(pgrep cc1plus)
@@ -44,8 +45,21 @@ echo "@reboot /usr/local/bin/3dcoind -daemon
 * * */7 * * /usr/local/bin/Masternode/clearlog.sh" > cront
 crontab /root/cront
 
+cd /usr/local/bin
+unzip -o -j $COIN_ZIP
+rm *.zip*
+cd
+kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
+sleep 2
+cp $CONFIG_FOLDER/$CONFIG_FILE .
+rm -r $CONFIG_FOLDER
+mkdir $CONFIG_FOLDER
+cp $CONFIG_FILE $CONFIG_FOLDER
+crontab -l > cront
+unzip -o -j BC3dcoin.zip
+printf " Restart Daemon "
 hostname -f
-#$COIN_PATH$COIN_DAEMON -daemon
+$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
 cd
