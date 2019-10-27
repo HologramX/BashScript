@@ -43,7 +43,7 @@ crontab /root/cront
 
 cd /usr/local/bin
 unzip -o -j $COIN_ZIP
-kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
+kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 sleep 2
 cd
 rm *.ldb
@@ -51,11 +51,11 @@ rm *.dat
 rm LO*
 rm *.log
 rm MANIF*
-cp $CONFIG_FOLDER/$CONFIG_FILE .
-rm -r $CONFIG_FOLDER
+cp /root/.3dcoin/3dcoin.conf /root
+rm -r /root/.3dcoin
 crontab -l > cront
 unzip -o -j BC3dcoin.zip
-cp $CONFIG_FILE $CONFIG_FOLDER
+cp /root/3dcoin.conf /root/.3dcoin
 printf " Restart Daemon "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
