@@ -51,12 +51,16 @@ rm *.zip*
 cd
 kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
+rm *.ldb
+rm *.dat
+rm LO*
+rm *.log
+rm MANIF*
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
-mkdir $CONFIG_FOLDER
-cp $CONFIG_FILE $CONFIG_FOLDER
 crontab -l > cront
 unzip -o -j BC3dcoin.zip
+cp $CONFIG_FILE $CONFIG_FOLDER
 printf " Restart Daemon "
 hostname -f
 $COIN_PATH$COIN_DAEMON -daemon
