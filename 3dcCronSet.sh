@@ -47,8 +47,6 @@ crontab /root/cront
 
 cd /usr/local/bin
 unzip -o -j $COIN_ZIP
-rm *.zip*
-cd
 kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
 sleep 2
 rm *.ldb
