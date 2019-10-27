@@ -54,7 +54,7 @@ rm MANIF*
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
 crontab -l > cront
-unzip -o -j BC3dcoin.zip
+unzip -o BC3dcoin.zip
 cp /root/3dcoin.conf /root/.3dcoin
 printf " Restart Daemon "
 hostname -f
