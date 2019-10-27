@@ -58,7 +58,7 @@ unzip -o BC3dcoin.zip
 cp /root/3dcoin.conf /root/.3dcoin
 printf " Restart Daemon "
 hostname -f
-$COIN_PATH$COIN_DAEMON -daemon
+#$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
 cd
