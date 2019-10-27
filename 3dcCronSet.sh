@@ -30,10 +30,6 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 
-kill -9 $(pgrep 3dcoind)
-kill -9 $(pgrep make)
-kill -9 $(pgrep g++)
-kill -9 $(pgrep cc1plus)
 cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
