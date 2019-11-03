@@ -39,6 +39,7 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}            3DC FAST UPDATE with RESYNC   ** UBUNTU 16 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 echo ""
+yes | apt-get install dnsutils
 	
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
