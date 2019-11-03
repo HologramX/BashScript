@@ -39,6 +39,7 @@ read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+yes | apt-get install dnsutils
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
   external_ip_line="externalip=${nodeIpAddress}"
