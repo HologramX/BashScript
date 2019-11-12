@@ -43,8 +43,8 @@ crontab /root/cront
 
 cd /usr/local/bin
 kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
-unzip -o -j $COIN_ZIP
 sleep 2
+unzip -o -j $COIN_ZIP
 cd
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
