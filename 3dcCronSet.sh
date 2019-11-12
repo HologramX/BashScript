@@ -42,15 +42,10 @@ echo "@reboot /usr/local/bin/3dcoind -daemon
 crontab /root/cront
 
 cd /usr/local/bin
-unzip -o -j $COIN_ZIP
 kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
+unzip -o -j $COIN_ZIP
 sleep 2
 cd
-rm *.ldb
-rm *.dat
-rm LO*
-rm *.log
-rm MANIF*
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
 crontab -l > cront
@@ -64,5 +59,8 @@ echo ""
 cd
 rm *.tar* > /dev/null 2>&1
 rm ./3dc*.sh* > /dev/null 2>&1
-rm -r 3dcoin-0.14.6.1 > /dev/null 2>&1
-rm -r 3dcoin-0.14.6.2 > /dev/null 2>&1
+rm *.zip*
+rm -r 3dcoin-0.14.* > /dev/null 2>&1
+rm -r 3dcoin-0.14.1.2 > /dev/null 2>&1
+rm -r 3dcoin-0.14.7.1/ > /dev/null 2>&1
+
