@@ -45,7 +45,7 @@ cd /usr/local/bin
 kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 sleep 2
 unzip -o -j $COIN_ZIP
-cd
+cd /root
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
 crontab -l > cront
@@ -56,11 +56,9 @@ hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
-cd
+cd /root
 rm *.tar* > /dev/null 2>&1
 rm ./3dc*.sh* > /dev/null 2>&1
 rm *.zip*
-rm -r 3dcoin-0.14.* > /dev/null 2>&1
-rm -r 3dcoin-0.14.1.2 > /dev/null 2>&1
-rm -r 3dcoin-0.14.7.1/ > /dev/null 2>&1
+rm -r 3dcoin-0.14.7.2/ > /dev/null 2>&1
 
