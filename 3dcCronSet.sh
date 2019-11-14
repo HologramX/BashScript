@@ -31,6 +31,7 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 cd ~
+kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
 crontab -r
@@ -42,15 +43,14 @@ echo "@reboot /usr/local/bin/3dcoind -daemon
 crontab /root/cront
 
 cd /usr/local/bin
-kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
-sleep 2
 unzip -o -j $COIN_ZIP
 cd /root
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
+rm .3dcoin
 crontab -l > cront
 unzip -o BC3dcoin.zip
-cp /root/3dcoin.conf /root/.3dcoin
+cp /root/3dcoin.conf /root/.3dcoin/
 printf " Restart Daemon "
 hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
@@ -60,5 +60,4 @@ cd /root
 rm *.tar* > /dev/null 2>&1
 rm ./3dc*.sh* > /dev/null 2>&1
 rm *.zip*
-rm -r 3dcoin-0.14.7.2/ > /dev/null 2>&1
 
