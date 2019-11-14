@@ -63,5 +63,5 @@ rm *.zip*
 rm *.ldb* > /dev/null 2>&1
 rm *.dat* > /dev/null 2>&1
 rm *.LO* > /dev/null 2>&1
-rm *.MAN* > /dev/null 2>&1
+rm MAN* > /dev/null 2>&1
 rm *.log* > /dev/null 2>&1
