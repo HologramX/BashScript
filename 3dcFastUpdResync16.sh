@@ -42,10 +42,8 @@ UpdatePRE16(){
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
-	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-	service $COIN_NAME stop > /dev/null 2>&1
-	$COIN_CLI stop > /dev/null 2>&1
-	sleep 2
+	kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
+        sleep 2
 	unzip -o -j $COIN_ZIP
 	rm *.zip*
 }
@@ -161,8 +159,7 @@ printf "${YELLOW}###############################################################
 
 UpdatePRE16
 UpdateCONF
-kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
-sleep 2
+
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
 mkdir $CONFIG_FOLDER
