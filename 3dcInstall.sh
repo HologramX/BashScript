@@ -145,17 +145,18 @@ yes |  apt-get remove postfix  -y
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
+}
+
+install_3dcoin_core_COMP(){
+
+echo ""
+cd /root
 latestrelease=$(curl --silent https://api.github.com/repos/BlockchainTechLLC/3dcoin/releases/latest | grep '"tag_name":' | sed -E 's/.*"([^"]+)".*/\1/')
 link="https://github.com/BlockchainTechLLC/3dcoin/archive/$latestrelease.tar.gz"
 wget $link
 tar -xvzf $latestrelease.tar.gz
 file=${latestrelease//[v]/3dcoin-}
 sleep 2
-}
-
-install_3dcoin_core_COMP(){
-
-echo ""
 echo  -e "${GREEN} Compile 3dcoin core .....                 ${STD}"
 cd $file
 ./autogen.sh && ./configure --disable-tests --disable-gui-tests --without-gui && make || { echo "Error: When Compiling 3Dcoin core" && exit;  }
@@ -234,8 +235,8 @@ cd ~
 crontab -r
 line="@reboot /usr/local/bin/3dcoind
 0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
 * * */2 * * /usr/local/bin/Masternode/clearlog.sh"
 echo "$line" | crontab -u root -
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
