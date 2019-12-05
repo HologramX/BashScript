@@ -78,7 +78,7 @@ cd ~
 git clone https://github.com/scribenetwork/sentinel.git && cd sentinel
 virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
-
+cd ~
 rm -r scribe-ubuntu-16.04-x64
 /usr/local/bin/scribed -daemon
 rm *.sh*
