@@ -72,7 +72,7 @@ cd ~
 mkdir /root/.scribecore
 echo "$config" > /root/.scribecore/scribe.conf
 crontab -l > /tmp/cron2fix 
-  echo "@reboot /usr/local/bin/scribed -daemon" /tmp/cron2fix" >>  /tmp/cron2fix
+  echo "@reboot /usr/local/bin/scribed -daemon"  >>  /tmp/cron2fix
   crontab /tmp/cron2fix 
 cd ~
 git clone https://github.com/scribenetwork/sentinel.git && cd sentinel
@@ -81,4 +81,4 @@ virtualenv ./venv
 cd ~
 rm -r scribe-ubuntu-16.04-x64
 /usr/local/bin/scribed -daemon
-rm *.sh*
+rm *.sh* 
