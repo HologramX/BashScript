@@ -73,6 +73,7 @@ mkdir /root/.scribecore
 echo "$config" > /root/.scribecore/scribe.conf
 crontab -l > /tmp/cron2fix 
   echo "@reboot /usr/local/bin/scribed -daemon"  >>  /tmp/cron2fix
+  echo "* * * * * cd /root/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >>  /tmp/cron2fix
   crontab /tmp/cron2fix 
 cd ~
 git clone https://github.com/scribenetwork/sentinel.git && cd sentinel
@@ -80,5 +81,6 @@ virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
 cd ~
 rm -r scribe-ubuntu-16.04-x64
+rm *.tar*
 /usr/local/bin/scribed -daemon
 rm *.sh* 
