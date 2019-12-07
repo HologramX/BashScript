@@ -81,12 +81,12 @@ cd ~
 apt-get -y -qq install python
 apt-get -y -qq install python-virtualenv
 apt-get install git -y -qq
-cd .absolute
+cd /root/.absolutecore
 git clone https://github.com/absolute-community/sentinel.git --q
-cd /root/.absolute/sentinel
+cd /root/.absolutecore/sentinel
 virtualenv ./venv
 ./venv/bin/pip install -r requirements.txt
-printf "absolute_conf=/root/.absolutecore/absolute.conf" >> "/root/.absolutecore/sentinel/sentinel.conf
+echo "absolute_conf=/root/.absolutecore/absolute.conf" >> /root/.absolutecore/sentinel/sentinel.conf
 cd ~
 rm -r absolutecore-0.12.2.5
 rm *.tar*
