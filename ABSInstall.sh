@@ -72,7 +72,7 @@ tar -xvzf absolutecore-0.12.2.5-x86_64-linux-gnu.tar.gz
 cp /root/absolutecore-0.12.2.5/bin/absolute* /usr/local/bin/
 cd ~
 mkdir /root/.absolutecore
-echo "$config" > /root/.absolutecore/absolutecore.conf
+echo "$config" > /root/.absolutecore/absolute.conf
 crontab -l > /tmp/cron2fix 
   echo "@reboot /usr/local/bin/absoluted -daemon"  >>  /tmp/cron2fix
   echo "* * * * * cd /root/.absolutecore/sentinel && ./venv/bin/python bin/sentinel.py >/dev/null 2>&1" >>  /tmp/cron2fix
