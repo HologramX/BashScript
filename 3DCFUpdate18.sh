@@ -88,6 +88,5 @@ echo ""
 rm *.tar*
 rm /root/.3dcoin/mncache.dat
 rm /root/.3dcoin/mnpayments.dat
-rm ./3dc*.sh* && reboot
 rm ./3DC*.sh* && reboot
 reboot
