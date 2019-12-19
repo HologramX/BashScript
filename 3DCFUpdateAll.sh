@@ -322,11 +322,12 @@ case $choice in
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
 esac
 UpdateCONF
+cp $CONFIG_FOLDER/$CONFIG_FILE .
 crontab -l > cront
-printf " Restart Daemon "
 hostname -f
-$COIN_PATH$COIN_DAEMON -daemon
-printf "ALL DONE..... "
+printf "ALL DONE..... Rebooting "
 echo ""
-rm *.tar* > /dev/null 2>&1
-rm ./3dc*.sh* > /dev/null 2>&1 
+rm *.tar*
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
+rm ./3dc*.sh* > /dev/null 2>&1  && reboot
