@@ -161,18 +161,6 @@ crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
 
-#crontab -l | grep "/run/sshd" >/dev/null 2>&1
-#if [[ $? -eq 0 ]]
-# then printf "\n        Crontab already SET"
-#  else crontab -l > /tmp/cron2fix 
-#  echo "@reboot mkdir /run/sshd" >> /tmp/cron2fix 
-#  echo "@reboot mkdir /run/fail2ban" >> /tmp/cron2fix 
-#  echo "@reboot service sshd start" >> /tmp/cron2fix
-#  echo "@reboot service fail2ban start" >> /tmp/cron2fix
-#  crontab /tmp/cron2fix 
-#  printf "\n        Crontab SET SUCCESFULL"
-# fi
-
 
 
 #printf "Would you reboot system?"
