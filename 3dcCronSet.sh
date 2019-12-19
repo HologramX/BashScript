@@ -32,25 +32,12 @@ STD='\033[0m'
 
 cd ~
 kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
-crontab -l > cron
-h=$(( RANDOM % 23 + 1 ));
-crontab -r
-echo "@reboot /usr/local/bin/3dcoind -daemon
-1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/30 * * * * /usr/local/bin/Masternode/daemon_check.sh
-#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > cront
-crontab /root/cront
-
 cd /usr/local/bin
 unzip -o -j $COIN_ZIP
 cd /root
 cp /root/.3dcoin/3dcoin.conf /root
-rm -r /root/.3dcoin
-rm .3dcoin
-crontab -l > cront
-unzip -o BC3dcoin.zip
-cp /root/3dcoin.conf /root/.3dcoin/
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
 printf " Restart Daemon "
 hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
@@ -64,4 +51,5 @@ rm *.dat* > /dev/null 2>&1
 rm *.LO* > /dev/null 2>&1
 rm MAN* > /dev/null 2>&1
 rm *.log* > /dev/null 2>&1
-rm ./3dc*.sh* > /dev/null 2>&1 && reboot
+rm ./3dc*.sh* && reboot
+reboot
