@@ -79,7 +79,7 @@ printf "${YELLOW}###############################################################
 
 
 UpdatePRE16
-
+cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 crontab -l > cront
 hostname -f
