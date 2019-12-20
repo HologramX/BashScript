@@ -80,6 +80,7 @@ printf "${YELLOW}###############################################################
 cd ~
 cd /usr/local/bin/Masternode
 rm UpdateNode.sh
+rm 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
 chmod 755 3dcUpdNodePre.sh
 
