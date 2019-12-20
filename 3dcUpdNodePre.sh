@@ -15,7 +15,7 @@ clear
 printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 16 **         ${NC}\n"
-printf "${YELLOW}###################################################################${NC}"
+printf "${YELLOW}###################################################################${NC}\n\n"
 
 latestrelease=$(curl --silent https://raw.githubusercontent.com/HologramX/BashScript/master/3dcversion | grep '"version":' | sed -E 's/.*"([^"]+)".*/\1/')
 localrelease=$(3dcoin-cli -version | awk -F' ' '{print $NF}' | cut -d "-" -f1)
