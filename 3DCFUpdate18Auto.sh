@@ -74,14 +74,16 @@ UpdatePRE18(){
 clear
 printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
-printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 16 **         ${NC}\n"
+printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 
 cd ~
 cd /usr/local/bin/Masternode
 rm UpdateNode.sh
-rm 3dcUpdNodePre.sh
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+rm 3dcUpdNodePre*
+#wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
+mv ./3dcUpdNodePre18.sh ./3dcUpdNodePre.sh
 chmod 755 3dcUpdNodePre.sh
 
 cd ~
@@ -98,10 +100,10 @@ echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD
 echo ""
 
 
-UpdatePRE16
+#UpdatePRE16
+#UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
-crontab -l > cront
 hostname -f
 printf "ALL DONE..... Rebooting "
 echo ""
