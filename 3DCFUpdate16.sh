@@ -77,25 +77,6 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 16 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 
-cd ~
-cd /usr/local/bin/Masternode
-rm UpdateNode.sh
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
-chmod 755 3dcUpdNodePre.sh
-
-cd ~
-crontab -l > cron
-h=$(( RANDOM % 23 + 1 ));
-crontab -r
-echo "@reboot /usr/local/bin/3dcoind -daemon
-#1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
-crontab /root/cront
-echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
-echo ""
-
 
 UpdatePRE16
 cd /root
