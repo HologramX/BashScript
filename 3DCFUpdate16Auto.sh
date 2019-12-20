@@ -118,7 +118,6 @@ hostname -f
 printf "ALL DONE..... "
 echo ""
 rm *.tar*
-dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
 apt-get -f -y install
 apt-get install perl -y
 apt-get --purge autoremove -y
