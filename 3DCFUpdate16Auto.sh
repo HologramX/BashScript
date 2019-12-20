@@ -105,9 +105,6 @@ echo ""
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 hostname -f
-printf "ALL DONE..... Rebooting "
+printf "ALL DONE..... "
 echo ""
-rm *.tar*
-rm /root/.3dcoin/mncache.dat
-rm /root/.3dcoin/mnpayments.dat
-rm ./3DC*.sh* && reboot
+
