@@ -53,6 +53,5 @@ sleep 10
 	kill -9 $(pgrep 3dcoind)
 	kill -9 $(pgrep 3dcoin-shutoff)
 	rm /root/.3dcoin/mncache.dat
-	rm /root/.3dcoin/mnpayments.dat
 reboot
 fi
