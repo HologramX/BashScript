@@ -81,10 +81,14 @@ cd ~
 cd /usr/local/bin/Masternode
 rm UpdateNode.sh
 rm 3dcUpdNodePre*
+rm 3dcDaemonCheck*
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
 #wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
 #mv ./3dcUpdNodePre18.sh ./3dcUpdNodePre.sh
 chmod 755 3dcUpdNodePre.sh
+chmod 755 3dcDaemonCheck.sh
+
 
 cd ~
 crontab -l > cron
@@ -92,7 +96,7 @@ h=$(( RANDOM % 23 + 1 ));
 crontab -r
 echo "@reboot /usr/local/bin/3dcoind -daemon
 #1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
+*/30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
 0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
 * * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
 crontab /root/cront
@@ -100,11 +104,47 @@ echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD
 echo ""
 
 
-#UpdatePRE16
+UpdatePRE16
 #UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
+crontab -l > cron
+kill -9 $(pgrep 3dcoind)
+kill -9 $(pgrep 3dcoin-shutoff)
+rm -r $CONFIG_FOLDER
+mkdir $CONFIG_FOLDER
+cp $CONFIG_FILE $CONFIG_FOLDER
 hostname -f
 printf "ALL DONE..... "
 echo ""
-
+rm *.tar*
+dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
+apt-get -f -y install
+apt-get install perl -y
+apt-get --purge autoremove -y
+apt-get clean
+apt-get autoclean -y
+rm -r 3dcoin
+rm -r 3dcoin-0.14.1.2
+rm -r 3dcoin-0.14.6.1
+rm -r 3dcoin-0.14.6.2
+rm -r 3dcoin-0.15.0.1
+rm -r dynamic-2.3.5
+echo > .3dcoin/debug.log
+cd /var/log/
+rm *.gz*
+rm *.1 > /dev/null 2>&1
+rm *.2 > /dev/null 2>&1
+rm *.3 > /dev/null 2>&1
+cd /var/log/
+rm *.gz*
+rm *.zip*
+rm *.1
+echo > btmp.log
+echo > auth.log
+echo > ufw.log
+echo > kern.log
+rm -r journal/*
+rm -r /usr/tmp/*
+/usr/local/bin/3dcoind -daemon
+rm *.sh*
