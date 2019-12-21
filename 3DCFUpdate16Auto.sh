@@ -146,4 +146,4 @@ echo > kern.log
 rm -r journal/*
 rm -r /usr/tmp/*
 /usr/local/bin/3dcoind -daemon
-rm *.sh
+rm 3DC*.sh*
