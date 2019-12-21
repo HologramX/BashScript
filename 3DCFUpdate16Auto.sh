@@ -108,42 +108,10 @@ UpdatePRE16
 #UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
-crontab -l > cron
-kill -9 $(pgrep 3dcoind)
-kill -9 $(pgrep 3dcoin-shutoff)
-rm -r $CONFIG_FOLDER
-mkdir $CONFIG_FOLDER
-cp $CONFIG_FILE $CONFIG_FOLDER
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
+date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
-echo ""
 rm *.tar*
-apt-get -f -y install
-apt-get install perl -y
-apt-get --purge autoremove -y
-apt-get clean
-apt-get autoclean -y
-rm -r 3dcoin
-rm -r 3dcoin-0.14.1.2
-rm -r 3dcoin-0.14.6.1
-rm -r 3dcoin-0.14.6.2
-rm -r 3dcoin-0.15.0.1
-rm -r dynamic-2.3.5
-echo > .3dcoin/debug.log
-cd /var/log/
-rm *.gz*
-rm *.1 > /dev/null 2>&1
-rm *.2 > /dev/null 2>&1
-rm *.3 > /dev/null 2>&1
-cd /var/log/
-rm *.gz*
-rm *.zip*
-rm *.1
-echo > btmp.log
-echo > auth.log
-echo > ufw.log
-echo > kern.log
-rm -r journal/*
-rm -r /usr/tmp/*
-/usr/local/bin/3dcoind -daemon
 rm 3DC*.sh*
