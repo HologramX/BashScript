@@ -84,8 +84,8 @@ rm 3dcUpdNodePre*
 rm 3dcDaemonCheck*
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
 chmod 755 3dcDaemonCheck.sh
-#wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
-#chmod 755 3dcUpdNodePre.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+chmod 755 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
 chmod 755 3dcUpdNodePre18.sh
 
