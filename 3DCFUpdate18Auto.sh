@@ -81,10 +81,13 @@ cd ~
 cd /usr/local/bin/Masternode
 rm UpdateNode.sh
 rm 3dcUpdNodePre*
+rm 3dcDaemonCheck*
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
+chmod 755 3dcDaemonCheck.sh
 #wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+#chmod 755 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
-mv ./3dcUpdNodePre18.sh ./3dcUpdNodePre.sh
-chmod 755 3dcUpdNodePre.sh
+chmod 755 3dcUpdNodePre18.sh
 
 cd ~
 crontab -l > cron
@@ -92,8 +95,9 @@ h=$(( RANDOM % 23 + 1 ));
 crontab -r
 echo "@reboot /usr/local/bin/3dcoind -daemon
 #1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
+*/30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
+#0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
+0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre18.sh
 * * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
 crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
@@ -104,6 +108,10 @@ echo ""
 #UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
+date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
-echo ""
+rm *.tar*
+rm 3DC*.sh*
