@@ -104,7 +104,7 @@ echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD
 echo ""
 
 
-UpdatePRE16
+#UpdatePRE16
 #UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
