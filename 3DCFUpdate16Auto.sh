@@ -82,13 +82,12 @@ cd /usr/local/bin/Masternode
 rm UpdateNode.sh
 rm 3dcUpdNodePre*
 rm 3dcDaemonCheck*
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
-#wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
-#mv ./3dcUpdNodePre18.sh ./3dcUpdNodePre.sh
-chmod 755 3dcUpdNodePre.sh
 chmod 755 3dcDaemonCheck.sh
-
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+chmod 755 3dcUpdNodePre.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
+chmod 755 3dcUpdNodePre18.sh
 
 cd ~
 crontab -l > cron
@@ -98,6 +97,7 @@ echo "@reboot /usr/local/bin/3dcoind -daemon
 #1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
 0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
+#0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre18.sh
 * * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
 crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
