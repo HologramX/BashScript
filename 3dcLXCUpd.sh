@@ -31,7 +31,7 @@ MAG='\e[1;35m'
 STD='\033[0m'
 
 #cd ~
-#kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
+kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 #cd /usr/local/bin
 #unzip -o -j $COIN_ZIP
 #cd /root
