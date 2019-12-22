@@ -51,3 +51,4 @@ cd
 rm *.tar* 
 rm *.zip*
 rm *.sh && reboot
+reboot
