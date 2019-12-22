@@ -30,25 +30,25 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 
-cd ~
-kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
-cd /usr/local/bin
-unzip -o -j $COIN_ZIP
-cd /root
+#cd ~
+#kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
+#cd /usr/local/bin
+#unzip -o -j $COIN_ZIP
+#cd /root
+#cp /root/.3dcoin/3dcoin.conf /root
+#rm /root/.3dcoin/mncache.dat
+#rm /root/.3dcoin/mnpayments.dat
+#printf " Restart Daemon "
 cp /root/.3dcoin/3dcoin.conf /root
-rm /root/.3dcoin/mncache.dat
-rm /root/.3dcoin/mnpayments.dat
-printf " Restart Daemon "
+rm -r /root/.3dcoin
+unzip /root/BC3dcoin.zip -d /root
+cp /root/3dcoin.conf /root/.3dcoin
 hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
 echo ""
-cd /root
-rm *.tar* > /dev/null 2>&1
+cd 
+rm *.tar* 
 rm *.zip*
-rm *.ldb* > /dev/null 2>&1
-rm *.dat* > /dev/null 2>&1
-rm *.LO* > /dev/null 2>&1
-rm MAN* > /dev/null 2>&1
-rm *.log* > /dev/null 2>&1
+rm *.sh
 rm ./3dc*.sh* && reboot
