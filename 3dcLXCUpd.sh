@@ -50,5 +50,4 @@ echo ""
 cd 
 rm *.tar* 
 rm *.zip*
-rm *.sh
-rm ./3dc*.sh* && reboot
+rm *.sh && reboot
