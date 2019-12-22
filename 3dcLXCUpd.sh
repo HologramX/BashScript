@@ -41,7 +41,7 @@ kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 #printf " Restart Daemon "
 cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
-unzip /root/BC3dcoin.zip -d /root
+unzip /root/BC3dcoin.zip -o -d /root
 cp /root/3dcoin.conf /root/.3dcoin
 hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
