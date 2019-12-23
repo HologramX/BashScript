@@ -39,7 +39,7 @@ kill -9 $(pgrep 3dcoind) > /dev/null 2>&1
 #rm /root/.3dcoin/mncache.dat
 #rm /root/.3dcoin/mnpayments.dat
 #printf " Restart Daemon "
-cp /root/.3dcoin/3dcoin.conf /root
+#cp /root/.3dcoin/3dcoin.conf /root
 rm -r /root/.3dcoin
 rm /root/.3dcoin
 unzip /root/BC3dcoin.zip -d /root
@@ -52,4 +52,3 @@ cd
 rm *.tar* 
 rm *.zip*
 rm *.sh && reboot
-reboot
