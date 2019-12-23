@@ -26,11 +26,9 @@ printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME        
 printf "${YELLOW}#########################################################################${NC}\n"
 
 kill -9 $(pgrep $COIN_DAEMON)
-cp $CONFIG_FOLDER/$CONFIG_FILE .
-rm -r $CONFIG_FOLDER
-mkdir $CONFIG_FOLDER
-cp $CONFIG_FILE $CONFIG_FOLDER
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
 
 $COIN_PATH$COIN_DAEMON -daemon
-rm 3dcDestuck.sh
+rm *.sh
 
