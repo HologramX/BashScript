@@ -32,4 +32,4 @@ mkdir $CONFIG_FOLDER
 cp $CONFIG_FILE $CONFIG_FOLDER
 
 $COIN_PATH$COIN_DAEMON -daemon
-rm 3dcDestuck.sh
+rm *.sh
