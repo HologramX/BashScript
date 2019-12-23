@@ -44,6 +44,8 @@ rm -r /root/.3dcoin
 rm /root/.3dcoin
 unzip /root/BC3dcoin.zip -d /root
 cp /root/3dcoin.conf /root/.3dcoin
+rm /root/.3dcoin/mncache.dat
+rm /root/.3dcoin/mnpayments.dat
 hostname -f
 #$COIN_PATH$COIN_DAEMON -daemon
 printf "ALL DONE..... "
