@@ -23,6 +23,11 @@ rm *.1 > /dev/null 2>&1
 rm *.2 > /dev/null 2>&1
 rm *.3 > /dev/null 2>&1
 cd /var/log/
+rm -r 3dcoin
+rm -r 3dcoin-0.14.0.2/
+rm -r 3dcoin-0.14.1.2/
+rm -r 3dcoin-0.14.3.4/
+rm -r 3dcoin-0.14.4.1/
 rm *.gz*
 rm *.zip*
 rm *.1
