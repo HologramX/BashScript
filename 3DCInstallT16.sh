@@ -147,6 +147,12 @@ chmod 755 UpdateNode.sh
 chmod 755 Check-scripts.sh
 chmod 755 Update-scripts.sh
 chmod 755 clearlog.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
+chmod 755 3dcDaemonCheck.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
+chmod 755 3dcUpdNodePre.sh
+wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
+chmod 755 3dcUpdNodePre18.sh
 
 cd ~
 crontab -l > cron
@@ -154,8 +160,8 @@ h=$(( RANDOM % 23 + 1 ));
 crontab -r
 echo "@reboot /usr/local/bin/3dcoind -daemon
 1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-#*/10 * * * * /usr/local/bin/Masternode/daemon_check.sh
-#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+*/30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
+0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
 * * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
 crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
