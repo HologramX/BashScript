@@ -9,7 +9,9 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 dpkg --list 'linux-image*'|awk '{ if ($1=="ii") print $2}'|grep -v `uname -r`
+yes | apt-get update
 apt-get -f -y install
+DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 apt-get install perl -y
 apt-get --purge autoremove -y
 apt-get clean
