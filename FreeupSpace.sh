@@ -30,4 +30,4 @@ echo > ufw.log
 echo > kern.log
 rm -r journal/*
 rm -r /usr/tmp/*
-rm *.sh*
+rm *.sh
