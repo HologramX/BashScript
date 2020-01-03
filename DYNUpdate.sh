@@ -18,11 +18,17 @@ yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 dynamic-cli stop
 sleep 5
+kill -9 $(pgrep dynamicd)
 wget https://github.com/duality-solutions/Dynamic/releases/download/v2.4.3.0/Dynamic-2.4.3.0-Linux-x64.tar.gz
 tar -xvzf Dynamic-2.4.3.0-Linux-x64.tar.gz
 cp /root/dynamic-2.4.3/bin/* /usr/local/bin/
 rm Dynamic*.gz*
 rm -r dynamic-2.4.0/
 rm -r dynamic-2.4.2/
+cp /root/.dynamic/dynamic.conf /root
+rm -r .dynamic
+mkdir /root/.dynamic
+cp /root/dynamic.conf /root/.dynamic
+
 /usr/local/bin/dynamicd -daemon
-rm *.sh*
+rm *.sh
