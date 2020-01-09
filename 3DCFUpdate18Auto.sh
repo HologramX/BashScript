@@ -46,6 +46,8 @@ UpdatePRE16(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP
 	rm *.zip*
 }
@@ -65,6 +67,8 @@ UpdatePRE18(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP18
 	rm *.zip*
 }
@@ -89,6 +93,7 @@ chmod 755 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
 chmod 755 3dcUpdNodePre18.sh
 apt-get install curl
+
 cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
@@ -114,4 +119,4 @@ date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
 rm *.tar*
-rm 3DC*.sh*
+rm 3DC*.sh && reboot
