@@ -88,7 +88,7 @@ wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre
 chmod 755 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
 chmod 755 3dcUpdNodePre18.sh
-
+apt-get install curl
 cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
@@ -105,7 +105,7 @@ echo ""
 
 
 #UpdatePRE16
-#UpdatePRE18
+UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm /root/.3dcoin/mncache.dat
