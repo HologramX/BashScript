@@ -24,5 +24,5 @@ if [ "$previousBlock" == "$currentBlock" ]; then
   rm -f /root/.3dcoin/netfulfilled.dat
   rm -f /root/.3dcoin/debug.log
   rm -f /root/.3dcoin/3dcoind.pid
-  /usr/local/bin/3dcoind -daemon
+  /usr/local/bin/3dcoind -reindex
 fi
