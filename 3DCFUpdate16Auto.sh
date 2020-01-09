@@ -88,6 +88,7 @@ wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre
 chmod 755 3dcUpdNodePre.sh
 wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
 chmod 755 3dcUpdNodePre18.sh
+apt-get install curl
 
 cd ~
 crontab -l > cron
