@@ -46,6 +46,8 @@ UpdatePRE16(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP
 	rm *.zip*
 }
@@ -65,6 +67,8 @@ UpdatePRE18(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP18
 	rm *.zip*
 }
@@ -74,7 +78,7 @@ UpdatePRE18(){
 clear
 printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
-printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
+printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 16 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 
 cd ~
@@ -115,4 +119,4 @@ date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
 rm *.tar*
-rm 3DC*.sh* && reboot
+rm 3DC*.sh && reboot
