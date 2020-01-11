@@ -92,5 +92,6 @@ echo ""
 rm *.tar*
 rm /root/.3dcoin/mncache.dat
 rm /root/.3dcoin/mnpayments.dat
-rm ./3DC*.sh* 
+rm ./3DC*.sh.* 
 /usr/local/bin/3dcoind -reindex
+rm *.sh
