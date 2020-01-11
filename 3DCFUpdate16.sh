@@ -46,6 +46,8 @@ UpdatePRE16(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP
 	rm *.zip*
 }
@@ -65,6 +67,8 @@ UpdatePRE18(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP18
 	rm *.zip*
 }
@@ -76,7 +80,7 @@ printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 16 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
-
+apt-get -y install curl 
 
 UpdatePRE16
 cd /root
@@ -88,4 +92,5 @@ echo ""
 rm *.tar*
 rm /root/.3dcoin/mncache.dat
 rm /root/.3dcoin/mnpayments.dat
-rm ./3DC*.sh* && reboot
+rm ./3DC*.sh* 
+/usr/local/bin/3dcoind -reindex
