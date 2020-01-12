@@ -30,57 +30,12 @@ NC='\033[0m'
 MAG='\e[1;35m'
 STD='\033[0m'
 	
-			
-UpdatePRE16(){
-	echo ""
-	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-	cd 
-	cd $COIN_PATH >/dev/null 2>&1
-	wget -q $COIN_TGZ
-	printf "\n        Downloaded Daemon" 
-	if [[ $? -ne 0 ]]; then
-	echo -e 'Error downloading node. Please contact support'
-	exit 1
-	fi
-	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-	service $COIN_NAME stop > /dev/null 2>&1
-	$COIN_CLI stop > /dev/null 2>&1
-	sleep 10
-	kill -9 $(pgrep 3dcoind)
-        kill -9 $(pgrep 3dcoin-shutoff)
-	unzip -o -j $COIN_ZIP
-	rm *.zip*
-}
-
-UpdatePRE18(){
-	echo ""
-	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-	cd 
-	cd $COIN_PATH >/dev/null 2>&1
-	wget -q $COIN_TGZ18
-	printf "\n        Downloaded Daemon" 
-	if [[ $? -ne 0 ]]; then
-	echo -e 'Error downloading node. Please contact support'
-	exit 1
-	fi	
-	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-	service $COIN_NAME stop > /dev/null 2>&1
-	$COIN_CLI stop > /dev/null 2>&1
-	sleep 10
-	kill -9 $(pgrep 3dcoind)
-  kill -9 $(pgrep 3dcoin-shutoff)
-	unzip -o -j $COIN_ZIP18
-	rm *.zip*
-}
-
-
 ##### Main #####
 clear
 printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
-
 cd ~
 cd /usr/local/bin/Masternode
 rm UpdateNode.sh
@@ -107,10 +62,24 @@ echo "@reboot /usr/local/bin/3dcoind -daemon
 crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
+echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
+cd 
+cd $COIN_PATH >/dev/null 2>&1
+#wget -q $COIN_TGZ
+#printf "\n        Downloaded Daemon" 
+#if [[ $? -ne 0 ]]; then
+#echo -e 'Error downloading node. Please contact support'
+#exit 1
+#fi
+$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
+service $COIN_NAME stop > /dev/null 2>&1
+$COIN_CLI stop > /dev/null 2>&1
+sleep 10
+kill -9 $(pgrep 3dcoind)
+kill -9 $(pgrep 3dcoin-shutoff)
+unzip -o -j $COIN_ZIP
+rm *.zip*
 
-
-#UpdatePRE16
-UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm /root/.3dcoin/mncache.dat
