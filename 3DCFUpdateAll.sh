@@ -45,33 +45,13 @@ printf "${YELLOW}###############################################################
 	echo   ""
 	echo "1. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for Ubuntu16"
 	echo "2. FAST Update ONLY DAEMON WITH PRECOMPILED Daemon for **Ubuntu18** "	
-	echo "3. FAST Update WITH PRECOMPILED Daemon and RESINK for Ubuntu16"
-	echo "4. FAST Update WITH PRECOMPILED Daemon and RESINK for **Ubuntu18** "	
+	echo "3. FAST Update WITH PRECOMPILED Daemon and RESYNC for Ubuntu16"
+	echo "4. FAST Update WITH PRECOMPILED Daemon and RESYNC for **Ubuntu18** "	
 	echo "0. Exit"
 	echo ""
 
 }
 
-
-SystemdRemove() {
-printf "\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-printf "${GREEN}                     Systemd Service REMOVE  $COIN_NAME                               ${NC}\n"
-printf "${YELLOW}#########################################################################${NC}\n"
-sleep 2
-systemctl stop 3dcoin
-systemctl stop fire
-systemctl stop mydaemon
-systemctl stop tame
-systemctl stop max
-systemctl disable 3dcoin
-systemctl disable fire
-systemctl disable mydaemon
-systemctl disable tame
-systemctl disable max
-systemctl daemon-reload
-
-}
 
 PrepUpdate(){
 
@@ -136,7 +116,6 @@ UpdateCOMP(){
 			echo ""
 }
 			
-			
 UpdatePRE16(){
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
@@ -152,6 +131,8 @@ UpdatePRE16(){
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+  	kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP
 	rm *.zip*
 }
@@ -166,15 +147,17 @@ UpdatePRE18(){
 	if [[ $? -ne 0 ]]; then
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
-	fi
-	
+	fi	
 	$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
 	service $COIN_NAME stop > /dev/null 2>&1
 	$COIN_CLI stop > /dev/null 2>&1
 	sleep 10
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j $COIN_ZIP18
 	rm *.zip*
 }
+
 
 UpdateCONF(){
 			h=$(( RANDOM % 23 + 1 ));
@@ -295,8 +278,6 @@ case $choice in
 		#SystemdRemove
 		#PrepUpdate
 		UpdatePRE16
-		kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
-		sleep 2
 		cp $CONFIG_FOLDER/$CONFIG_FILE .
 		rm -r $CONFIG_FOLDER
 		mkdir $CONFIG_FOLDER
@@ -308,15 +289,14 @@ case $choice in
 		#SystemdRemove
 		#PrepUpdate	
 		UpdatePRE18
-		kill -9 $(pgrep $COIN_DAEMON) > /dev/null 2>&1
-		sleep 2
 		cp $CONFIG_FOLDER/$CONFIG_FILE .
 		rm -r $CONFIG_FOLDER
 		mkdir $CONFIG_FOLDER
 		cp $CONFIG_FILE $CONFIG_FOLDER
 		echo "";;
 		
-	0) 	rm 3dc*.sh* > /dev/null 2>&1
+	0) 	rm 3dc*.sh.* > /dev/null 2>&1
+		rm 3dc*.sh* > /dev/null 2>&1
 		exit 0;;
 
 	*) 	echo -e "${RED}Invalid option...${STD}" && sleep 2
@@ -330,5 +310,6 @@ echo ""
 rm *.tar*
 rm /root/.3dcoin/mncache.dat
 rm /root/.3dcoin/mnpayments.dat
-rm ./3DC*.sh* && reboot
+rm ./3DC*.sh.*
+rm ./3DC*.sh && reboot
 reboot
