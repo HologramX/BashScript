@@ -7,7 +7,7 @@
 #
 # Setup crown server or update existing one
 
-LATEST_RELEASE="0.13.2.0"
+LATEST_RELEASE="0.13.4.0"
 dir=/tmp
 systemnode=false
 masternode=false
