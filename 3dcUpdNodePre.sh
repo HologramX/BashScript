@@ -34,8 +34,6 @@ echo "[$dt]    ==============================================================" >
 cd ~
 3dcoin-cli stop
 sleep 10
-kill -9 $(pgrep 3dcoind)
-kill -9 $(pgrep 3dcoin-shutoff)
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 	cd 
@@ -46,14 +44,13 @@ kill -9 $(pgrep 3dcoin-shutoff)
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
+	kill -9 $(pgrep 3dcoind)
+	kill -9 $(pgrep 3dcoin-shutoff)	
 	unzip -o -j 3dcoin_latest.zip
 	rm *.zip*
 	cd /root
 	printf "ALL DONE..... Rebooting "
 	echo ""
-	rm *.tar*
-	kill -9 $(pgrep 3dcoind)
-	kill -9 $(pgrep 3dcoin-shutoff)
 	rm /root/.3dcoin/mncache.dat
 	rm /root/.3dcoin/mnpayments.dat
 reboot
