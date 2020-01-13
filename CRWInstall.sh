@@ -49,24 +49,24 @@ install_dependencies() {
     sudo apt-get install curl ufw unzip -y
 }
 
-create_swap() {
-    if [ `sudo swapon | wc -l` -lt 2 ]; then
-        sudo mkdir -p /var/cache/swap/   
-        sudo dd if=/dev/zero of=/var/cache/swap/myswap bs=1M count=1024
-        sudo chmod 600 /var/cache/swap/myswap
-        sudo mkswap /var/cache/swap/myswap
-        sudo swapon /var/cache/swap/myswap
-        swap_line='/var/cache/swap/myswap   none    swap    sw  0   0'
-        # Add the line only once 
-        sudo grep -q -F "$swap_line" /etc/fstab || echo "$swap_line" | sudo tee --append /etc/fstab > /dev/null
-        cat /etc/fstab
-    fi
-}
+#create_swap() {
+#    if [ `sudo swapon | wc -l` -lt 2 ]; then
+#        sudo mkdir -p /var/cache/swap/   
+#        sudo dd if=/dev/zero of=/var/cache/swap/myswap bs=1M count=1024
+#        sudo chmod 600 /var/cache/swap/myswap
+#        sudo mkswap /var/cache/swap/myswap
+#        sudo swapon /var/cache/swap/myswap
+#        swap_line='/var/cache/swap/myswap   none    swap    sw  0   0'
+#        # Add the line only once 
+#        sudo grep -q -F "$swap_line" /etc/fstab || echo "$swap_line" | sudo tee --append /etc/fstab > /dev/null
+#        cat /etc/fstab
+#    fi
+#}
 
-update_repos() {
-    sudo apt-get update
-    sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-}
+#update_repos() {
+#    sudo apt-get update
+#    sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
+#}
 
 download_package() {
     # Create temporary directory
@@ -77,7 +77,7 @@ download_package() {
        BITS=64
     fi
     # Change this later to take latest release version.
-    wget "https://github.com/Crowndev/crowncoin/releases/download/v0.13.2.0/Crown-$LATEST_RELEASE-Linux64.zip" -O $dir/crown.zip
+    wget "https://github.com/Crowndev/crowncoin/releases/download/v0.13.4.0/Crown-$LATEST_RELEASE-Linux64.zip" -O $dir/crown.zip
 }
 
 install_package() {
@@ -136,7 +136,7 @@ main() {
     # (Quietly) Stop crownd (in case it's running)
     /usr/local/bin/crown-cli stop 2>/dev/null
     # Update Repos
-    update_repos
+    #update_repos
     # Install dependencies
     install_dependencies
     # Download the latest release
@@ -146,7 +146,7 @@ main() {
 
     if [ "$install" = true ] ; then
         # Create swap to help with sync
-        create_swap
+        #create_swap
         # Create folder structures and configure crown.conf
         configure_conf
         # Configure firewall
