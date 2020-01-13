@@ -38,28 +38,29 @@ printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 cd ~
 cd /usr/local/bin/Masternode
-rm UpdateNode.sh
-rm 3dcUpdNodePre*
-rm 3dcDaemonCheck*
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcDaemonCheck.sh
-chmod 755 3dcDaemonCheck.sh
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre.sh
-chmod 755 3dcUpdNodePre.sh
-wget https://raw.githubusercontent.com/HologramX/BashScript/master/3dcUpdNodePre18.sh
-chmod 755 3dcUpdNodePre18.sh
-apt-get install curl
-
+rm -f *
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
+wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
+chmod 755 daemon_check.sh
+chmod 755 UpdateNode.sh
+chmod 755 Check-scripts.sh
+chmod 755 Update-scripts.sh
+chmod 755 clearlog.sh
 cd ~
-crontab -l > cron
+crontab -l >> cron
 h=$(( RANDOM % 23 + 1 ));
 crontab -r
-echo "@reboot /usr/local/bin/3dcoind -reindex
-#1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-*/30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
-#0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
-0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre18.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
-crontab /root/cront
+line="@reboot /usr/local/bin/3dcoind -daemon
+0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
+*/30 * * * * /usr/local/bin/Masternode/daemon_check.sh
+#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
+* * */2 * * /usr/local/bin/Masternode/clearlog.sh"
+echo "$line" | crontab -u root -
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
 echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
