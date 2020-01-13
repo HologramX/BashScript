@@ -34,6 +34,8 @@ echo "[$dt]    ==============================================================" >
 cd ~
 3dcoin-cli stop
 sleep 10
+kill -9 $(pgrep 3dcoind)
+kill -9 $(pgrep 3dcoin-shutoff)
 	echo ""
 	echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
 	cd 
