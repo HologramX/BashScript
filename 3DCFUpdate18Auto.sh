@@ -98,7 +98,7 @@ cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
 crontab -r
-echo "@reboot /usr/local/bin/3dcoind -daemon
+echo "@reboot /usr/local/bin/3dcoind -reindex
 #1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
 #0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
