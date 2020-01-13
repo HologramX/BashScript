@@ -32,3 +32,4 @@ rm -r journal/*
 rm -r /usr/tmp/*
 rm *.sh.*
 rm *.sh
+rm Free*.sh
