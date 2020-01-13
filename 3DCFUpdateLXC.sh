@@ -31,7 +31,9 @@ MAG='\e[1;35m'
 STD='\033[0m'
 	
 ##### Main #####
-clear
+printf "\n"
+printf "\n"
+printf "\n"
 printf "\n"
 printf "${YELLOW}#################################################################${NC}\n"
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
