@@ -44,14 +44,13 @@ sleep 10
 	echo -e 'Error downloading node. Please contact support'
 	exit 1
 	fi
+	kill -9 $(pgrep 3dcoind)
+        kill -9 $(pgrep 3dcoin-shutoff)
 	unzip -o -j 3dcoin_latest18.zip
 	rm *.zip*
 	cd /root
 	printf "ALL DONE..... Rebooting "
 	echo ""
-	rm *.tar*
-	kill -9 $(pgrep 3dcoind)
-	kill -9 $(pgrep 3dcoin-shutoff)
 	rm /root/.3dcoin/mncache.dat
 	rm /root/.3dcoin/mnpayments.dat
 reboot
