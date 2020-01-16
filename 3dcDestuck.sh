@@ -26,9 +26,10 @@ printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME        
 printf "${YELLOW}#########################################################################${NC}\n"
 
 kill -9 $(pgrep $COIN_DAEMON)
-rm /root/.3dcoin/mncache.dat
-rm /root/.3dcoin/mnpayments.dat
-
+cd /root
+cp /root/.3dcoin/3dcoin.conf /root/3dcoin.conf 
+rm -r /root/.3dcoin
+mkdir /root/.3dcoin
+cp /root/3dcoin.conf /root/.3dcoin/3dcoin.conf 
 $COIN_PATH$COIN_DAEMON -daemon
 rm *.sh
-
