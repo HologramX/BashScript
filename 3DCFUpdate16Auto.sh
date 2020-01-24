@@ -113,8 +113,14 @@ UpdatePRE16
 #UpdatePRE18
 cd /root
 cp $CONFIG_FOLDER/$CONFIG_FILE .
-rm /root/.3dcoin/mncache.dat
-rm /root/.3dcoin/mnpayments.dat
+
+rm -r $CONFIG_FOLDER
+mkdir $CONFIG_FOLDER
+cp /root/$CONFIG_FILE $CONFIG_FOLDER/$CONFIG_FILE 
+
+#rm /root/.3dcoin/mncache.dat
+#rm /root/.3dcoin/mnpayments.dat
+
 date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
