@@ -128,3 +128,4 @@ printf "ALL DONE..... "
 rm *.tar*
 rm 3DC*.sh
 /usr/local/bin/3dcoind -daemon
+
