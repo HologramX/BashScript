@@ -126,4 +126,5 @@ date > /root/.3dcoin/debug.log
 hostname -f
 printf "ALL DONE..... "
 rm *.tar*
-rm 3DC*.sh && reboot
+rm 3DC*.sh
+/usr/local/bin/3dcoind -daemon
