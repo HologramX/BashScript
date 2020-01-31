@@ -34,8 +34,7 @@ PWD=/root
 
 currentBlock=$(3dcoin-cli masternode count)
 
-if [ "$currentBlock" != 0 ]; then
-  exit
+if [ "$currentBlock" != 0 ] then exit
 
 kill -9 $(pgrep $COIN_DAEMON)
 cd /root
