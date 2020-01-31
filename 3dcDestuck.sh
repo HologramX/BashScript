@@ -24,6 +24,18 @@ printf "\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
+#!/bin/bash
+HOME=/root
+LOGNAME=root
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+LANG=en_US.UTF-8
+SHELL=/bin/sh
+PWD=/root
+
+currentBlock=$(3dcoin-cli masternode count)
+
+if [ "$currentBlock" != 0 ]; then
+  exit
 
 kill -9 $(pgrep $COIN_DAEMON)
 cd /root
