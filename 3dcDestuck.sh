@@ -32,11 +32,6 @@ LANG=en_US.UTF-8
 SHELL=/bin/sh
 PWD=/root
 
-currentBlock=$(3dcoin-cli masternode count)
-
-if [ "$currentBlock" != 0 ]; then
-exit
-fi
 kill -9 $(pgrep $COIN_DAEMON)
 cd /root
 cp /root/.3dcoin/3dcoin.conf /root/3dcoin.conf 
