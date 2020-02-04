@@ -50,9 +50,17 @@ yes |  apt-get autoclean -y
 cd ~
 ufw allow 33300/tcp 
 ufw allow 9999/tcp 
-wget https://github.com/duality-solutions/Dynamic/releases/download/v2.4.3.0/Dynamic-2.4.3.0-Linux-x64.tar.gz
-tar -xvzf Dynamic-2.4.3.0-Linux-x64.tar.gz
-cp /root/dynamic-2.4.3/bin/* /usr/local/bin/
+kill -9 $(pgrep dynamicd)
+kill -9 $(pgrep dynamic-shutoff)
+wget https://github.com/duality-solutions/Dynamic/releases/download/v2.4.4.0/Dynamic-2.4.4.0-Linux-x64.tar.gz
+tar -xvzf Dynamic-2.4.4.0-Linux-x64.tar.gz
+cp /root/dynamic-2.4.4/bin/* /usr/local/bin/
+rm Dynamic*.gz*
+rm -r dynamic-2.4.0/
+rm -r dynamic-2.4.1/
+rm -r dynamic-2.4.2/
+rm -r dynamic-2.4.3/
+rm -r dynamic-2.4.4/
 cd ~
 mkdir /root/.dynamic
 echo "$config" > /root/.dynamic/dynamic.conf
