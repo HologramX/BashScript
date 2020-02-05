@@ -52,6 +52,5 @@ sleep 10
 	printf "ALL DONE..... Rebooting "
 	echo ""
 	rm /root/.3dcoin/mncache.dat
-	rm /root/.3dcoin/mnpayments.dat
 reboot
 fi
