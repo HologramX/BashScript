@@ -30,4 +30,5 @@ cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
 unzip -o BC3dcoin.zip 
 cp $CONFIG_FILE $CONFIG_FOLDER
+rm *.zip
 rm *.sh && reboot
