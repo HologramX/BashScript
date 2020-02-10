@@ -28,8 +28,6 @@ printf "${YELLOW}###############################################################
 kill -9 $(pgrep $COIN_DAEMON)
 cp $CONFIG_FOLDER/$CONFIG_FILE .
 rm -r $CONFIG_FOLDER
-mkdir $CONFIG_FOLDER
+unzip -o BC3dcoin.zip 
 cp $CONFIG_FILE $CONFIG_FOLDER
-
-$COIN_PATH$COIN_DAEMON -daemon
-rm *.sh
+rm *.sh && reboot
