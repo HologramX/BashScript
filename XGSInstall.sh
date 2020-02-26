@@ -11,7 +11,16 @@ GREEN="\033[0;32m"
 NC="\033[0m"
 MAG="\e[1;35m"
 STD="\033[0m"
-
+echo ""
+echo "*******************************"
+echo "*                             *"
+echo "*       XGS Masternode        *"
+echo "*           SETUP             *"
+echo "*                             *"
+echo "*                             *"
+echo "*******************************"
+echo ""
+echo ""
 unset pv
 while [ -z ${pv} ]; do
 read -p "Please Enter GenesisX Masternode Private key: " pv
