@@ -83,15 +83,17 @@ yes | add-apt-repository ppa:bitcoin/bitcoin
 yes | apt-get install libdb4.8-dev libdb4.8++-dev 
 yes | apt-get install libpthread-stubs0-dev 
 yes | apt-get install libzmq3-dev 
-yes | apt install make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev libboost-chrono-dev libboost-filesystem-dev \
-libboost-program-options-dev libboost-system-dev libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev \
-bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev libdb5.3++ unzip libzmq5
+yes | apt install make build-essential libtool software-properties-common autoconf libssl-dev libboost-dev
+yes | apt install libboost-chrono-dev libboost-filesystem-dev libboost-program-options-dev libboost-system-dev
+yes | apt install libboost-test-dev libboost-thread-dev sudo automake git curl libdb4.8-dev
+yes | apt install bsdmainutils libdb4.8++-dev libminiupnpc-dev libgmp3-dev ufw pkg-config libevent-dev
+yes | apt install libdb5.3++ unzip libzmq5
 yes | apt-get install -y ufw
-yes | ufw allow ssh/tcp
-yes | ufw limit ssh/tcp
-yes | ufw allow 5555/tcp
-yes | ufw logging on
-yes | ufw enable
+ufw allow ssh/tcp
+ufw limit ssh/tcp
+ufw allow 5555/tcp
+ufw logging on
+ufw enable
 
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
@@ -103,9 +105,6 @@ yes |  apt-get remove postfix  -y
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 yes |  apt-get install python-virtualenv
-apt-get install pwgen  -y -qq
-apt-get install tmux  -y -qq
-apt-get install libevent-pthreads-2.0-5 -y -qq
 cd ~
 kill -9 $(pgrep genesisxd)
 kill -9 $(pgrep genesisxd-shutoff)
