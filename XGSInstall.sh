@@ -45,8 +45,8 @@ config="#----
 rpcuser=$rpcUserName
 rpcpassword=$rpcPassword
 rpcallowip=127.0.0.1
-rpcport=18889
-port=18888
+rpcport=5556
+port=5555
 #----
 listen=1
 server=1
@@ -93,7 +93,7 @@ ufw allow ssh/tcp
 ufw limit ssh/tcp
 ufw allow 5555/tcp
 ufw logging on
-ufw enable
+yes | ufw enable
 
 yes |  apt-get remove apache2 -y
 yes |  apt-get remove apache2  -y
