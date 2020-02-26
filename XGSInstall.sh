@@ -23,20 +23,21 @@ echo ""
 echo ""
 unset pv
 while [ -z ${pv} ]; do
-read -p "Please Enter GenesisX Masternode Private key: " pv
+read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
 echo ""
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
 if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  external_ip_line="externalip=${nodeIpAddress}:5555"
+  {
+  external_ip_line="externalip=${nodeIpAddress}"
+  bind_line="bind=${nodeIpAddress}:5555"
+  }
 else
-  external_ip_line="#externalip=external_IP_goes_here:5555"
-fi
-if [[ ${nodeIpAddress} =~ ^[0-9]+.[0-9]+.[0-9]+.[0-9]+$ ]]; then
-  bind_line="masternodeaddr=${nodeIpAddress}:5555"
-else
-  external_ip_line="#masternodeaddr=external_IP_goes_here:5555"
+  {
+  external_ip_line="#externalip=external_IP_goes_here"
+  bind_line="bind=${nodeIpAddress}:5555"
+  }
 fi
 
 rpcUserName=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 12 ; echo '')
