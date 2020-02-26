@@ -1,6 +1,5 @@
 #!/bin/bash
-EDITOR=vim
-COIN_NAME="scribe"
+COIN_NAME="GenesisX"
 TMP_FOLDER="/tmp"
 BLUE="\033[0;34m"
 YELLOW="\033[0;33m"
