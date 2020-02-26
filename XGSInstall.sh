@@ -21,7 +21,7 @@ echo "*                             *"
 echo "*******************************"
 echo ""
 echo ""
-genesis-cli stop > /dev/null 2>&1
+genesis-cli stop >/dev/null 2>&1
 unset pv
 while [ -z ${pv} ]; do
 read -p "Please Enter GenesisX Masternode Private key: " pv
