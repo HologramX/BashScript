@@ -120,7 +120,6 @@ crontab -l > /tmp/cron2fix
   echo "@reboot /usr/local/bin/genesisxd -daemon"  >>  /tmp/cron2fix
   crontab /tmp/cron2fix
 cd ~
-rm -r genesisx-linux.zip
-rm *.tar*
+rm genesisx-linux.zip
 /usr/local/bin/genesisxd -daemon
 rm *.sh*
