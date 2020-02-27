@@ -110,7 +110,8 @@ kill -9 $(pgrep genesisxd)
 kill -9 $(pgrep genesisxd-shutoff)
 
 wget -q https://github.com/genesis-x/genesis-x/files/2799605/genesisx-linux.zip
-tar --overwrite -C /usr/local/bin/ -zxf .\genesisx-linux.zip
+unzip -o -j genesisx-linux.zip -d /usr/local/bin
+chmod 755 /usr/local/bin/genesis* 
 
 cd ~
 mkdir /root/.genesisx
