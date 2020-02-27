@@ -79,6 +79,5 @@ crontab -l > /tmp/cron2fix
   crontab /tmp/cron2fix 
 cd ~
 rm genesisx-linux.zip
-rm *.tar*
 /usr/local/bin/genesisxd -daemon
 rm *.sh*
