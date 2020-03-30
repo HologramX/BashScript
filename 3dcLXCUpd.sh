@@ -53,4 +53,5 @@ echo ""
 cd 
 rm *.tar* 
 rm *.zip*
-rm *.sh && reboot
+rm *.sh 
+3dcoind -daemon
