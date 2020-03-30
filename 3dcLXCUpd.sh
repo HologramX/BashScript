@@ -54,4 +54,4 @@ cd
 rm *.tar* 
 rm *.zip*
 rm *.sh 
-3dcoind -daemon
+/usr/local/bin/3dcoind -daemon
