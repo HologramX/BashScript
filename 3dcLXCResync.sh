@@ -25,10 +25,15 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
-kill -9 $(pgrep $COIN_DAEMON)
-cp $CONFIG_FOLDER/$CONFIG_FILE .
-rm -r $CONFIG_FOLDER
-unzip -o BC3dcoin.zip 
-cp $CONFIG_FILE $CONFIG_FOLDER
-rm *.zip
+kill -9 $(pgrep 3dcoind)
+kill -9 $(pgrep 3dcoin-shutoff)
+
+#kill -9 $(pgrep $COIN_DAEMON)
+#cp $CONFIG_FOLDER/$CONFIG_FILE .
+#rm -r $CONFIG_FOLDER
+#unzip -o BC3dcoin.zip 
+#cp $CONFIG_FILE $CONFIG_FOLDER
+#rm *.zip
+rm -f /root/.3dcoin/nnpayments.dat
+rm -f /root/.3dcoin/mncache.dat
 rm *.sh && reboot
