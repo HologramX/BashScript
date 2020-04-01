@@ -25,6 +25,8 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}                     $COIN DESTUCK by RESYNK  $COIN_NAME                               ${NC}\n"
 printf "${YELLOW}#########################################################################${NC}\n"
 
+/usr/local/bin/3dcoin-cli stop
+sleep 30
 kill -9 $(pgrep 3dcoind)
 kill -9 $(pgrep 3dcoin-shutoff)
 
