@@ -38,6 +38,4 @@ kill -9 $(pgrep 3dcoin-shutoff)
 #rm *.zip
 rm -f /root/.3dcoin/nnpayments.dat
 rm -f /root/.3dcoin/mncache.dat
-3dcoind -daemon
-rm *.sh
-#rm *.sh && reboot
+rm *.sh && reboot
