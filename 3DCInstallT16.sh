@@ -38,6 +38,7 @@ while [ -z ${pv} ]; do
 read -p "Please Enter Masternode Private key: " pv
 done
 echo ""
+apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
 yes | apt-get install dnsutils
 nodeIpAddress=`dig +short myip.opendns.com @resolver1.opendns.com`
