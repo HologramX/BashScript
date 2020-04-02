@@ -73,12 +73,12 @@ echo  -e "${GREEN} Install packages.....                     ${STD}"
 #DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 yes | apt-get install git unzip pv nano htop
 echo ""
-echo  -e "${GREEN} Firewall setup.....              ${STD}"
- ufw allow ssh/tcp
- ufw limit ssh/tcp 
- ufw allow 6695/tcp
- ufw logging on 
-yes |  ufw enable 
+#echo  -e "${GREEN} Firewall setup.....              ${STD}"
+# ufw allow ssh/tcp
+# ufw limit ssh/tcp 
+# ufw allow 6695/tcp
+# ufw logging on 
+#yes |  ufw enable 
 echo ""
 rm -rf /usr/local/bin/Masternode
 yes |  apt-get update
