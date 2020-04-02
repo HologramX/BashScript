@@ -71,7 +71,7 @@ echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 #DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
-yes | apt-get install git unzip pv nano htop ufw
+yes | apt-get install git unzip pv nano htop
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw allow ssh/tcp
@@ -90,18 +90,17 @@ yes |  apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" install libdb4.8-dev libdb4.8++-dev
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
-yes | apt-get install fail2ban
 sleep 2
 yes |  apt-get autoremove -y
 yes |  apt-get autoclean -y
 cd ~
 
-echo ""
-fallocate -l 1G /swapfile
-chmod 600 /swapfile
-mkswap /swapfile 
-swapon /swapfile
-echo "/swapfile none swap sw 0 0" >> /etc/fstab
+#echo ""
+#fallocate -l 1G /swapfile
+#chmod 600 /swapfile
+#mkswap /swapfile 
+#swapon /swapfile
+#echo "/swapfile none swap sw 0 0" >> /etc/fstab
 
 echo -e "${GREEN}Downloading and Installing VPS $3dcoin Daemon${NC}"
 cd /usr/local/bin/ >/dev/null 2>&1
