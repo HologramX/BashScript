@@ -84,11 +84,15 @@ echo ""
 rm -rf /usr/local/bin/Masternode
 yes |  apt-get update
 yes |  apt-get install build-essential libtool autotools-dev autoconf automake autogen pkg-config libgtk-3-dev libssl-dev libevent-dev bsdmainutils
+echo "2"
 yes |  apt-get install libboost-system-dev libboost-filesystem-dev libboost-chrono-dev libboost-program-options-dev libboost-test-dev libboost-thread-dev
+echo "3"
 yes |  apt-get install software-properties-common
+echo "4"
 yes |  add-apt-repository ppa:bitcoin/bitcoin
 yes |  apt-get update
 yes |  apt-get install libdb4.8-dev libdb4.8++-dev
+echo "5"
 yes |  apt-get install libminiupnpc-dev
 yes |  apt-get install libzmq3-dev
 sleep 2
