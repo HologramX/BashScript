@@ -112,7 +112,8 @@ echo ""
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 yes | apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" upgrade
-yes | apt-get install curl fail2ban ufw python virtualenv git unzip pv nano htop libwww-perl
+#yes | apt-get install curl fail2ban ufw python virtualenv git unzip pv nano htop libwww-perl
+yes | apt-get install curl python virtualenv git unzip pv nano htop libwww-perl
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw allow ssh/tcp
