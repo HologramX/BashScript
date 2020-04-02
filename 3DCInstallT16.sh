@@ -113,6 +113,7 @@ exit 1
 fi
 unzip -j -o /usr/local/bin/3dcoin_latest.zip
 rm   /usr/local/bin/3dcoin_latest.zip
+cp /usr/local/bin/3dcoind /usr/local/bin/mydaemon
 mkdir /root/.3dcoin
 echo "$config" > /root/.3dcoin/3dcoin.conf
 echo "#---
@@ -158,7 +159,7 @@ cd ~
 crontab -l > cron
 h=$(( RANDOM % 23 + 1 ));
 crontab -r
-echo "@reboot /usr/local/bin/3dcoind -daemon
+echo "@reboot /usr/local/bin/mydaemon -daemon
 1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
 0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
