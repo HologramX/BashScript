@@ -71,7 +71,7 @@ echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
 echo  -e "${GREEN} Install packages.....                     ${STD}"
 #DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
-yes | apt-get install python virtualenv git unzip pv nano htop ufw
+yes | apt-get install git unzip pv nano htop ufw
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw allow ssh/tcp
