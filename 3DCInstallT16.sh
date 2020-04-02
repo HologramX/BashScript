@@ -70,7 +70,7 @@ echo ""
 echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
 sleep 1
 echo  -e "${GREEN} Install packages.....                     ${STD}"
-DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+#DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
 yes | apt-get install python virtualenv git unzip pv nano htop ufw
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
@@ -163,12 +163,14 @@ echo "@reboot /usr/local/bin/mydaemon -daemon
 1 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
 */30 * * * * /usr/local/bin/Masternode/3dcDaemonCheck.sh
 0 $h * * * /usr/local/bin/Masternode/3dcUpdNodePre.sh
-* * */7 * * /usr/local/bin/Masternode/clearlog.sh" > /root/cront
+* * */7 * * /usr/local/bin/Masternode/clearlog.sh
+@reboot mkdir /run/sshd
+@reboot mkdir /run/fail2ban
+@reboot service ssh restart
+@reboot service fail2ban restart" > /root/cront
 crontab /root/cront
 echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
 echo ""
-
-
 
 #printf "Would you reboot system?"
 #echo ""
