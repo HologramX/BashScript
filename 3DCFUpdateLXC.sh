@@ -108,5 +108,5 @@ addnode=159.65.90.101
 addnode=128.199.218.139
 addnode=174.138.3.33
 addnode=159.203.167.75
-addnode=138.68.102.67" >> .3dcoin\3dcoin.conf
+addnode=138.68.102.67" >> .3dcoin/3dcoin.conf
 rm *.sh
