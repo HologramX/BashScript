@@ -39,56 +39,74 @@ printf "${YELLOW}###############################################################
 printf "${GREEN}            3DC FAST UPDATE  ** UBUNTU 18 **         ${NC}\n"
 printf "${YELLOW}###################################################################${NC}"
 cd ~
-cd /usr/local/bin/Masternode
-rm -f *
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Check-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Update-scripts.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/UpdateNode.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/clearlog.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/daemon_check.sh
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/Version
-wget https://raw.githubusercontent.com/BlockchainTechLLC/masternode/master/Masternode/blockcount
-chmod 755 daemon_check.sh
-chmod 755 UpdateNode.sh
-chmod 755 Check-scripts.sh
-chmod 755 Update-scripts.sh
-chmod 755 clearlog.sh
-cd ~
-crontab -l >> cron
-h=$(( RANDOM % 23 + 1 ));
-crontab -r
-line="@reboot /usr/local/bin/3dcoind -daemon
-0 0 * * * /usr/local/bin/Masternode/Check-scripts.sh
-*/30 * * * * /usr/local/bin/Masternode/daemon_check.sh
-#0 $h * * * /usr/local/bin/Masternode/UpdateNode.sh
-* * */2 * * /usr/local/bin/Masternode/clearlog.sh"
-echo "$line" | crontab -u root -
-echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
-echo ""
-echo -e "${GREEN}Downloading and Installing VPS $COIN_NAME Daemon${NC}"
-cd 
-cd $COIN_PATH >/dev/null 2>&1
-#wget -q $COIN_TGZ
-#printf "\n        Downloaded Daemon" 
-#if [[ $? -ne 0 ]]; then
-#echo -e 'Error downloading node. Please contact support'
-#exit 1
-#fi
-$COIN_PATH$COIN_CLI stop > /dev/null 2>&1
-service $COIN_NAME stop > /dev/null 2>&1
-$COIN_CLI stop > /dev/null 2>&1
-sleep 10
-kill -9 $(pgrep 3dcoind)
-kill -9 $(pgrep 3dcoin-shutoff)
-unzip -o -j $COIN_ZIP
-rm *.zip*
-
-cd /root
-cp $CONFIG_FOLDER/$CONFIG_FILE .
-rm /root/.3dcoin/mncache.dat
-rm /root/.3dcoin/mnpayments.dat
-date > /root/.3dcoin/debug.log
-hostname -f
-printf "ALL DONE..... "
-rm *.tar*
-rm 3DC*.sh && reboot
+echo "addnode=89.40.127.40
+addnode=80.211.106.106
+addnode=93.186.254.217
+addnode=80.211.197.58
+addnode=80.211.216.64
+addnode=81.2.249.48
+addnode=81.2.253.84
+addnode=194.182.85.236
+addnode=80.211.117.147
+addnode=80.211.83.145
+addnode=80.211.28.173
+addnode=212.237.50.243
+addnode=212.237.63.198
+addnode=80.211.101.38
+addnode=212.237.62.63
+addnode=80.211.187.152
+addnode=80.211.173.236
+addnode=80.211.87.148
+addnode=212.237.18.20
+addnode=80.211.94.158
+addnode=80.211.239.135
+addnode=80.211.0.236
+addnode=80.211.56.67
+addnode=80.211.134.11
+addnode=80.211.2.60
+addnode=80.211.92.142
+addnode=80.211.153.53
+addnode=80.211.87.253
+addnode=80.211.67.167
+addnode=80.211.115.246
+addnode=80.211.115.52
+addnode=80.211.115.173
+addnode=80.211.42.35
+addnode=188.213.175.235
+addnode=80.211.103.230
+addnode=80.211.186.153
+addnode=94.177.189.190
+addnode=212.237.25.133
+addnode=80.211.151.193
+addnode=94.177.216.28
+addnode=80.211.75.95
+addnode=80.211.75.114
+addnode=80.211.86.123
+addnode=80.211.86.7
+addnode=80.211.85.231
+addnode=80.211.86.108
+addnode=80.211.86.209
+addnode=80.211.165.55
+addnode=80.211.14.103
+addnode=80.211.168.64
+addnode=80.211.172.249
+addnode=80.211.42.165
+addnode=80.211.98.233
+addnode=77.81.230.126
+addnode=80.211.101.200
+addnode=217.61.6.233
+addnode=217.61.110.85
+addnode=206.189.72.203
+addnode=206.189.41.191
+addnode=165.227.197.115
+addnode=167.99.87.86
+addnode=159.65.201.222
+addnode=159.65.148.226
+addnode=165.227.38.214
+addnode=159.65.167.79
+addnode=159.65.90.101
+addnode=128.199.218.139
+addnode=174.138.3.33
+addnode=159.203.167.75
+addnode=138.68.102.67" >> .3dcoin\3dcoin.conf
+rm *.sh
