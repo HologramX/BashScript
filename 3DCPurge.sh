@@ -29,7 +29,7 @@ kill -9 $(pgrep 3dcoind)
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw disable
- ufw delete allow 6695  
+ ufw delete allow 6695/tcp  
  ufw logging on 
 yes |  ufw enable 
 echo ""
