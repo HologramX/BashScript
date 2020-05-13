@@ -36,7 +36,8 @@ echo ""
 rm /root/cron*
 rm -rf /usr/local/bin/Masternode
 rm /usr/local/bin/3dc*
-rm -r /root/3dcoin
+rm -r /root/.3dcoin/
+rm 3dcoin*
 rm jail.local
 
 cd ~
