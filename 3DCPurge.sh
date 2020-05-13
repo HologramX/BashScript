@@ -26,14 +26,6 @@ pause(){
 }
 
 kill -9 $(pgrep 3dcoind)
-
-
-echo ""
-echo  -e "${GREEN} Start Installation 3DCoin core                  ${STD}"
-sleep 1
-echo  -e "${GREEN} Install packages.....                     ${STD}"
-DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
-yes | apt-get install python virtualenv git unzip pv nano htop ufw
 echo ""
 echo  -e "${GREEN} Firewall setup.....              ${STD}"
  ufw disable
@@ -54,7 +46,7 @@ crontab -r
 sed -i '/3dcoind/d' ./cron
 sed -i '/Masternode/d' ./cron
 crontab /root/cron
-echo  -e "${GREEN} 3DCoin core Configured successfully .....               ${STD}"
+echo  -e "${GREEN} 3DCoin PURGED successfully .....               ${STD}"
 echo ""
 
 rm 3DC*.sh* > /dev/null 2>&1 
