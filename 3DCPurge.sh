@@ -30,7 +30,7 @@ echo  "${GREEN} 3DCoin File remove...               ${STD}"
 rm /root/cron*
 rm -rf /usr/local/bin/Masternode
 rm /usr/local/bin/3dc*
-rm -r /root/3dcoin
+rm -r /root/.3dcoin
 rm jail.local
 
 echo ""
