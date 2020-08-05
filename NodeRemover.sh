@@ -32,19 +32,23 @@ systemctl disable $COIN_NAME
 systemctl daemon-reload
 $COIN_CLI stop >/dev/null 2>&1
 sleep 2
+kill -9 $(pgrep $COIN_DAEMON)
 
 rm -f /usr/local/bin/$COIN_DAEMON 
 rm -f /usr/local/bin/$COIN_CLI
 
 cd ~
-rm *.sh*
 rm -r $CONFIG_FOLDER
 
 crontab -l | grep "$COIN_NAME" >/dev/null 2>&1
 if [[ $? -eq 0 ]]
  then 
-  crontab -u root -l | grep -v '@reboot /usr/local/bin/$COIN_DAEMON -daemon'  | crontab -u root -
-  printf "\n        Crontab SET SUCCESFULL"
+     crontab -l > cron
+     crontab -r
+     sed -i '/$COIN_DAEMON /d' ./cron
+     crontab /root/cron
+     crontab -u root -l | grep -v '@reboot /usr/local/bin/$COIN_DAEMON -daemon'  | crontab -u root -
+      printf "\n        Crontab SET SUCCESFULL"
  fi
 
 printf "\n\n"
